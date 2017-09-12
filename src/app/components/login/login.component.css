@@ -1,0 +1,28 @@
+.authorization-form {
+    max-width: 920px;
+    margin: 50px auto 0;
+    position: relative;
+}
+
+@media(min-width: 768px) {
+    .authorization-form:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 1px;
+        /* background: red; #d8d8d8; */
+        background: #A9A9A9;
+        left: 50%;
+    }
+}
+
+.bg {
+    /* background-color: #D2D2EA; */
+    opacity: 0.9;
+    min-height: 300px;
+}
+
+.line-margin {
+    margin-bottom: 25px;
+}

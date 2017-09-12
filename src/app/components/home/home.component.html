@@ -1,0 +1,11 @@
+<div *ngIf="authenticated; else elseBlock">
+    <div class="bg-success" style="padding: 15px">
+        <span>Welcome again, {{user.email}}!</span>
+        <button class="btn btn-danger" (click)="logout()">Wyloguj się</button>
+    </div>
+</div>
+<ng-template #elseBlock>
+    <div class="bg-warning">Mógłbyś się zalogować albo stworzyć konto</div>
+</ng-template>
+
+<br><br><a routerLink="/login">Link do logowania</a>

@@ -1,0 +1,19 @@
+<div class="container" style="margin-top: 30px;">
+  <div class="row header">
+    <div class="col-md-3">
+        <img src="assets/logo.png" width="250" />        
+    </div>
+    <div class="col-md-6">
+        <form (ngSubmit)="doSearch()">
+            <input type="text" value="Szukaj produkt" style="width: 100%" /> 
+        </form>
+    </div>
+    <div class="col-md-3">
+        <img src="assets/profile.png" height="25"/>
+        <a *ngIf="authenticated; else elseBlock" routerLink="/profile">Twoje konto</a>
+        <ng-template #elseBlock>
+            <a routerLink="/login">Zaloguj się lub załóż konto</a>
+        </ng-template>     
+    </div>
+  </div>
+</div>

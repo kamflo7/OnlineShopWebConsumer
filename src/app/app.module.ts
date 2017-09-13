@@ -9,19 +9,28 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthenticationService } from './services/authentication.service';
 import { TokenInterceptor } from './services/token.interceptor';
+import { HeaderComponent } from './components/header/header.component';
+import { ProfileCenterModule } from './profile-center/profile-center.module';
+import { SharedModule } from './shared/shared.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    // HeaderComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    SharedModule,
+    ProfileCenterModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+  ],
+  exports: [
+
   ],
   providers: [
     AuthenticationService,

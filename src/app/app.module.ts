@@ -12,6 +12,8 @@ import { TokenInterceptor } from './services/token.interceptor';
 import { HeaderComponent } from './components/header/header.component';
 import { ProfileCenterModule } from './profile-center/profile-center.module';
 import { SharedModule } from './shared/shared.module';
+import { ProductService } from './services/product.service';
+import { Globals } from './globals';
 
 
 @NgModule({
@@ -33,7 +35,9 @@ import { SharedModule } from './shared/shared.module';
 
   ],
   providers: [
+    Globals,
     AuthenticationService,
+    ProductService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

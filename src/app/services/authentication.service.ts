@@ -5,6 +5,7 @@ import {Observable} from "rxjs/Observable";
 import 'rxjs/Rx';
 import { JwtHelper } from 'angular2-jwt';
 import { User } from '../model/user';
+import { Globals } from '../globals';
 
 export interface AuthResponse {
     status: string;
@@ -14,7 +15,7 @@ export interface AuthResponse {
 @Injectable()
 export class AuthenticationService {
 
-    constructor(private http:HttpClient) {}
+    constructor(private http:HttpClient, private globals:Globals) {}
 
     isUserAuthenticated():boolean {
         var jwt:JwtHelper = new JwtHelper();
@@ -36,7 +37,7 @@ export class AuthenticationService {
         return new Promise(resolve => {
 
             // returns values by json "status": ["success", "user already exists"]
-            this.http.post<AuthResponse>('http://localhost:8080/register?email='+email+'&password='+password, null,
+            this.http.post<AuthResponse>(this.globals.backendUrl+'register?email='+email+'&password='+password, null,
             { observe: 'response' })
             .subscribe(r => {
                 var status:string = r.body.status;

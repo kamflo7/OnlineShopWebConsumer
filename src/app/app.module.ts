@@ -10,11 +10,13 @@ import { LoginComponent } from './components/login/login.component';
 import { AuthenticationService } from './services/authentication.service';
 import { TokenInterceptor } from './services/token.interceptor';
 import { HeaderComponent } from './components/header/header.component';
-import { ProfileCenterModule } from './profile-center/profile-center.module';
 import { SharedModule } from './shared/shared.module';
 import { ProductService } from './services/product.service';
 import { Globals } from './globals';
 import { CategoryComponent } from './components/category/category.component';
+import { ProfileCenterComponent } from './components/profile-center/profile-center.component';
+import { ProfileMainComponent } from './components/profile-center/profile-main/profile-main.component';
+import { ProfileChangePasswordComponent } from './components/profile-center/profile-change-passwd/profile-change-passwd.component';
 
 
 @NgModule({
@@ -22,14 +24,15 @@ import { CategoryComponent } from './components/category/category.component';
     AppComponent,
     HomeComponent,
     LoginComponent,
-    CategoryComponent
-    // HeaderComponent
+    CategoryComponent,
+    ProfileCenterComponent,
+    ProfileMainComponent,
+    ProfileChangePasswordComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     SharedModule,
-    ProfileCenterModule,
     AppRoutingModule,
     HttpClientModule,
   ],

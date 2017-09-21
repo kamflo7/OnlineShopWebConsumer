@@ -4,11 +4,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
+import { CategoryComponent } from './components/category/category.component';
 
 
 const routes: Routes = [
-    { path: '',         component: HomeComponent },
-    { path: 'login',    component: LoginComponent }
+    { path: 'cat/:category',    component: CategoryComponent },
+    { path: '',                 component: HomeComponent },
+    { path: 'login',            component: LoginComponent }
     // { path: 'profile',  component: ProfileComponent }
 ]
 

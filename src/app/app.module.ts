@@ -14,6 +14,7 @@ import { ProfileCenterModule } from './profile-center/profile-center.module';
 import { SharedModule } from './shared/shared.module';
 import { ProductService } from './services/product.service';
 import { Globals } from './globals';
+import { CategoryComponent } from './components/category/category.component';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { Globals } from './globals';
     AppComponent,
     HomeComponent,
     LoginComponent,
+    CategoryComponent
     // HeaderComponent
   ],
   imports: [

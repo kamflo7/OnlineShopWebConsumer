@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
 import { Router } from '@angular/router';
 import { User } from '../../model/user';
-import { Category } from '../../model/category';
+import { CategoryLogic } from '../../model/category-logic';
 import { ProductService } from '../../services/product.service';
 
 @Component({
@@ -24,12 +24,20 @@ export class HeaderComponent implements OnInit {
     });
   }
 
+
   authenticated:boolean;
   user:User;
-  categories:Category[];
+  categories:CategoryLogic[];
+  selectedBaseCategory:CategoryLogic = null;
 
-  categoriesFirstLvl():Category[] {
-    return this.categories.filter(c => c.parent_id == -1);
+  categoriesFirstLvl():CategoryLogic[] {
+    // return this.categories.filter(c => c.parent_id == -1);
+    return null;
+  }
+
+  categoriesForId(id:number):CategoryLogic[] {
+    // return this.categories.filter(c => c.parent_id == id);
+    return null;
   }
 
   ngOnInit() {
@@ -37,5 +45,10 @@ export class HeaderComponent implements OnInit {
 
   doSearch():void {
     console.log("Dziala headerComponent>Form");
+  }
+
+  navCategoryHover(category:CategoryLogic):void {
+    console.log("elo: " + category.name);
+    this.selectedBaseCategory = category;
   }
 }

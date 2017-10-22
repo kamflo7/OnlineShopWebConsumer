@@ -1,0 +1,42 @@
+<form>
+    <div class="form-group">
+        <label for="productName">Product name:</label>
+        <input type="text" ngModel name="productName" id="productName" #productName="ngModel" class="form-control" required minlength="3" [(ngModel)]="product.name" />
+        <div class="alert alert-danger" *ngIf="productName.touched && !productName.valid">
+            <div *ngIf="productName.errors.required">Product name is required.</div>
+            <div *ngIf="productName.errors.minlength">Product name should be minimum {{productName.errors.minlength.requiredLength}} characters.</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="productDescription">Product description:</label>
+        <textarea type="text" name="productDescription" id="productDescription" class="form-control" [(ngModel)]="product.description"></textarea>
+    </div>
+    <div class="form-group">
+        <label for="productPrice">Price:</label>
+        <input type="text" ngModel name="productPrice" id="productPrice" #productPrice="ngModel" class="form-control" required [(ngModel)]="product.price" />
+        <div class="alert alert-danger" *ngIf="productPrice.touched && !productPrice.valid">
+            <div *ngIf="productPrice.errors.required">Price is required.</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="fileImage">Image:</label>
+        <input type="file" id="fileImage" class="form-control" />
+    </div>
+
+    <!-- <div class="form-group" *ngFor="let f of product.featureBags">
+        <label for="{{f.featureDefinition.name}}">{{f.featureDefinition.name}}</label>
+        <select class="form-control" id="{{f.featureDefinition.name}}" [attr.multiple]="f.featureDefinition.multipleValues ? true : null">
+            <option *ngFor="let v of f.featureValues" value="{{v.id}}">{{v.value}}</option>
+        </select>
+    </div> -->
+
+    <div class="form-group" *ngFor="let f of featureBagsDTO">
+        <label for="{{f.featureDefinition.name}}">{{f.featureDefinition.name}}</label>
+        <select class="form-control" id="{{f.featureDefinition.name}}" [attr.multiple]="f.featureDefinition.multipleValues ? true : null">
+            <!-- <option *ngFor="let v of f.featureValuesDTO" value="{{v.featureValue.id}}" [attr.selected]="v.selected">{{v.featureValue.value}}</option> -->
+            <option *ngFor="let v of f.featureValuesDTO" value="{{v.featureValue.id}}"  [attr.selected]="v.selected">{{v.featureValue.value}}</option>
+        </select>
+    </div>
+
+    <button class="btn btn-primary">Submit</button>
+</form>

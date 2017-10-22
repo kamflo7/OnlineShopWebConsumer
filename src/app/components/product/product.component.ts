@@ -4,12 +4,15 @@ import { User } from '../../model/user';
 import { Router } from '@angular/router';
 import { ProductService } from '../../services/product.service';
 import { CategoryLogic } from '../../model/category-logic';
+import { ResponseDetails } from '../../model/response-details';
+import { Product } from '../../model/product';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.component.html'
+  selector: 'app-product',
+  templateUrl: 'product.component.html',
+  styleUrls: ['product.component.css']
 })
-export class HomeComponent implements OnInit {
+export class ProductComponent implements OnInit {
 
   constructor(private auth:AuthenticationService,
     private router:Router,
@@ -23,14 +26,15 @@ export class HomeComponent implements OnInit {
 
   authenticated:boolean;
   user:User;
+  product:Product;
+
 
   ngOnInit(): void {
-    document.title = "Strona główna";
-  }
-
-  logout() {
-    this.auth.logout();
-    this.router.navigateByUrl('/');
-    window.location.reload();
+    document.title = "Produkt";
+    this.productService.getProduct(4).then(r => {
+        console.log(r);
+        if(r.status == 'success')
+          this.product = r.data;
+    })
   }
 }

@@ -17,6 +17,10 @@ import { CategoryComponent } from './components/category/category.component';
 import { ProfileCenterComponent } from './components/profile-center/profile-center.component';
 import { ProfileMainComponent } from './components/profile-center/profile-main/profile-main.component';
 import { ProfileChangePasswordComponent } from './components/profile-center/profile-change-passwd/profile-change-passwd.component';
+import { ProductComponent } from './components/product/product.component';
+import { AdminCenterComponent } from './components/admin-center/admin-center.component';
+import { AdminMainComponent } from './components/admin-center/admin-main/admin-main.component';
+import { FormAdminProductEdit } from './components/_forms/form-admin-product-edit/form-admin-product-edit.component';
 
 
 @NgModule({
@@ -25,9 +29,10 @@ import { ProfileChangePasswordComponent } from './components/profile-center/prof
     HomeComponent,
     LoginComponent,
     CategoryComponent,
-    ProfileCenterComponent,
-    ProfileMainComponent,
-    ProfileChangePasswordComponent
+    ProfileCenterComponent, ProfileMainComponent, ProfileChangePasswordComponent,
+    ProductComponent,
+    AdminCenterComponent, AdminMainComponent,
+    FormAdminProductEdit
   ],
   imports: [
     BrowserModule,

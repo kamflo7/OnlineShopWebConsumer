@@ -19,12 +19,16 @@
 </div>
 
 <div class="container">
-        <nav class="navbar navbar-default" *ngIf="categories">
-                <div class="container">
-                    <ul class="nav navbar-nav">
-                        <li *ngFor="let c of categoriesFirstLvl()"><a href="#">{{c.name}}</a></li>
-                    </ul>
-                </div>
-            </nav>
+    <nav class="navbar navbar-default" *ngIf="categories" style="margin-bottom: 0px !important;">
+        <div class="container">
+            <ul class="nav navbar-nav">
+                <li *ngFor="let c of categoriesFirstLvl()"><a href="#" (mouseover)="navCategoryHover(c)">{{c.name}}</a></li>
+            </ul>
+        </div>
+    </nav>
 </div>
-
+<div class="container" style="background-color: green; border:1px solid black; padding: 25px; min-height: 200px">
+    <ul *ngIf="selectedBaseCategory">
+        <li *ngFor="let c of categoriesForId(selectedBaseCategory.id)">{{c.name}}</li>
+    </ul>
+</div>

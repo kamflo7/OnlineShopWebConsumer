@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProductService } from '../../services/product.service';
-import { Category } from '../../model/category';
+import { CategoryLogic } from '../../model/category-logic';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -16,13 +16,11 @@ export class CategoryComponent implements OnInit {
   ) {
   }
 
-  category: string;
 
   ngOnInit(): void {
     document.title = "Kategoria";
     this.route.params.subscribe((params) => {
-      this.category = params.category;
-      console.log("Kategoria to " + this.category);
+      console.log("Category: " + params.category + "; Sub: " + params.subcategory + "; Sub2: " + params.subcategory2);
       // this.username = params.username
     });
   }

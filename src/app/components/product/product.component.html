@@ -1,0 +1,18 @@
+<app-header></app-header>
+Also header + this
+
+<div class="container">
+
+    <div *ngIf="product">
+        <span>{{product.name}} za {{product.price}}</span>>
+        <span>{{product.description}}</span>
+        <table class="table-bordered">
+            <tr *ngFor="let f of product.featureBags">
+                <td>{{f.featureDefinition.name}}</td>
+                <td><span *ngFor="let v of f.featureValues">{{v.value}}<br></span></td>
+            </tr>
+        </table>
+    </div>
+
+</div>
+

@@ -1,14 +1,23 @@
 <div>
-  <h2 md-dialog-title>My dialog</h2>
-  <hr>
-  <md-dialog-content>
-      Tu jakis tekst
-      <br><br>
-      <strong>{{data.name}} oraz {{data.animal}}</strong>
-  </md-dialog-content>
-  <hr>
-  <md-dialog-actions>
-      <button md-raised-button (click)="onCloseConfirm()">Confirm</button>
-      <button md-raised-button (click)="onCloseCancel()">Cancel</button>
-  </md-dialog-actions>
+    <h4 md-dialog-title>Create a category</h4>
+    <hr>
+    <md-dialog-content>
+        <form>
+            <div class="form-group">
+                <label for="categoryName">Category name:</label>
+                <!-- <input type="text" id="categoryName" class="form-control" ngModel name="categoryName" [(ngModel)]="categoryName" #categoryName="ngModel" required minlength="3" /> -->
+				<input type="text" id="categoryName" class="form-control" [(ngModel)]="categoryName" name="categoryName"
+				 	ngModel required minlength="3" #category="ngModel" />
+                <div class="alert alert-danger" *ngIf="category.touched && !category.valid">
+                    <div *ngIf="category.errors.required">Category name is required.</div>
+                    <div *ngIf="category.errors.minlength">Category name should be minimum {{category.errors.minlength.requiredLength}} characters.</div>
+                </div>
+            </div>
+        </form>
+    </md-dialog-content>
+    <hr>
+    <md-dialog-actions>
+        <button md-raised-button (click)="onCloseConfirm()">Confirm</button>
+        <button md-raised-button (click)="onCloseCancel()">Cancel</button>
+    </md-dialog-actions>
 </div>

@@ -7,15 +7,19 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material'
 })
 export class DialogCreateCategoryComponent {
 
-  constructor(
-    public dialogRef: MatDialogRef<DialogCreateCategoryComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+  constructor(public dialogRef: MatDialogRef<DialogCreateCategoryComponent>, @Inject(MAT_DIALOG_DATA) public data: any) { }
+
+  categoryName:string;
 
   onCloseConfirm() {
-      this.dialogRef.close('Confirm');
+    this.dialogRef.close({success: true, data: this.categoryName});
   }
 
   onCloseCancel() {
-      this.dialogRef.close('Cancel');
+    this.dialogRef.close({success: false});
+  }
+
+  sth(s):void {
+    console.log("zmiana " + s);
   }
 }

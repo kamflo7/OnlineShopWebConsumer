@@ -4,6 +4,7 @@ import { AuthenticationService } from '../../../_services/authentication.service
 import { ProductService } from '../../../_services/product.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material'
 import { DialogCreateCategoryComponent } from './dialog-create-category/dialog-create-category.component';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
     selector: 'app-admin-categories',
@@ -21,17 +22,20 @@ export class AdminCategoriesComponent implements OnInit {
       }
 
 	ngOnInit(): void {
+        Observable.timer(500).subscribe(x => {
+            this.openDialog();
+        });
     }
 
     openDialog():void {
         // this.router.navigate(["create"], {relativeTo: this.route});
         let dialogRef = this.dialog.open(DialogCreateCategoryComponent, {
-            width: '250px',
+            width: '300px',
             data: { name: 'dupa', animal: 'animal jakis' }
           });
       
           dialogRef.afterClosed().subscribe(result => {
-            console.log('The dialog was closed');
+            console.log('The dialog was closed with: ' + JSON.stringify(result));
           });
     }
 }

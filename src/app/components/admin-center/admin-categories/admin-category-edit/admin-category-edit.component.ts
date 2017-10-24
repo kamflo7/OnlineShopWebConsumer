@@ -35,13 +35,18 @@ export class AdminCategoryEditComponent implements OnInit {
   }
 
   nameChange(newName) {
-    console.log("start updating name");
+    console.log("start updating name: " + JSON.stringify(newName));
     this.productService.updateCategory(this.id, newName).then(r => {
       if(r.status == 'success') {
         this.category.name = newName;
+        console.log("Update success");
       } else {
         alert("There was a problem with editing category name");
       }
     });
+  }
+
+  featureGroupNameChange(groupid:number, newName:string) {
+    console.log("Trying change featureGroup for index " + groupid + ", and new value: " + newName);
   }
 }

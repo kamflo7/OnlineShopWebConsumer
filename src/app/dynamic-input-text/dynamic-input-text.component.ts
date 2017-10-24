@@ -14,18 +14,15 @@ export class DynamicInputTextComponent implements OnInit {
   }
 
   @Input() value:string;
+  @Output() changeVal:EventEmitter<string> = new EventEmitter();
+
   originalValue:string;
-  @Output() change:EventEmitter<string> = new EventEmitter();
   isEditing:boolean = false;
 
-  startEdit() {
-    this.isEditing = true;
-  }
-
-  submit() {
+  submit(e:MouseEvent) {
     this.isEditing = false;
     if(this.originalValue != this.value) {
-      this.change.emit(this.value);
+      this.changeVal.emit(this.value);
       this.value = this.originalValue;
     }
   }

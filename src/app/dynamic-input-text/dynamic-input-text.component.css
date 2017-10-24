@@ -1,0 +1,9 @@
+.editable-span:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.editable-span {
+    text-decoration: none;
+}
+

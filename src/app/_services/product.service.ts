@@ -56,6 +56,7 @@ export class ProductService {
             this.http.post<ResponseDetails<CategoryLogic>>(this.globals.backendUrl+'categories/'+id+'/?name='+name, null,
                 {observe: 'response'}).subscribe(r => {
                     resolve(r.body);
+                    console.log(r.body);
                 });
         });
     }

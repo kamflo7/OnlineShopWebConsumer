@@ -4,8 +4,22 @@
   </div>
 
   <div class="row bgcontainer" *ngIf="category">
-    <span>ID: {{category.id}}</span><br>
-    <label for="test">The name:</label>
-    <dynamic-input-text id="test" [value]="category.name" (change)="nameChange($event)"></dynamic-input-text>
+    <div class="col-md-4">
+      <h4>Basic informations:</h4>
+      <span>ID: {{category.id}}</span><br>
+      <span>Name: </span><dynamic-input-text [value]="category.name" (changeVal)="nameChange($event)"></dynamic-input-text>
+    </div>
+    <div class="col-md-4">
+      <h4>Feature Groups:</h4>
+      <ul>
+        <li *ngFor="let g of category.featureGroups; let i=index">
+            <dynamic-input-text [value]="category.featureGroups[i].name" (changeVal)="featureGroupNameChange(category.featureGroups[i].id, $event)"></dynamic-input-text>
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-4">
+      <h4>Feature Definitions:</h4>
+    </div>
   </div>
 </div>
+<hr>

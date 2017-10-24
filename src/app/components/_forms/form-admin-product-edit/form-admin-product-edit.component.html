@@ -23,20 +23,44 @@
         <input type="file" id="fileImage" class="form-control" />
     </div>
 
-    <!-- <div class="form-group" *ngFor="let f of product.featureBags">
-        <label for="{{f.featureDefinition.name}}">{{f.featureDefinition.name}}</label>
-        <select class="form-control" id="{{f.featureDefinition.name}}" [attr.multiple]="f.featureDefinition.multipleValues ? true : null">
-            <option *ngFor="let v of f.featureValues" value="{{v.id}}">{{v.value}}</option>
+    <!-- <div class="form-group" *ngFor="let featureBagDTO of featureBagsDTO; let fIn = index">
+        <label for="{{featureBagDTO.featureDefinition.name}}">{{featureBagDTO.featureDefinition.name}}</label>
+        <select class="form-control" id="{{featureBagDTO.featureDefinition.name}}" [attr.multiple]="featureBagDTO.featureDefinition.multipleValues ? '' : null">
+            <option *ngFor="let valueDTO of featureBagDTO.featureValuesDTO; let vIn = index" [attr.selected]="featureBagsDTO[fIn].featureValuesDTO[vIn].selected ? true : null">{{valueDTO.orgFeatureValue.value}}</option>
         </select>
     </div> -->
 
-    <div class="form-group" *ngFor="let f of featureBagsDTO">
-        <label for="{{f.featureDefinition.name}}">{{f.featureDefinition.name}}</label>
-        <select class="form-control" id="{{f.featureDefinition.name}}" [attr.multiple]="f.featureDefinition.multipleValues ? true : null">
-            <!-- <option *ngFor="let v of f.featureValuesDTO" value="{{v.featureValue.id}}" [attr.selected]="v.selected">{{v.featureValue.value}}</option> -->
-            <option *ngFor="let v of f.featureValuesDTO" value="{{v.featureValue.id}}"  [attr.selected]="v.selected">{{v.featureValue.value}}</option>
-        </select>
+    <div class="form-group" *ngFor="let featureBagDTO of featureBagsDTO; let fIn = index">
+        <label for="{{featureBagDTO.featureDefinition.name}}">{{featureBagDTO.featureDefinition.name}}</label>
+        <ng-container *ngIf="!featureBagDTO.featureDefinition.multipleValues">
+            <select class="form-control" id="{{featureBagDTO.featureDefinition.name}}">
+                <option *ngFor="let valueDTO of featureBagDTO.featureValuesDTO; let vIn = index" value="{{valueDTO.orgFeatureValue.id}}" [attr.selected]="featureBagsDTO[fIn].featureValuesDTO[vIn].selected ? '' : null">{{valueDTO.orgFeatureValue.value}}</option>
+            </select>
+        </ng-container>
+        <ng-container *ngIf="featureBagDTO.featureDefinition.multipleValues">
+            <ng-container *ngFor="let valueDTO of featureBagDTO.featureValuesDTO; let vIn = index">
+                <div class="checkbox">
+                    <label><input type="checkbox" [attr.checked]="featureBagsDTO[fIn].featureValuesDTO[vIn].selected ? '' : null">{{valueDTO.orgFeatureValue.value}}</label>
+                </div>
+            </ng-container>
+        </ng-container>
     </div>
 
-    <button class="btn btn-primary">Submit</button>
+    <!-- <label for="test">Test</label>
+    <select class="form-control" multiple>
+        <option [attr.selected]="">Dupa 1</option>
+        <option selected>Dupa 1</option>
+        <option selected>Dupa 1</option>
+        <option>Dupa 1</option>
+    </select> -->
+
+    <!-- <ng-container *ngFor="let valueDTO of featureBagDTO.featureValuesDTO; let vIn = index">
+            <span>{{valueDTO.orgFeatureValue.value}}</span>
+        </ng-container> -->
+
+    <!-- <div *ngFor="let w of words; let i=index">
+        <input [(ngModel)]="words[i]" [name]="w+i" />
+    </div> -->
+
+    <button class="btn btn-primary" (click)="test()">Submit</button>
 </form>

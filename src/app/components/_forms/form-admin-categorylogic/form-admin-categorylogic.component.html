@@ -1,0 +1,54 @@
+<form>
+        <div class="form-group">
+            <label for="categoryName">Category name:</label>
+            <input type="text" ngModel name="categoryName" id="categoryName" #categoryName="ngModel" class="form-control" required minlength="3" [(ngModel)]="category.name" />
+            <div class="alert alert-danger" *ngIf="categoryName.touched && !categoryName.valid">
+                <div *ngIf="categoryName.errors.required">Category name is required.</div>
+                <div *ngIf="categoryName.errors.minlength">Category name should be minimum {{categoryName.errors.minlength.requiredLength}} characters.</div>
+            </div>
+        </div>
+        <span>FeatureGroups:</span>
+        <ng-container *ngFor="let group of category.featureGroups">
+            <div style="border: 1px solid blue; margin-left: 20px; min-height: 30px; ">
+                {{group.name}}
+                <ul>
+                    <li *ngFor="let feature of getFeaturesForGroup(group)">{{feature.name}}</li>
+                </ul>
+            </div>
+        </ng-container>
+
+
+        <!-- <div class="form-group">
+            <label for="productDescription">Product description:</label>
+            <textarea type="text" name="productDescription" id="productDescription" class="form-control" [(ngModel)]="product.description"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="productPrice">Price:</label>
+            <input type="text" ngModel name="productPrice" id="productPrice" #productPrice="ngModel" class="form-control" required [(ngModel)]="product.price" />
+            <div class="alert alert-danger" *ngIf="productPrice.touched && !productPrice.valid">
+                <div *ngIf="productPrice.errors.required">Price is required.</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="fileImage">Image:</label>
+            <input type="file" id="fileImage" class="form-control" />
+        </div>
+    
+        <div class="form-group" *ngFor="let featureBagDTO of featureBagsDTO; let fIn = index">
+            <label for="{{featureBagDTO.featureDefinition.name}}">{{featureBagDTO.featureDefinition.name}}</label>
+            <ng-container *ngIf="!featureBagDTO.featureDefinition.multipleValues">
+                <select class="form-control" id="{{featureBagDTO.featureDefinition.name}}">
+                    <option *ngFor="let valueDTO of featureBagDTO.featureValuesDTO; let vIn = index" value="{{valueDTO.orgFeatureValue.id}}" [attr.selected]="featureBagsDTO[fIn].featureValuesDTO[vIn].selected ? '' : null">{{valueDTO.orgFeatureValue.value}}</option>
+                </select>
+            </ng-container>
+            <ng-container *ngIf="featureBagDTO.featureDefinition.multipleValues">
+                <ng-container *ngFor="let valueDTO of featureBagDTO.featureValuesDTO; let vIn = index">
+                    <div class="checkbox">
+                        <label><input type="checkbox" [attr.checked]="featureBagsDTO[fIn].featureValuesDTO[vIn].selected ? '' : null">{{valueDTO.orgFeatureValue.value}}</label>
+                    </div>
+                </ng-container>
+            </ng-container>
+        </div>
+    
+        <button class="btn btn-primary">Submit</button> -->
+    </form>

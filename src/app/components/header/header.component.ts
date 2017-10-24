@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from '../../services/authentication.service';
+import { AuthenticationService } from '../../_services/authentication.service';
 import { Router } from '@angular/router';
-import { User } from '../../model/user';
-import { CategoryLogic } from '../../model/category-logic';
-import { ProductService } from '../../services/product.service';
+import { User } from '../../_model/user';
+import { CategoryLogic } from '../../_model/category-logic';
+import { ProductService } from '../../_services/product.service';
 
 @Component({
   selector: 'app-header',

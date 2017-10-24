@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from '../../services/authentication.service';
-import { User } from '../../model/user';
+import { AuthenticationService } from '../../_services/authentication.service';
+import { User } from '../../_model/user';
 import { Router } from '@angular/router';
-import { ProductService } from '../../services/product.service';
-import { CategoryLogic } from '../../model/category-logic';
-import { ResponseDetails } from '../../model/response-details';
-import { Product } from '../../model/product';
+import { ProductService } from '../../_services/product.service';
+import { CategoryLogic } from '../../_model/category-logic';
+import { ResponseDetails } from '../../_model/response-details';
+import { Product } from '../../_model/product';
 
 @Component({
   selector: 'app-product',

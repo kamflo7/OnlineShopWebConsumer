@@ -1,4 +1,5 @@
 import { FeatureValue } from './feature-value';
+import { FeatureGroup } from './feature-group';
 
 export class FeatureDefinition {
     id:number;
@@ -7,5 +8,6 @@ export class FeatureDefinition {
     filterable:boolean;
     visible:boolean;
 
+    featureGroup:FeatureGroup;
     featureValueDefinitions:FeatureValue[];
 }

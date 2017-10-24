@@ -4,7 +4,7 @@ import { RequestOptions, Response, Headers } from '@angular/http';
 import {Observable} from "rxjs/Observable";
 import 'rxjs/Rx';
 import { JwtHelper } from 'angular2-jwt';
-import { User } from '../model/user';
+import { User } from '../_model/user';
 import { Globals } from '../globals';
 
 export interface AuthResponse {

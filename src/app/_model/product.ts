@@ -1,4 +1,5 @@
 import { FeatureBag } from './feature-bag';
+import { CategoryLogic } from './category-logic';
 
 export class Product {
     name:string;
@@ -6,4 +7,5 @@ export class Product {
     amount:number;
     description:string;
     featureBags:FeatureBag[];
+    categoryLogic:CategoryLogic;
 }

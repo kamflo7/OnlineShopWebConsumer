@@ -4,6 +4,7 @@ import { FeatureGroup } from './feature-group';
 export class CategoryLogic {
     id:number;
     name:string;
-    featureDefinitions:FeatureDefinition[];
-    featureGroups:FeatureGroup[];
+    featureDefinitions:FeatureDefinition[] = [];
+    featureGroups:FeatureGroup[] = [];
+
 }

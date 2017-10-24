@@ -20,8 +20,7 @@ import { ProductComponent } from './components/product/product.component';
 import { AdminCenterComponent } from './components/admin-center/admin-center.component';
 import { AdminMainComponent } from './components/admin-center/admin-main/admin-main.component';
 import { FormAdminProductEdit } from './components/_forms/form-admin-product-edit/form-admin-product-edit.component';
-import { AdminCategoriesComponent } from './components/admin-center/admin-categories/admin-categories.component';
-import { AdminCategoriesCreateComponent } from './components/admin-center/admin-categories-create/admin-categories-create.component';
+import { AdminCategoriesComponent, DialogCreateCategory } from './components/admin-center/admin-categories/admin-categories.component';
 import { FormAdminCategoryLogicComponent } from './components/_forms/form-admin-categorylogic/form-admin-categorylogic.component';
 import { SharedModule } from './_shared/shared.module';
 import { AuthenticationService } from './_services/authentication.service';
@@ -37,8 +36,9 @@ import { TokenInterceptor } from './_services/token.interceptor';
     CategoryComponent,
     ProfileCenterComponent, ProfileMainComponent, ProfileChangePasswordComponent,
     ProductComponent,
-    AdminCenterComponent, AdminMainComponent, AdminCategoriesComponent, AdminCategoriesCreateComponent,
-    FormAdminProductEdit, FormAdminCategoryLogicComponent
+    AdminCenterComponent, AdminMainComponent, AdminCategoriesComponent,
+    FormAdminProductEdit, FormAdminCategoryLogicComponent,
+    DialogCreateCategory
   ],
   imports: [
     BrowserModule,
@@ -48,7 +48,9 @@ import { TokenInterceptor } from './_services/token.interceptor';
     HttpClientModule,
     BrowserAnimationsModule,
     MatDialogModule
-    //  MatButtonModule, MatCheckboxModule
+  ],
+  entryComponents: [
+    DialogCreateCategory
   ],
   exports: [
 

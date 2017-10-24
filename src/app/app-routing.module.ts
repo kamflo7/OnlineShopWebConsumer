@@ -12,8 +12,6 @@ import { ProductComponent } from './components/product/product.component';
 import { AdminCenterComponent } from './components/admin-center/admin-center.component';
 import { AdminMainComponent } from './components/admin-center/admin-main/admin-main.component';
 import { AdminCategoriesComponent } from './components/admin-center/admin-categories/admin-categories.component';
-import { AdminCategoriesCreateComponent } from './components/admin-center/admin-categories-create/admin-categories-create.component';
-
 
 
 const routes: Routes = [
@@ -36,8 +34,7 @@ const routes: Routes = [
         children: [
             { path: '', component: AdminMainComponent},
             // { path: ':id', component: AdminMainComponent},
-            { path: 'categories', component: AdminCategoriesComponent},
-            { path: 'categories/create', component: AdminCategoriesCreateComponent},
+            { path: 'categories', component: AdminCategoriesComponent}
         ]
     }
 ]

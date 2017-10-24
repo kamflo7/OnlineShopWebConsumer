@@ -1,0 +1,11 @@
+<span *ngIf="!isEditing" (click)="startEdit()">{{value}}</span>
+
+<div class="row" *ngIf="isEditing">
+  <div class="col-md-8">
+    <input type="text" class="form-control" name="inputEdit" ngModel [(ngModel)]="value" />
+  </div>
+  <div class="col-md-4">
+    <button class="btn btn-primary" (click)="submit()">Submit</button>
+    <button class="btn btn-danger" (click)="cancel()">Cancel</button>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="row">
+    <h3>Edit categogry</h3>
+  </div>
+
+  <div class="row bgcontainer" *ngIf="category">
+    <span>ID: {{category.id}}</span><br>
+    <label for="test">The name:</label>
+    <dynamic-input-text id="test" [value]="category.name" (change)="nameChange($event)"></dynamic-input-text>
+  </div>
+</div>

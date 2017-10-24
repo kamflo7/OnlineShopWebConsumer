@@ -19,9 +19,9 @@ export class HeaderComponent implements OnInit {
     if(this.authenticated)
       this.user = auth.getUser();
 
-    productService.getCategories().then(r => {
-      this.categories = r;
-    });
+    // productService.getCategories().then(r => {
+    //   this.categories = r;
+    // });
   }
 
 

@@ -27,6 +27,8 @@ import { AuthenticationService } from './_services/authentication.service';
 import { ProductService } from './_services/product.service';
 import { TokenInterceptor } from './_services/token.interceptor';
 import { DialogCreateCategoryComponent } from './components/admin-center/admin-categories/dialog-create-category/dialog-create-category.component';
+import { AdminCategoryEditComponent } from './components/admin-center/admin-categories/admin-category-edit/admin-category-edit.component';
+import { DynamicInputTextComponent } from './dynamic-input-text/dynamic-input-text.component';
 
 
 @NgModule({
@@ -38,7 +40,7 @@ import { DialogCreateCategoryComponent } from './components/admin-center/admin-c
     ProfileCenterComponent, ProfileMainComponent, ProfileChangePasswordComponent,
     ProductComponent,
     AdminCenterComponent, AdminMainComponent, AdminCategoriesComponent,
-    FormAdminProductEdit, FormAdminCategoryLogicComponent, DialogCreateCategoryComponent,
+    FormAdminProductEdit, FormAdminCategoryLogicComponent, DialogCreateCategoryComponent, AdminCategoryEditComponent, DynamicInputTextComponent,
   ],
   imports: [
     BrowserModule,

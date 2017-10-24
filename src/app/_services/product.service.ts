@@ -23,12 +23,12 @@ export class ProductService {
 
     constructor(private http:HttpClient, private globals:Globals) {}
 
-    getCategories():Promise<Array<CategoryLogic>> {
+    getCategories():Promise<ResponseDetails<Array<CategoryLogic>>> {
         return new Promise(resolve => {
-            this.http.get<CategoriesResponse>(this.globals.backendUrl+'categories',
+            this.http.get<ResponseDetails<Array<CategoryLogic>>>(this.globals.backendUrl+'categories',
                 {observe: 'response'}).subscribe(r => {
-                //console.log(JSON.stringify(r.body.categories));
-                resolve(r.body.categories);
+                // console.log(JSON.stringify(r.body));
+                resolve(r.body);
             });
         });
     }
@@ -42,6 +42,24 @@ export class ProductService {
         });
     }
 
+    createCategory(name:string):Promise<ResponseDetails<CategoryLogic>> {
+        return new Promise(resolve => {
+            this.http.put<ResponseDetails<CategoryLogic>>(this.globals.backendUrl+'categories/?name='+name, null, 
+                {observe: 'response'}).subscribe(r => {
+                    resolve(r.body);
+                })
+        });
+    }
+
+    updateCategory(id:number, name:string):Promise<ResponseDetails<CategoryLogic>> {
+        return new Promise(resolve => {
+            this.http.post<ResponseDetails<CategoryLogic>>(this.globals.backendUrl+'categories/'+id+'/?name='+name, null,
+                {observe: 'response'}).subscribe(r => {
+                    resolve(r.body);
+                });
+        });
+    }
+
     getProduct(productid:number):Promise<ResponseDetails<Product>> {
         return new Promise(resolve => {
         this.http.get<ResponseDetails<Product>>(this.globals.backendUrl+'products/'+productid, 
@@ -51,24 +69,6 @@ export class ProductService {
         });
     }
 
-    // getProductForEditing(id:number):FeatureBagDTO[] {
-    //     var features:FeatureBagDTO[];
-
-    //     this.getProduct(id).then(p => {
-    //         if (p.status == 'success') {
-    //             this.getCategory(p.data.categoryLogic.id).then(c => {
-    //                 if(c.status == 'success') {
-    //                     features = this.mergeCategoryWholeFeatureValuesWithProductFeatureValues(c.data, p.data);
-    //                 } else {
-    //                     return null;
-    //                 }
-    //             });
-    //         } else {
-    //             return null;
-    //         }
-    //     });
-    //     return features;
-    // }
 
     mergeCategoryWholeFeatureValuesWithProductFeatureValues(categoryLogic:CategoryLogic, product:Product):FeatureBagDTO[] {
         var result:FeatureBagDTO[] = [];

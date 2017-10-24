@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from '../../../_services/authentication.service';
 import { ProductService } from '../../../_services/product.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material'
+import { DialogCreateCategoryComponent } from './dialog-create-category/dialog-create-category.component';
 
 @Component({
     selector: 'app-admin-categories',
@@ -24,7 +25,7 @@ export class AdminCategoriesComponent implements OnInit {
 
     openDialog():void {
         // this.router.navigate(["create"], {relativeTo: this.route});
-        let dialogRef = this.dialog.open(DialogCreateCategory, {
+        let dialogRef = this.dialog.open(DialogCreateCategoryComponent, {
             width: '250px',
             data: { name: 'dupa', animal: 'animal jakis' }
           });
@@ -34,37 +35,3 @@ export class AdminCategoriesComponent implements OnInit {
           });
     }
 }
-
-@Component({
-    selector: 'dialog-create-category',
-    template: `
-        <div>
-            <h2 md-dialog-title>My dialog</h2>
-            <hr>
-            <md-dialog-content>
-                Tu jakis tekst
-                <br><br>
-                <strong>{{data}}</strong>
-            </md-dialog-content>
-            <hr>
-            <md-dialog-actions>
-                <button md-raised-button (click)="onCloseConfirm()"></button>
-                <button md-raised-button (click)="onCloseCancel()"></button>
-            </md-dialog-actions>
-        </div>
-    `
-  })
-  export class DialogCreateCategory {
-  
-    constructor(
-      public dialogRef: MatDialogRef<DialogCreateCategory>,
-      @Inject(MAT_DIALOG_DATA) public data: any) { }
-  
-    onCloseConfirm() {
-        this.dialogRef.close('Confirm');
-    }
-
-    onCloseCancel() {
-        this.dialogRef.close('Cancel');
-    }
-  }

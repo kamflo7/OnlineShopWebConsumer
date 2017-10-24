@@ -20,12 +20,13 @@ import { ProductComponent } from './components/product/product.component';
 import { AdminCenterComponent } from './components/admin-center/admin-center.component';
 import { AdminMainComponent } from './components/admin-center/admin-main/admin-main.component';
 import { FormAdminProductEdit } from './components/_forms/form-admin-product-edit/form-admin-product-edit.component';
-import { AdminCategoriesComponent, DialogCreateCategory } from './components/admin-center/admin-categories/admin-categories.component';
+import { AdminCategoriesComponent } from './components/admin-center/admin-categories/admin-categories.component';
 import { FormAdminCategoryLogicComponent } from './components/_forms/form-admin-categorylogic/form-admin-categorylogic.component';
 import { SharedModule } from './_shared/shared.module';
 import { AuthenticationService } from './_services/authentication.service';
 import { ProductService } from './_services/product.service';
 import { TokenInterceptor } from './_services/token.interceptor';
+import { DialogCreateCategoryComponent } from './components/admin-center/admin-categories/dialog-create-category/dialog-create-category.component';
 
 
 @NgModule({
@@ -37,8 +38,7 @@ import { TokenInterceptor } from './_services/token.interceptor';
     ProfileCenterComponent, ProfileMainComponent, ProfileChangePasswordComponent,
     ProductComponent,
     AdminCenterComponent, AdminMainComponent, AdminCategoriesComponent,
-    FormAdminProductEdit, FormAdminCategoryLogicComponent,
-    DialogCreateCategory
+    FormAdminProductEdit, FormAdminCategoryLogicComponent, DialogCreateCategoryComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,7 +50,7 @@ import { TokenInterceptor } from './_services/token.interceptor';
     MatDialogModule
   ],
   entryComponents: [
-    DialogCreateCategory
+    DialogCreateCategoryComponent
   ],
   exports: [
 

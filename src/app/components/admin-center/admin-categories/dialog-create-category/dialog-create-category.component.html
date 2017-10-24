@@ -1,0 +1,14 @@
+<div>
+  <h2 md-dialog-title>My dialog</h2>
+  <hr>
+  <md-dialog-content>
+      Tu jakis tekst
+      <br><br>
+      <strong>{{data.name}} oraz {{data.animal}}</strong>
+  </md-dialog-content>
+  <hr>
+  <md-dialog-actions>
+      <button md-raised-button (click)="onCloseConfirm()">Confirm</button>
+      <button md-raised-button (click)="onCloseCancel()">Cancel</button>
+  </md-dialog-actions>
+</div>

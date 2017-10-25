@@ -14,6 +14,7 @@ export class DynamicInputTextComponent implements OnInit {
   }
 
   @Input() value:string;
+  // @Input() inputEvent:EventEmitter<any>;
   @Output() changeVal:EventEmitter<string> = new EventEmitter();
 
   originalValue:string;

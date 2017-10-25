@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../../../_services/product.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryLogic } from '../../../../_model/category-logic';
 import { FeatureDefinition } from '../../../../_model/feature-definition';
 import { MatDialog } from '@angular/material';
@@ -14,7 +14,7 @@ import { DialogCreateEditFeatureDefinition } from '../../../_dialogs/dialog-crea
 })
 export class AdminCategoryEditComponent implements OnInit {
 
-  constructor(private productService: ProductService, private route: ActivatedRoute, public dialog: MatDialog) { }
+  constructor(private productService: ProductService, private router:Router, private route: ActivatedRoute, public dialog: MatDialog) { }
 
   id: number;
   category: CategoryLogic;
@@ -115,5 +115,9 @@ export class AdminCategoryEditComponent implements OnInit {
           });
       }
     });
+  }
+
+  goBack_Click() {
+    this.router.navigate(["admin/categories"]);
   }
 }

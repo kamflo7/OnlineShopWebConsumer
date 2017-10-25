@@ -26,21 +26,27 @@ import { SharedModule } from './_shared/shared.module';
 import { AuthenticationService } from './_services/authentication.service';
 import { ProductService } from './_services/product.service';
 import { TokenInterceptor } from './_services/token.interceptor';
-import { DialogCreateCategoryComponent } from './components/admin-center/admin-categories/dialog-create-category/dialog-create-category.component';
 import { AdminCategoryEditComponent } from './components/admin-center/admin-categories/admin-category-edit/admin-category-edit.component';
 import { DynamicInputTextComponent } from './dynamic-input-text/dynamic-input-text.component';
-
+import { DialogCreateCategoryComponent } from './components/_dialogs/dialog-create-category/dialog-create-category.component';
+import { DialogCreateFeatureGroupComponent } from './components/_dialogs/dialog-create-featuregroup/dialog-create-featuregroup.component';
+import { DialogCreateEditFeatureDefinition } from './components/_dialogs/dialog-create-edit-featuredefinition/dialog-create-edit-featuredefinition.component';
 
 @NgModule({
   declarations: [
+// normal components
     AppComponent,
     HomeComponent,
     LoginComponent,
     CategoryComponent,
     ProfileCenterComponent, ProfileMainComponent, ProfileChangePasswordComponent,
     ProductComponent,
-    AdminCenterComponent, AdminMainComponent, AdminCategoriesComponent,
-    FormAdminProductEdit, FormAdminCategoryLogicComponent, DialogCreateCategoryComponent, AdminCategoryEditComponent, DynamicInputTextComponent,
+    AdminCenterComponent, AdminMainComponent, AdminCategoriesComponent, AdminCategoryEditComponent,
+    FormAdminProductEdit, FormAdminCategoryLogicComponent,
+// dialogs
+    DialogCreateCategoryComponent, DialogCreateFeatureGroupComponent, DialogCreateEditFeatureDefinition,
+// other things
+    DynamicInputTextComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +58,7 @@ import { DynamicInputTextComponent } from './dynamic-input-text/dynamic-input-te
     MatDialogModule
   ],
   entryComponents: [
-    DialogCreateCategoryComponent
+    DialogCreateCategoryComponent, DialogCreateFeatureGroupComponent, DialogCreateEditFeatureDefinition
   ],
   exports: [
 

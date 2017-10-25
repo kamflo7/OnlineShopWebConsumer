@@ -1,0 +1,23 @@
+<div>
+    <h4 md-dialog-title>Create a FeatureGroup</h4>
+    <hr>
+    <md-dialog-content>
+        <form>
+            <div class="form-group">
+                <label for="groupName">FeatureGroup name:</label>
+                <!-- <input type="text" id="categoryName" class="form-control" ngModel name="categoryName" [(ngModel)]="categoryName" #categoryName="ngModel" required minlength="3" /> -->
+				<input type="text" id="groupName" class="form-control" [(ngModel)]="groupName" name="groupName"
+				 	ngModel required minlength="3" #group="ngModel" />
+                <div class="alert alert-danger" *ngIf="group.touched && !group.valid">
+                    <div *ngIf="group.errors.required">FeatureGroup name is required.</div>
+                    <div *ngIf="group.errors.minlength">FeatureGroup name should be minimum {{group.errors.minlength.requiredLength}} characters.</div>
+                </div>
+            </div>
+        </form>
+    </md-dialog-content>
+    <hr>
+    <md-dialog-actions>
+        <button md-raised-button (click)="onCloseConfirm()">Confirm</button>
+        <button md-raised-button (click)="onCloseCancel()">Cancel</button>
+    </md-dialog-actions>
+</div>

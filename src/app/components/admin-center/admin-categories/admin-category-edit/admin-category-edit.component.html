@@ -1,25 +1,37 @@
 <div class="container">
   <div class="row">
-    <h3>Edit categogry</h3>
+    <h3>Edit category</h3>
   </div>
 
   <div class="row bgcontainer" *ngIf="category">
-    <div class="col-md-4">
+    <div class="col-md-3">
       <h4>Basic informations:</h4>
       <span>ID: {{category.id}}</span><br>
-      <span>Name: </span><dynamic-input-text [value]="category.name" (changeVal)="nameChange($event)"></dynamic-input-text>
+      <span>Name: </span>
+      <dynamic-input-text [value]="category.name" (changeVal)="categoryNameChange_Click($event)"></dynamic-input-text>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-5">
       <h4>Feature Groups:</h4>
       <ul>
         <li *ngFor="let g of category.featureGroups; let i=index">
-            <dynamic-input-text [value]="category.featureGroups[i].name" (changeVal)="featureGroupNameChange(category.featureGroups[i].id, $event)"></dynamic-input-text>
+          <dynamic-input-text [value]="category.featureGroups[i].name" (changeVal)="featureGroupNameChange_Click(category.featureGroups[i].id, $event)"></dynamic-input-text>
+        </li>
+        <li>
+          <button class="btn btn-default btn-xs" (click)="addFeatureGroup_Click()">New FeatureGroup</button>
         </li>
       </ul>
     </div>
     <div class="col-md-4">
       <h4>Feature Definitions:</h4>
+      <ul>
+        <li class="editable-span" *ngFor="let f of category.featureDefinitions; let i=index" (click)="listFeatureDefinition_Click(category.featureDefinitions[i])">{{f.name}}</li>
+        <li>
+          <button class="btn btn-default btn-xs" (click)="addFeatureDefinition_Click()">New FeatureDefinition</button>
+        </li>
+      </ul>
     </div>
   </div>
+
+
 </div>
 <hr>

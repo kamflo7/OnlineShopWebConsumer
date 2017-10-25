@@ -1,0 +1,48 @@
+<div>
+    <h4 md-dialog-title>{{title}}</h4>
+    <hr>
+    <md-dialog-content>
+        <!-- <form> -->
+            <div class="form-group">
+                <div>
+                    <!-- <span>Name: {{name}}</span> -->
+                    <span>Name: <dynamic-input-text [value]="dto.name" (changeVal)="featureDefNameChange($event)"></dynamic-input-text></span>
+                    <div><input class="form-check-input" type="checkbox" value="option2" [checked]="dto.multipleValues" (change)="dto.multipleValues=!dto.multipleValues"><span>&nbsp;MultipleValues</span></div>
+                    <div><input class="form-check-input" type="checkbox" value="option2" [checked]="dto.filterable" (change)="dto.filterable=!dto.filterable"><span>&nbsp;Filterable</span></div>
+                    <div><input class="form-check-input" type="checkbox" value="option2" [checked]="dto.visible" (change)="dto.visible=!dto.visible"><span>&nbsp;Visible</span></div>
+                </div>
+            </div>
+            <label style="font-weight: normal" for="select">FeatureGroup:</label>
+            <select id="select" (change)="featureGroupChange($event.target.value)">
+                <option *ngFor="let g of givenFeatureGroups; let i=index" [value]="g.id" [attr.selected]="g.id == groupid ? true : null">{{g.name}}</option>
+                <!-- <option *ngFor="let g of givenFeatureGroups; let i=index" [attr.selected]="givenFeatureGroups[i].id == groupid ? true : null">{{g.name}}</option> -->
+            </select>
+            <span>FeatureValues:</span>
+            <ul>
+                <!-- <li class="underline-hover" *ngFor="let v of dto.featureValues">{{v.value}}</li> -->
+                <li class="underline-hover" *ngFor="let v of dto.featureValues; let i=index">
+                    <dynamic-input-text [value]="dto.featureValues[i].value" (changeVal)="featureValueChange(i, $event)"></dynamic-input-text>
+                </li>
+                <li class="underline-hover" *ngFor="let v of dto.newValues; let i=index">
+                    <dynamic-input-text [value]="dto.newValues[i]" (changeVal)="featureValueJustCreatedChange(i, $event)"></dynamic-input-text>
+                </li>
+                <li>
+                    <button class="btn btn-secondary btn-sm" (click)="addNewAdditionalValue()">Add Value</button>
+                </li>
+            </ul>
+        <!-- </form> -->
+    </md-dialog-content>
+    <hr>
+    <md-dialog-actions>
+        <button md-raised-button (click)="onCloseConfirm()">Confirm</button>
+        <button md-raised-button (click)="onCloseCancel()">Cancel</button>
+    </md-dialog-actions>
+</div>
+
+
+<!-- <input type="text" id="groupName" class="form-control" [(ngModel)]="groupName" name="groupName"
+ngModel required minlength="3" #group="ngModel" />
+<div class="alert alert-danger" *ngIf="group.touched && !group.valid">
+<div *ngIf="group.errors.required">FeatureGroup name is required.</div>
+<div *ngIf="group.errors.minlength">FeatureGroup name should be minimum {{group.errors.minlength.requiredLength}} characters.</div>
+</div> -->

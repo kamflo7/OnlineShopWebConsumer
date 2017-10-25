@@ -1,11 +1,11 @@
 <span *ngIf="!isEditing" (click)="isEditing = !isEditing" class="editable-span">{{value}}</span>
 
 <div class="row" *ngIf="isEditing">
-  <div class="col-md-8">
-    <input type="text" class="form-control" name="inputEdit" ngModel [(ngModel)]="value" />
+  <div class="col-md-8 no-gutter">
+    <input type="text" (keyup.enter)="onUserEnter()" class="form-control" name="inputEdit" ngModel [(ngModel)]="value" />
   </div>
-  <div class="col-md-4">
-    <button class="btn btn-primary btn-xs" (click)="submit($event)">Submit</button>
-    <button class="btn btn-danger btn-xs" (click)="cancel()">Cancel</button>
+  <div class="col-md-4 btn-group no-gutter">
+    <button style="margin-left: 2px; margin-top: 5px" type="button" class="btn btn-primary btn-xs" (click)="submit($event)">Submit</button>
+    <button style="margin-top: 5px" type="button" class="btn btn-danger btn-xs" (click)="cancel()">Cancel</button>
   </div>
 </div>

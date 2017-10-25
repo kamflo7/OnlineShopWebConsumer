@@ -31,4 +31,7 @@ export class DynamicInputTextComponent implements OnInit {
     this.isEditing=false;
   }
 
+  onUserEnter() {
+    this.submit(null);
+  }
 }

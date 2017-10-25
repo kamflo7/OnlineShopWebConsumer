@@ -3,9 +3,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from '../../../_services/authentication.service';
 import { ProductService } from '../../../_services/product.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material'
-import { DialogCreateCategoryComponent } from './dialog-create-category/dialog-create-category.component';
 import { Observable } from 'rxjs/Observable';
 import { CategoryLogic } from '../../../_model/category-logic';
+import { DialogCreateCategoryComponent } from '../../_dialogs/dialog-create-category/dialog-create-category.component';
 
 @Component({
     selector: 'app-admin-categories',
@@ -43,7 +43,7 @@ export class AdminCategoriesComponent implements OnInit {
         // this.router.navigate(["create"], {relativeTo: this.route});
         let dialogRef = this.dialog.open(DialogCreateCategoryComponent, {
             width: '300px',
-            data: { name: 'dupa', animal: 'animal jakis' }
+            // data: {  }
           });
       
           dialogRef.afterClosed().subscribe(result => {

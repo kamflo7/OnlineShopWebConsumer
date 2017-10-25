@@ -13,6 +13,7 @@ import { FeatureBagDTO } from '../_dto/feature-bag-dto';
 import { FeatureDefinition } from '../_model/feature-definition';
 import { FeatureBag } from '../_model/feature-bag';
 import { FeatureValueDTO } from '../_dto/feature-value-dto';
+import { FeatureDefinitionDTOEditable } from '../_dto/feature-definition-dto-editable';
 
 export interface CategoriesResponse {
     categories:CategoryLogic[];
@@ -22,7 +23,9 @@ export interface CategoriesResponse {
 export class ProductService {
 
     constructor(private http:HttpClient, private globals:Globals) {}
+    printDebugLog:boolean = true;
 
+// CATEGORIES
     getCategories():Promise<ResponseDetails<Array<CategoryLogic>>> {
         return new Promise(resolve => {
             this.http.get<ResponseDetails<Array<CategoryLogic>>>(this.globals.backendUrl+'categories',
@@ -47,7 +50,7 @@ export class ProductService {
             this.http.put<ResponseDetails<CategoryLogic>>(this.globals.backendUrl+'categories/?name='+name, null, 
                 {observe: 'response'}).subscribe(r => {
                     resolve(r.body);
-                })
+                });
         });
     }
 
@@ -56,10 +59,51 @@ export class ProductService {
             this.http.post<ResponseDetails<CategoryLogic>>(this.globals.backendUrl+'categories/'+id+'/?name='+name, null,
                 {observe: 'response'}).subscribe(r => {
                     resolve(r.body);
-                    console.log(r.body);
+                    if(this.printDebugLog) console.log(r.body);
                 });
         });
     }
+// FEATURE GROUPS
+    createFeatureGroup(categoryid:number, name:string):Promise<ResponseDetails<CategoryLogic>> {
+        return new Promise(resolve => {
+            this.http.put<ResponseDetails<CategoryLogic>>(this.globals.backendUrl+'categories/'+categoryid+'/feature_groups/?name='+name, null, 
+                {observe: 'response'}).subscribe(r => {
+                    resolve(r.body);
+                });
+        });
+    }
+
+    updateFeatureGroup(categoryid:number, groupid:number, name:string):Promise<ResponseDetails<CategoryLogic>> {
+        return new Promise(resolve => {                     ///categories/{categoryID}/feature_groups/{groupID}
+            this.http.post<ResponseDetails<CategoryLogic>>(this.globals.backendUrl+'categories/'+categoryid+'/feature_groups/'+groupid+'/?name='+name, null,
+                {observe: 'response'}).subscribe(r => {
+                    resolve(r.body);
+                    if(this.printDebugLog) console.log(r.body);
+                });
+        });
+    }
+// FEATURE DEFINITIONS
+    createFeatureDefinition(categoryid:number, groupid:number, dto:FeatureDefinitionDTOEditable):Promise<ResponseDetails<CategoryLogic>> {
+        return new Promise(resolve => {
+            this.http.put<ResponseDetails<CategoryLogic>>(this.globals.backendUrl+'categories/'+categoryid+'/feature_groups/'+groupid+'/feature_definitions',
+            dto, {observe: 'response'}).subscribe(r => {
+                resolve(r.body);
+                if(this.printDebugLog) console.log(r.body);
+            });
+        });
+    }
+
+    updateFeatureDefinition(categoryid:number, groupid:number, featureDefID:number, dto:FeatureDefinitionDTOEditable):Promise<ResponseDetails<CategoryLogic>> {
+        return new Promise(resolve => {
+            this.http.post<ResponseDetails<CategoryLogic>>(this.globals.backendUrl+'categories/'+categoryid+'/feature_groups/'+groupid+'/feature_definitions/'+featureDefID,
+            dto, {observe: 'response'}).subscribe(r => {
+                resolve(r.body);
+                if(this.printDebugLog) console.log(r.body);
+            });
+        });
+    }
+
+    
 
     getProduct(productid:number):Promise<ResponseDetails<Product>> {
         return new Promise(resolve => {

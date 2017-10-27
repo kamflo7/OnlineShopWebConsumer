@@ -8,4 +8,6 @@ export class Product {
     description:string;
     featureBags:FeatureBag[];
     categoryLogic:CategoryLogic;
+
+    image:any;
 }

@@ -8,6 +8,7 @@ import { Product } from '../../../../_model/product';
 import { FeatureBag } from '../../../../_model/feature-bag';
 import { CategoryLogic } from '../../../../_model/category-logic';
 import { Observable } from 'rxjs/Observable';
+import { Globals } from '../../../../globals';
 
 
 @Component({
@@ -21,7 +22,8 @@ export class AdminProductEditComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private productService: ProductService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private globals:Globals
   ) {
 
   }
@@ -37,6 +39,32 @@ export class AdminProductEditComponent implements OnInit {
   categories;
   category;
 
+
+  base64textString:string="";
+  base64ToSend:string;
+
+  imageChanged:boolean;
+  
+  handleFileSelect(evt){
+      var files = evt.target.files;
+      var file = files[0];
+    
+    if (files && file) {
+        var reader = new FileReader();
+        reader.onload =this._handleReaderLoaded.bind(this);
+        reader.readAsBinaryString(file);
+    }
+  }
+
+  _handleReaderLoaded(readerEvt) {
+    var binaryString = readerEvt.target.result;
+    // this.base64textString= btoa(binaryString);
+    this.base64ToSend = btoa(binaryString);
+    this.base64textString= "data:image/jpeg;base64," + this.base64ToSend;
+    this.imageChanged = true;
+    // console.log(btoa(binaryString));
+   }
+
   ngOnInit() {
     this.route.params.subscribe(params => {
       if (params.id != 'createNew') { // if URL has productid:number - edit mode
@@ -47,6 +75,9 @@ export class AdminProductEditComponent implements OnInit {
         this.productService.getProduct(this.productid).then(r => {
           if (r.status == 'success') {
             let product: Product = r.data;
+            if(r.data.image != null) {
+              this.base64textString = this.globals.resourceImgsUrl+r.data.image.name;
+            }
             this.productDTO = this.convertProductToProductDTO(product);
             this.loadCategory(product.categoryLogic.id, r.data);
           }
@@ -66,7 +97,6 @@ export class AdminProductEditComponent implements OnInit {
       if (r2.status == 'success') {
         this.categoryLogic = r2.data;
         this.features = this.makeFeaturesDTO(this.categoryLogic, product);
-        console.log(this.features);
       } else {
         alert("There was a problem with getting data (CategoryLogic");
       }
@@ -98,9 +128,17 @@ export class AdminProductEditComponent implements OnInit {
           featureValues.push(loopFeature.checked[j]);
         }
       } else {
-        featureValues.push(loopFeature.checked);
+        if(typeof loopFeature.checked === "object") {
+          featureValues.push(loopFeature.checked[0]);
+        }  else {
+          featureValues.push(loopFeature.checked);
+        }
       }
       this.productDTO.features[loopFeature.featureDefID] = featureValues;
+    }
+
+    if(this.imageChanged) {
+      this.productDTO.image = this.base64ToSend;
     }
 
     if (this.mode == Mode.CREATE) {

@@ -11,6 +11,8 @@ export class ProductDTO {
     amount:number;
 
     features:HashNumberOfListNumbers;
+
+    image:string;
 }
 
 export interface HashNumberOfListNumbers {

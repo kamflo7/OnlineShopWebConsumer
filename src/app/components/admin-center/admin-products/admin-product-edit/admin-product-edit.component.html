@@ -10,6 +10,7 @@
 
   <div class="row bgcontainer">
     <form class="example-form" *ngIf="productDTO">
+      <!-- BASIC FIELDS -->
       <mat-form-field class="example-full-width">
         <input matInput placeholder="Name" [(ngModel)]="productDTO.name" name="name">
       </mat-form-field>
@@ -22,6 +23,7 @@
       <mat-form-field class="example-full-width">
         <textarea matInput placeholder="Description" type="text" style="min-height: 50px" [(ngModel)]="productDTO.description" name="description"></textarea>
       </mat-form-field>
+      <!-- CATEGORY PICKER IF CREATE MODE -->
       <mat-form-field *ngIf="mode == 1 && categories" class="example-full-width">
         <mat-select placeholder="CategoryLogic" [(ngModel)]="category" name="category" (change)="categoryLogic_Change()">
           <mat-option *ngFor="let cat of categories" [value]="cat.id">
@@ -29,6 +31,7 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
+      <!-- FEATURES  -->
       <ng-container *ngIf="categoryLogic && features">
         <ng-container *ngFor="let def of features; let i=index">
           <mat-form-field class="example-full-width">
@@ -40,6 +43,12 @@
           </mat-form-field>
         </ng-container>
       </ng-container>
-      <button mat-raised-button color="primary" (click)="submit_Click()">{{staticTitle}}</button>
+      <label for="filePicker">Choose or drag a file:</label>
+      <input type="file" id="filePicker" (change)="handleFileSelect($event)">
+      <div style="width: 330px">
+          <img src="{{base64textString}}" alt="Image" class="img-thumbnail" *ngIf="base64textString">
+      </div>
+      
+      <div style="margin-top: 10px;"><button mat-raised-button color="primary" (click)="submit_Click()">{{staticTitle}}</button></div>
     </form>
   </div>

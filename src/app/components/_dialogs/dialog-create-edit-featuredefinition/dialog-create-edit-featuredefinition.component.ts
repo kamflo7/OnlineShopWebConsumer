@@ -17,6 +17,7 @@ export class DialogCreateEditFeatureDefinition {
       if(data.featureDefinition != null) { // passing existing FeatureDefinition for edit
         this.modeEditing = true;
         this.title = 'Edit FeatureDefinition';
+        this.featureDefinitionID = data.featureDefinition.id;
 
         this.dto.featureValues = [];
         for(var i=0; i<data.featureDefinition.featureValueDefinitions.length; i++) {
@@ -47,6 +48,7 @@ export class DialogCreateEditFeatureDefinition {
   title:string;
   modeEditing:boolean;
   givenFeatureGroups:FeatureGroup[];
+  featureDefinitionID:number;
 
   dto:any = {};
   groupid:number;

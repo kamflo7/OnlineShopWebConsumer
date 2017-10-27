@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-6">
+      <h3>{{staticTitle}}</h3>
+    </div>
+    <div class="col-xs-6">
+      <button class="btn btn-secondary btn-sm pull-right" style="position:relative;margin-top:20px" (click)="goBack_Click()">Go back</button>
+    </div>
+  </div>
+
+  <div class="row bgcontainer">
+    <form class="example-form" *ngIf="productDTO">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Name" [(ngModel)]="productDTO.name" name="name">
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Price" type="number" [(ngModel)]="productDTO.price" name="price">
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Amount" type="number" [(ngModel)]="productDTO.amount" name="amount">
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <textarea matInput placeholder="Description" type="text" style="min-height: 50px" [(ngModel)]="productDTO.description" name="description"></textarea>
+      </mat-form-field>
+      <mat-form-field *ngIf="mode == 1 && categories" class="example-full-width">
+        <mat-select placeholder="CategoryLogic" [(ngModel)]="category" name="category" (change)="categoryLogic_Change()">
+          <mat-option *ngFor="let cat of categories" [value]="cat.id">
+            {{cat.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <ng-container *ngIf="categoryLogic && features">
+        <ng-container *ngFor="let def of features; let i=index">
+          <mat-form-field class="example-full-width">
+            <mat-select placeholder="{{def.featureDefName}}" [multiple]="def.multipleValues" [(ngModel)]="features[i].checked" name="{{def.featureDefName}}">
+              <mat-option *ngFor="let featureValue of def.values" [value]="featureValue.id">
+                {{featureValue.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </ng-container>
+      </ng-container>
+      <button mat-raised-button color="primary" (click)="submit_Click()">{{staticTitle}}</button>
+    </form>
+  </div>

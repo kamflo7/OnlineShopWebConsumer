@@ -14,6 +14,7 @@ import { FeatureDefinition } from '../_model/feature-definition';
 import { FeatureBag } from '../_model/feature-bag';
 import { FeatureValueDTO } from '../_dto/feature-value-dto';
 import { FeatureDefinitionDTOEditable } from '../_dto/feature-definition-dto-editable';
+import { ProductDTO } from '../_dto/product-dto';
 
 export interface CategoriesResponse {
     categories:CategoryLogic[];
@@ -104,12 +105,32 @@ export class ProductService {
     }
 
     
-
+// PRODUCTS
     getProduct(productid:number):Promise<ResponseDetails<Product>> {
         return new Promise(resolve => {
         this.http.get<ResponseDetails<Product>>(this.globals.backendUrl+'products/'+productid, 
             {observe: 'response'}).subscribe(r => {
                 resolve(r.body);
+            });
+        });
+    }
+
+    editProduct(productid:number, dto:ProductDTO):Promise<ResponseDetails<Product>> {
+        return new Promise(resolve => {
+            this.http.post<ResponseDetails<Product>>(this.globals.backendUrl+'products/'+productid, dto,
+            {observe: 'response'}).subscribe(r => {
+                resolve(r.body);
+                if(this.printDebugLog) console.log(r.body);
+            });
+        });
+    }
+
+    createProduct(categoryid:number, dto:ProductDTO):Promise<ResponseDetails<Product>> {
+        return new Promise(resolve => {
+            this.http.put<ResponseDetails<Product>>(this.globals.backendUrl+'categories/'+categoryid+'/products', dto, 
+            {observe: 'response'}).subscribe(r => {
+                resolve(r.body);
+                if(this.printDebugLog) console.log(r.body);
             });
         });
     }

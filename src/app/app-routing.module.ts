@@ -13,6 +13,8 @@ import { AdminCenterComponent } from './components/admin-center/admin-center.com
 import { AdminMainComponent } from './components/admin-center/admin-main/admin-main.component';
 import { AdminCategoriesComponent } from './components/admin-center/admin-categories/admin-categories.component';
 import { AdminCategoryEditComponent } from './components/admin-center/admin-categories/admin-category-edit/admin-category-edit.component';
+import { AdminProductsComponent } from './components/admin-center/admin-products/admin-products.component';
+import { AdminProductEditComponent } from './components/admin-center/admin-products/admin-product-edit/admin-product-edit.component';
 
 
 const routes: Routes = [
@@ -36,7 +38,10 @@ const routes: Routes = [
             { path: '', component: AdminMainComponent},
             // { path: ':id', component: AdminMainComponent},
             { path: 'categories', component: AdminCategoriesComponent},
-            { path: 'categories/edit/:id', component: AdminCategoryEditComponent}
+            { path: 'categories/edit/:id', component: AdminCategoryEditComponent},
+            { path: 'products', component: AdminProductsComponent},
+            { path: 'products/edit/:id', component: AdminProductEditComponent},
+            // { path: 'products/edit', component: AdminProductEditComponent}
         ]
     }
 ]

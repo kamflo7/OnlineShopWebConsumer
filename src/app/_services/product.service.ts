@@ -15,6 +15,7 @@ import { FeatureBag } from '../_model/feature-bag';
 import { FeatureValueDTO } from '../_dto/feature-value-dto';
 import { FeatureDefinitionDTOEditable } from '../_dto/feature-definition-dto-editable';
 import { ProductDTO } from '../_dto/product-dto';
+import { CategoryView } from '../_model/category-view';
 
 export interface CategoriesResponse {
     categories:CategoryLogic[];
@@ -25,6 +26,17 @@ export class ProductService {
 
     constructor(private http:HttpClient, private globals:Globals) {}
     printDebugLog:boolean = true;
+
+// CATEGORIES VIEW (NAVIGATION)
+    getCategoryViews():Promise<ResponseDetails<Array<CategoryView>>> {
+        return new Promise(resolve => {
+            this.http.get<ResponseDetails<Array<CategoryView>>>(this.globals.backendUrl+'navigations',
+            {observe: 'response'}).subscribe(r => {
+                if(this.printDebugLog) console.log(r.body);
+                    resolve(r.body);
+            });
+        });
+    }
 
 // CATEGORIES
     getCategories():Promise<ResponseDetails<Array<CategoryLogic>>> {

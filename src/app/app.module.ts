@@ -36,6 +36,7 @@ import { AdminProductEditComponent } from './components/admin-center/admin-produ
 import { AdminNavigationsComponent } from './components/admin-center/admin-navigations/admin-navigations.component';
 import { AdminNavigationEditComponent } from './components/admin-center/admin-navigations/admin-navigation-edit/admin-navigation-edit.component';
 import { NavigationConverter } from './_services/navigation-converter.service';
+import { ItemListProductComponent } from './components/item-list-product/item-list-product.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,7 @@ import { NavigationConverter } from './_services/navigation-converter.service';
 // dialogs
     DialogCreateCategoryComponent, DialogCreateFeatureGroupComponent, DialogCreateEditFeatureDefinition,
 // other things
-    DynamicInputTextComponent
+    DynamicInputTextComponent, ItemListProductComponent
   ],
   imports: [
     BrowserModule,

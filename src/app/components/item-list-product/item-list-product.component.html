@@ -1,0 +1,12 @@
+<div class="row" style="width: 100%; min-height: 120px; border: 1px solid blue; margin-bottom: 10px; display:flex; align-items: center;">
+    <div class="col-md-3" style="text-align: center;">
+        <img *ngIf="product.image" height="120" src="{{imgSrc}}">
+    </div>
+    <div class="col-md-7">
+        <h4>{{product.name}}</h4>
+        <div>{{product.description}}</div>
+    </div>
+    <div class="col-md-2" style="text-align: right">
+        <h4>{{product.price}} PLN</h4>
+    </div>
+</div>

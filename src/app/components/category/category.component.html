@@ -1,8 +1,8 @@
 <app-header></app-header>
 
-<div class="container" style="background-color: gray;">
+<div class="container" style="background-color: #cacaca">
     <div class="row">
-        <div class="col-md-3" style="background-color: #cacaca; padding-bottom: 20px;">
+        <div class="col-md-3" style="padding-bottom: 20px; padding-top: 20px">
             <h4>Filters:</h4>
             <ng-container *ngIf="categoryLogic">
                 <ng-container *ngFor="let fd of filterableDefinitions; let i=index">
@@ -23,7 +23,7 @@
             </div>
         </div>
         <div class="col-md-9">
-            content
+            <item-list-product *ngFor="let product of products" [product]="product"></item-list-product>
         </div>
     </div>
 </div>

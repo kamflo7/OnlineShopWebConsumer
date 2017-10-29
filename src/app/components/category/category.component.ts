@@ -7,6 +7,7 @@ import { NavigationConverter } from '../../_services/navigation-converter.servic
 import { NavigationItem } from '../../_dto/navigation-item';
 import { FeatureDefinition } from '../../_model/feature-definition';
 import { Observable } from 'rxjs/Observable';
+import { Product } from '../../_model/product';
 
 @Component({
   selector: 'app-category',
@@ -29,6 +30,8 @@ export class CategoryComponent implements OnInit {
   currentNavigationItem: NavigationItem;
   categoryLogic: CategoryLogic;
   filterableDefinitions = []; // {def, values, valuesNgModel}
+
+  products:Product[] = [];
 
   ngOnInit(): void {
     document.title = "Kategoria";
@@ -128,6 +131,8 @@ export class CategoryComponent implements OnInit {
   getProducts() { // called automatically after fully loading page
     this.readURLFiltersAndAssignToNGModel().then(r => {
       this.productService.getProducts(this.categoryLogic.id, this.currentURLFilterParams).then(r => {
+        this.products = r.data;
+        console.log("Pobralem produkty:");
         console.log(r.data);
       });
     });
@@ -148,7 +153,8 @@ export class CategoryComponent implements OnInit {
       for(let i=0; i<this.filterableDefinitions.length; i++) {
         this.filterableDefinitions[i].valuesNgModel = [];
       }
-      
+
+      this.currentURLFilterParams = null;
       this.getProducts();
     });
   }

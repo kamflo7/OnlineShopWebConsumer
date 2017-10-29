@@ -4,4 +4,5 @@ import { Injectable } from '@angular/core';
 export class Globals {
     backendUrl:string = 'http://localhost:8080/';
     resourceImgsUrl:string = this.backendUrl+"resources/imgs/";
+    
 }

@@ -1,5 +1,4 @@
-import { CategoryLogic } from '../../_model/category-logic';
-import { HashNumberOfGroup } from '../../_model/category-view';
+import { CategoryLogic } from '../_model/category-logic';
 
 export class NavigationItem {
     id:number;

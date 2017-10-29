@@ -35,6 +35,7 @@ import { AdminProductsComponent } from './components/admin-center/admin-products
 import { AdminProductEditComponent } from './components/admin-center/admin-products/admin-product-edit/admin-product-edit.component';
 import { AdminNavigationsComponent } from './components/admin-center/admin-navigations/admin-navigations.component';
 import { AdminNavigationEditComponent } from './components/admin-center/admin-navigations/admin-navigation-edit/admin-navigation-edit.component';
+import { NavigationConverter } from './_services/navigation-converter.service';
 
 @NgModule({
   declarations: [
@@ -76,6 +77,7 @@ import { AdminNavigationEditComponent } from './components/admin-center/admin-na
     Globals,
     AuthenticationService,
     ProductService,
+    NavigationConverter,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

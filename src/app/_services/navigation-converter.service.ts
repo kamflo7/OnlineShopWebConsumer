@@ -1,16 +1,13 @@
-import { CategoryView, HashNumberOfGroup } from '../../_model/category-view';
-import { NavigationItem } from './navigation-item';
+import { CategoryView } from '../_model/category-view';
+import { NavigationItem } from '../_dto/navigation-item';
 
 export class NavigationConverter {
     // private categories = [];
     private data:CategoryView[];
     private root = [];
 
-    constructor(data:CategoryView[]) {
+    public convertForNavigationTemplate(data:CategoryView[]) {
         this.data = data;
-    }
-
-    public convert() {
         let childCount = 0;
 
         // let root = [];
@@ -108,7 +105,7 @@ export class NavigationConverter {
         result.children = [];
         result.parentid = categoryView.parent != null ? categoryView.parent.id : -1;
         result.level = level;
-        result.url = "";
+        result.url = null;
         // if(categoryView.parent != null)
         return result;
     }

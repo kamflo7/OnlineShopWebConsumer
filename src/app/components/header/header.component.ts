@@ -5,7 +5,7 @@ import { User } from '../../_model/user';
 import { CategoryLogic } from '../../_model/category-logic';
 import { ProductService } from '../../_services/product.service';
 import { CategoryView, HashNumberOfGroup } from '../../_model/category-view';
-import { NavigationConverter } from './navigation-converter';
+import { NavigationConverter } from '../../_services/navigation-converter.service';
 
 @Component({
   selector: 'app-header',
@@ -16,7 +16,8 @@ export class HeaderComponent implements OnInit {
 
   constructor(private auth: AuthenticationService,
     private router: Router,
-    private productService: ProductService) {
+    private productService: ProductService,
+    private navigationConverter: NavigationConverter) {
     // this.authenticated = auth.isUserAuthenticated();
     // if(this.authenticated)
     //   this.user = auth.getUser();
@@ -32,8 +33,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.productService.getCategoryViews().then(r => {
       if (r.status == 'success') {
-        let converter = new NavigationConverter(r.data);
-        this.categories = converter.convert();
+        this.categories = this.navigationConverter.convertForNavigationTemplate(r.data);
         // console.log(this.categories);
       }
     });

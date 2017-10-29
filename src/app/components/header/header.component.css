@@ -3,3 +3,11 @@
     align-items: center;
     -webkit-box-align: center;
 }
+
+/* for <li> */
+.divider { 
+    height: 1px;
+    background-color: #cecece;
+    overflow: hidden;
+    margin: 0;
+}

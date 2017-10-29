@@ -10,5 +10,7 @@ export class NavigationItem {
     children:NavigationItem[];
     lastLevel:boolean;
     parentid:number;
+    level:number;
+    url:string;
     // filterParams:string;
 }

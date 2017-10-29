@@ -30,8 +30,8 @@
                             <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li *ngFor="let s of c.children">
-                                    <a *ngIf="s.lastLevel" href="#">-> {{s.name}}</a>
-                                    <a *ngIf="!s.lastLevel" href="#">{{s.name}}</a>
+                                    <a *ngIf="s.lastLevel" routerLink="/category/{{s.url}}">&#9658;{{s.name}}</a>
+                                    <a *ngIf="!s.lastLevel" routerLink="/category/{{s.url}}">{{s.name}}</a>
                                     <!-- <a href="#">{{s.name}}</a> -->
                                 </li>
                             </ul>
@@ -42,3 +42,5 @@
         </div>
     </nav>
 </div>
+
+<a routerLink="/login">Link do logowania</a>

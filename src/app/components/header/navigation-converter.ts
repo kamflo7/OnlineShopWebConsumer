@@ -4,6 +4,7 @@ import { NavigationItem } from './navigation-item';
 export class NavigationConverter {
     // private categories = [];
     private data:CategoryView[];
+    private root = [];
 
     constructor(data:CategoryView[]) {
         this.data = data;
@@ -12,51 +13,93 @@ export class NavigationConverter {
     public convert() {
         let childCount = 0;
 
-        let root = [];
+        // let root = [];
         let level2 = [];
         let level3 = [];
 
         for (let i = 0; i < this.data.length; i++) { // look for navigation level root (0)
             if (this.data[i].parent == null) {
-                root.push(this.convertCategoryViewToLocalDTO(this.data[i]));
+                this.root.push(this.convertCategoryViewToLocalDTO(this.data[i], 0));
             } 
         }
 
-        for (let i = 0; i < this.data.length; i++) { // look for navigation level root (0)
+        for (let i = 0; i < this.data.length; i++) { // look for navigation level 1 and 2
             if (this.data[i].parent != null) {
                 let found = false;
-                for(let j=0; j<root.length; j++) {
-                    if(this.data[i].parent.id == root[j].id) {
-                        level2.push(this.convertCategoryViewToLocalDTO(this.data[i]));
+                for(let j=0; j<this.root.length; j++) {
+                    if(this.data[i].parent.id == this.root[j].id) {
+                        level2.push(this.convertCategoryViewToLocalDTO(this.data[i], 1));
                         found = true;
                         break;
                     }
                 }
     
                 if(!found)
-                    level3.push(this.convertCategoryViewToLocalDTO(this.data[i]));
+                    level3.push(this.convertCategoryViewToLocalDTO(this.data[i], 2));
             } 
         }
 
-        for(let i=0; i<root.length; i++) {
+        for(let i=0; i<this.root.length; i++) { // merge level 1 with level 2 and assert correct order
             for(let j=0; j<level2.length; j++) {
-                if(level2[j].parentid == root[i].id)
-                    root[i].children.push(level2[j]);
+                if(level2[j].parentid == this.root[i].id)
+                    this.root[i].children.push(level2[j]);
                     
                 for(let k=0; k<level3.length; k++) {
-                    if(level3[k].parentid == level2[j].id && level2[j].parentid == root[i].id) {
+                    if(level3[k].parentid == level2[j].id && level2[j].parentid == this.root[i].id) {
                         level3[k].lastLevel = true;
-                        root[i].children.push(level3[k]);
+                        this.root[i].children.push(level3[k]);
                     }
                 }
             }
         }
 
-        return root;
+        for(let i=0; i<this.root.length; i++) {
+            this.generateURL(this.root[i]);
+            if(this.root[i].children != null) {
+                for(let j=0; j<this.root[i].children.length; j++) {
+                    this.generateURL(this.root[i].children[j]);
+                }
+            }
+        }
+        // console.log(this.root);
+        return this.root;
     }
 
+    generateURL(node:NavigationItem) {
+        if(node.categoryLogic != null) {
+            let catBlocks = [];
+            catBlocks.push(node.name.replace(/ /g, "-") + "-" + node.id);
 
-    convertCategoryViewToLocalDTO(categoryView: CategoryView): NavigationItem {
+            let parent:NavigationItem;
+            parent = node.parentid != -1 ? this.searchNodeByID(node.parentid) : null;
+            while(parent != null) {
+                catBlocks.push(parent.name.replace(/ /g, "-"));
+                parent = parent.parentid != -1 ? this.searchNodeByID(parent.parentid) : null;
+            }
+            let finalQuery = "";
+            for(let i=catBlocks.length-1; i >= 0; i--) {
+                finalQuery += catBlocks[i] + "/";
+            }
+            node.url = finalQuery;
+            // console.log("url for node " + node.name + ": " + node.url);
+        }
+    }
+
+    searchNodeByID(id:number):NavigationItem {
+        for(let i=0; i<this.root.length; i++) {
+            if(this.root[i].id == id)
+                return this.root[i];
+            if(this.root[i].children != null) {
+                for(let j=0; j<this.root[i].children.length; j++) {
+                    if(this.root[i].children[j].id == id)
+                        return this.root[i].children[j];
+                }
+            }
+        }
+        return null;
+    }
+
+    convertCategoryViewToLocalDTO(categoryView: CategoryView, level:number): NavigationItem {
         let result = new NavigationItem();
         result.id = categoryView.id;
         result.name = categoryView.name;
@@ -64,6 +107,8 @@ export class NavigationConverter {
         result.lastLevel = false;
         result.children = [];
         result.parentid = categoryView.parent != null ? categoryView.parent.id : -1;
+        result.level = level;
+        result.url = "";
         // if(categoryView.parent != null)
         return result;
     }

@@ -1,0 +1,13 @@
+.editable-span:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.editable-span {
+    text-decoration: none;
+}
+
+.no-gutter {
+    padding-right:0;
+    padding-left:0;
+}

@@ -33,6 +33,8 @@ import { DialogCreateFeatureGroupComponent } from './components/_dialogs/dialog-
 import { DialogCreateEditFeatureDefinition } from './components/_dialogs/dialog-create-edit-featuredefinition/dialog-create-edit-featuredefinition.component';
 import { AdminProductsComponent } from './components/admin-center/admin-products/admin-products.component';
 import { AdminProductEditComponent } from './components/admin-center/admin-products/admin-product-edit/admin-product-edit.component';
+import { AdminNavigationsComponent } from './components/admin-center/admin-navigations/admin-navigations.component';
+import { AdminNavigationEditComponent } from './components/admin-center/admin-navigations/admin-navigation-edit/admin-navigation-edit.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +50,7 @@ import { AdminProductEditComponent } from './components/admin-center/admin-produ
       AdminMainComponent,
       AdminCategoriesComponent, AdminCategoryEditComponent,
       AdminProductsComponent, AdminProductEditComponent,
+      AdminNavigationsComponent, AdminNavigationEditComponent,
     FormAdminProductEdit, FormAdminCategoryLogicComponent,
 // dialogs
     DialogCreateCategoryComponent, DialogCreateFeatureGroupComponent, DialogCreateEditFeatureDefinition,

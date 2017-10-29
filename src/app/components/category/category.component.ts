@@ -109,10 +109,11 @@ export class CategoryComponent implements OnInit {
             for (let j = 0; j < this.filterableDefinitions.length; j++) { // iterate over FilterableDefinitions
               if (filterDefID == this.filterableDefinitions[j].def.id) {
                 let filterValues: string[] = eachFilter[1].split(".");
+                this.filterableDefinitions[j].valuesNgModel = [];
+                
                 for (let k = 0; k < filterValues.length; k++) {  // iterate over URL filter segment assigned values
                   let valueID = Number(filterValues[k]);
-
-                  this.filterableDefinitions[j].valuesNgModel = [];
+                  
                   for (let h = 0; h < this.filterableDefinitions[j].values.length; h++) { // iterate over current FilterableDefinition's values
                     if (valueID == this.filterableDefinitions[j].values[h].id) {
                       this.filterableDefinitions[j].valuesNgModel.push(valueID);

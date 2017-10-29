@@ -1,3 +1,29 @@
 <app-header></app-header>
 
-<p>CATEGORY</p>
+<div class="container" style="background-color: gray;">
+    <div class="row">
+        <div class="col-md-3" style="background-color: #cacaca; padding-bottom: 20px;">
+            <h4>Filters:</h4>
+            <ng-container *ngIf="categoryLogic">
+                <ng-container *ngFor="let fd of filterableDefinitions; let i=index">
+                    <mat-form-field class="example-full-width">
+                        <mat-select placeholder="{{fd.def.name}}" [multiple]="fd.def.multipleValues" [(ngModel)]="filterableDefinitions[i].valuesNgModel" name="{{fd.def.name}}">
+                            <mat-option *ngFor="let featureValue of fd.values" [value]="featureValue.id">
+                                {{featureValue.value}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </ng-container>
+            </ng-container>
+            <div>
+                <button class="btn btn-primary" style="width: 200px" (click)="doFilter()">Filter</button>
+            </div>
+            <div style="margin-top: 10px">
+                <button class="btn btn-danger" style="width: 200px" (click)="doClearFilters()">Clear filters</button>
+            </div>
+        </div>
+        <div class="col-md-9">
+            content
+        </div>
+    </div>
+</div>

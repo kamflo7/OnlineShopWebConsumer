@@ -16,6 +16,7 @@ import { FeatureValueDTO } from '../_dto/feature-value-dto';
 import { FeatureDefinitionDTOEditable } from '../_dto/feature-definition-dto-editable';
 import { ProductDTO } from '../_dto/product-dto';
 import { CategoryView } from '../_model/category-view';
+import { DialogCreateFeatureGroupComponent } from '../components/_dialogs/dialog-create-featuregroup/dialog-create-featuregroup.component';
 
 export interface CategoriesResponse {
     categories:CategoryLogic[];
@@ -25,7 +26,7 @@ export interface CategoriesResponse {
 export class ProductService {
 
     constructor(private http:HttpClient, private globals:Globals) {}
-    printDebugLog:boolean = true;
+    printDebugLog:boolean = false;
 
 // CATEGORIES VIEW (NAVIGATION)
     getCategoryViews():Promise<ResponseDetails<Array<CategoryView>>> {
@@ -118,6 +119,17 @@ export class ProductService {
 
     
 // PRODUCTS
+    ///categories/{categoryID}/products + ?f={filters}
+    getProducts(categoryID:number, filters:String):Promise<ResponseDetails<Product[]>> {
+        return new Promise(resolve => {
+            this.http.get<ResponseDetails<Product[]>>(this.globals.backendUrl+'categories/'+categoryID+'/products/'
+                + (filters != null ? '?f='+filters : ''), {observe: 'response'}).subscribe(r => {
+                    if(this.printDebugLog) console.log(r.body);
+                    resolve(r.body);
+                });
+        });
+    }
+
     getProduct(productid:number):Promise<ResponseDetails<Product>> {
         return new Promise(resolve => {
         this.http.get<ResponseDetails<Product>>(this.globals.backendUrl+'products/'+productid, 

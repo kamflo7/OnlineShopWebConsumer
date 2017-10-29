@@ -6,11 +6,54 @@ export class NavigationConverter {
     private data:CategoryView[];
     private root = [];
 
+    public convert(data:CategoryView[]):NavigationItem[] {
+        this.data = data;
+        this.root = [];
+        let level2 = [];
+        let level3 = [];
+
+        for (let i = 0; i < this.data.length; i++) { // look for navigation level root (0)
+            if (this.data[i].parent == null) {
+                this.root.push(this.convertCategoryViewToLocalDTO(this.data[i], 0));
+            } 
+        }
+
+        for (let i = 0; i < this.data.length; i++) { // look for navigation level 1 and 2
+            if (this.data[i].parent != null) {
+                let found = false;
+                for(let j=0; j<this.root.length; j++) {
+                    if(this.data[i].parent.id == this.root[j].id) {
+                        level2.push(this.convertCategoryViewToLocalDTO(this.data[i], 1));
+                        found = true;
+                        break;
+                    }
+                }
+    
+                if(!found)
+                    level3.push(this.convertCategoryViewToLocalDTO(this.data[i], 2));
+            } 
+        }
+
+        for(let i=0; i<this.root.length; i++) { // merge level 1 with level 2 and assert correct order
+            for(let j=0; j<level2.length; j++) {
+                if(level2[j].parentid == this.root[i].id)
+                    this.root[i].children.push(level2[j]);
+                    
+                for(let k=0; k<level3.length; k++) {
+                    if(level3[k].parentid == level2[j].id && level2[j].parentid == this.root[i].id) {
+                        level3[k].lastLevel = true;
+                        this.root[i].children.push(level3[k]);
+                    }
+                }
+            }
+        }
+        return this.root;
+    }
+
     public convertForNavigationTemplate(data:CategoryView[]) {
         this.data = data;
-        let childCount = 0;
 
-        // let root = [];
+        this.root = [];
         let level2 = [];
         let level3 = [];
 
@@ -68,10 +111,10 @@ export class NavigationConverter {
             catBlocks.push(node.name.replace(/ /g, "-") + "-" + node.id);
 
             let parent:NavigationItem;
-            parent = node.parentid != -1 ? this.searchNodeByID(node.parentid) : null;
+            parent = node.parentid != -1 ? this.searchNodeByID(node.parentid, this.root) : null;
             while(parent != null) {
                 catBlocks.push(parent.name.replace(/ /g, "-"));
-                parent = parent.parentid != -1 ? this.searchNodeByID(parent.parentid) : null;
+                parent = parent.parentid != -1 ? this.searchNodeByID(parent.parentid, this.root) : null;
             }
             let finalQuery = "";
             for(let i=catBlocks.length-1; i >= 0; i--) {
@@ -82,14 +125,14 @@ export class NavigationConverter {
         }
     }
 
-    searchNodeByID(id:number):NavigationItem {
-        for(let i=0; i<this.root.length; i++) {
-            if(this.root[i].id == id)
-                return this.root[i];
-            if(this.root[i].children != null) {
-                for(let j=0; j<this.root[i].children.length; j++) {
-                    if(this.root[i].children[j].id == id)
-                        return this.root[i].children[j];
+    public searchNodeByID(id:number, source:NavigationItem[]):NavigationItem {
+        for(let i=0; i<source.length; i++) {
+            if(source[i].id == id)
+                return source[i];
+            if(source[i].children != null) {
+                for(let j=0; j<source[i].children.length; j++) {
+                    if(source[i].children[j].id == id)
+                        return source[i].children[j];
                 }
             }
         }

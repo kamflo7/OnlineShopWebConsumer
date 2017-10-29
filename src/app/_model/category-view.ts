@@ -5,7 +5,7 @@ export class CategoryView {
     parent:CategoryView;
     categoryLogic:CategoryLogic;
     // filters:HashNumberOfGroup;
-    filters:Map<number, any>;
+    // filters:Map<number, any>;
 }
 
 export interface HashNumberOfGroup {

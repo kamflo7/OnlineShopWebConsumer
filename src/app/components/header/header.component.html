@@ -32,6 +32,7 @@
                                 <li *ngFor="let s of c.children">
                                     <a *ngIf="s.lastLevel" href="#">-> {{s.name}}</a>
                                     <a *ngIf="!s.lastLevel" href="#">{{s.name}}</a>
+                                    <!-- <a href="#">{{s.name}}</a> -->
                                 </li>
                             </ul>
                         </li>

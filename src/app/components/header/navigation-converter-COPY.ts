@@ -55,7 +55,7 @@ export class NavigationConverterCopy {
         result.id = categoryView.id;
         result.name = categoryView.name;
         result.categoryLogic = categoryView.categoryLogic;
-        result.filters = categoryView.filters;
+        // result.filters = categoryView.filters;
         result.children = [];
         return result;
     }

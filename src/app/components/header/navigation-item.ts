@@ -6,8 +6,9 @@ export class NavigationItem {
     name: string;
     categoryLogic:CategoryLogic;
     // filters: HashNumberOfGroup;
-    filters: Map<number, any>;
+    // filters: Map<number, any>;
     children:NavigationItem[];
     lastLevel:boolean;
-    filterParams:string;
+    parentid:number;
+    // filterParams:string;
 }

@@ -7,6 +7,8 @@ import { CategoryLogic } from '../../_model/category-logic';
 import { ResponseDetails } from '../../_model/response-details';
 import { Product } from '../../_model/product';
 import { Globals } from '../../globals';
+import { FeatureDefinition } from '../../_model/feature-definition';
+import { FeatureBag } from '../../_model/feature-bag';
 
 @Component({
   selector: 'item-list-product',
@@ -23,12 +25,26 @@ export class ItemListProductComponent implements OnInit {
   }
 
   @Input() product:Product;
+  handyFeatures = [];
   imgSrc:string;
 
 
   ngOnInit(): void {
     if(this.product.image != null) {
         this.imgSrc = this.globals.resourceImgsUrl + this.product.image.name;
+    }
+
+    for(let i=0; i<this.product.featureBags.length; i++) {
+      let loopFeatureBag = this.product.featureBags[i];
+
+      if(loopFeatureBag.featureDefinition.visibleInList) {
+        let values = "";
+        for(let j=0; j<loopFeatureBag.featureValues.length; j++)
+          values += loopFeatureBag.featureValues[j].value + ", ";
+        values = values.substr(0, values.length-1);
+
+        this.handyFeatures.push({ name: loopFeatureBag.featureDefinition.name, values: values });
+      }
     }
   }
 }

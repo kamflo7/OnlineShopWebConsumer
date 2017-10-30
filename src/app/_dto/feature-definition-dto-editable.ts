@@ -7,6 +7,7 @@ export class FeatureDefinitionDTOEditable {
     multipleValues:boolean;
     filterable:boolean;
     visible:boolean;
+    visibleInList:boolean;
 
 
     values:HashNumberString;

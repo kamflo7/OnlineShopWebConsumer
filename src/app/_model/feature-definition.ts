@@ -7,6 +7,7 @@ export class FeatureDefinition {
     name:string;
     filterable:boolean;
     visible:boolean;
+    visibleInList:boolean;
 
     featureGroup:FeatureGroup;
     featureValueDefinitions:FeatureValue[];

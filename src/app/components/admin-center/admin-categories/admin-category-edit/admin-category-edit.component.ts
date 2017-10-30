@@ -80,6 +80,11 @@ export class AdminCategoryEditComponent implements OnInit {
   }
 
   addFeatureDefinition_Click() {
+    if(this.category.featureGroups == null || this.category.featureGroups.length == 0) {
+      alert("First you need to create some FeatureGroup, because FeatureDefinitions depend on FeatureGroups");
+      return;
+    }
+
     let dialogRef = this.dialog.open(DialogCreateEditFeatureDefinition, {
       width: '400px',
       data: { featureDefinition: null, featureGroups: this.category.featureGroups }

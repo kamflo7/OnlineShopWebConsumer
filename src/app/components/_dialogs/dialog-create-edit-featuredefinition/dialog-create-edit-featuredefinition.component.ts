@@ -32,6 +32,7 @@ export class DialogCreateEditFeatureDefinition {
         this.dto.multipleValues = data.featureDefinition.multipleValues;
         this.dto.filterable = data.featureDefinition.filterable;
         this.dto.visible = data.featureDefinition.visible;
+        this.dto.visibleInList = data.featureDefinition.visibleInList;
 
         this.groupid = data.featureDefinition.featureGroup.id;
       } else { // create new FeatureDefinition
@@ -79,6 +80,7 @@ export class DialogCreateEditFeatureDefinition {
       multipleValues: this.dto.multipleValues,
       filterable: this.dto.filterable,
       visible: this.dto.visible,
+      visibleInList: this.dto.visibleInList,
       values: {},
       newValues: []
     };

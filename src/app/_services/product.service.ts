@@ -141,6 +141,7 @@ export class ProductService {
                 +  (sort!=null ? (filters!=null ? '&' : '?') + 's='+sort : ''), {observe: 'response'}).subscribe(r => {
                     if(this.printDebugLog) console.log(r.body);
                     resolve(r.body);
+                    console.log(r.body);
                 });
         });
     }

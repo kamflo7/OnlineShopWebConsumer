@@ -43,7 +43,9 @@ export class ProductComponent implements OnInit {
   productInstallment:number;
 
   categoryLogic:CategoryLogic;
+  date:number = Date.now();// + 2 * 24*60*60*1000;
   
+  detailFeatureGroups = [];
 
   ngOnInit(): void {
     this.route.params.subscribe(r => {
@@ -68,6 +70,7 @@ export class ProductComponent implements OnInit {
           this.productService.getCategory(this.product.categoryLogic.id).then(r2 => {
             if(r2.status == 'success') {
               this.categoryLogic = r2.data;
+              this.makeDetailFeatures();
             }
           })
         }
@@ -82,6 +85,56 @@ export class ProductComponent implements OnInit {
     });
   }
 
+  makeDetailFeatures() {
+    //this.categoryLogic, this.product, this.detailFeatureGroups
+    for(let i=0; i<this.categoryLogic.featureGroups.length; i++) {
+      this.detailFeatureGroups.push({
+        groupName: this.categoryLogic.featureGroups[i].name,
+        groupID: this.categoryLogic.featureGroups[i].id,
+        featureBags: []
+      });
+    }
+
+    for(let i=0; i<this.categoryLogic.featureDefinitions.length; i++) {
+      let fd = this.categoryLogic.featureDefinitions[i];
+
+      if(!fd.visible) continue;
+
+      for(let j=0; j<this.detailFeatureGroups.length; j++) {
+        let g = this.detailFeatureGroups[j];
+
+        if(g.groupID == fd.featureGroup.id) {
+          let values = this.getValuesFromProductForGivenFeatureDefinition(fd.id);
+
+          g.featureBags.push({
+            definitionName: fd.name,
+            definitionID: fd.id,
+            values: values
+          });
+          break;
+        }
+      }
+    }
+
+    console.log(this.detailFeatureGroups);
+  }
+
+  getValuesFromProductForGivenFeatureDefinition(definitionID:number):string {
+    var values = "";
+    for(let i=0; i<this.product.featureBags.length; i++) {
+      let bag = this.product.featureBags[i];
+
+      if(bag.featureDefinition.id == definitionID) {
+        for(let j=0; j<bag.featureValues.length; j++) {
+          values += bag.featureValues[j].value + ", ";
+        }
+        values = values.substr(0, values.length-2);
+        return values;
+      }
+    }
+    return "not found";
+  }
+
   makeNavigationTree(categoryView:CategoryView) {
     let tree:CategoryView[] = [];
 
@@ -94,13 +147,13 @@ export class ProductComponent implements OnInit {
 
     this.categoryViewsInOrder.push({
       name: this.globals.shopNameWithDomain,
-      url: "TODO"
+      url: "notReadyFeature"
     })
 
     for(let i=tree.length-1; i>=0; i--) {
       this.categoryViewsInOrder.push({
         name: tree[i].name,
-        url: "TODO"
+        url: "notReadyFeature"
       });
     }
     console.log(this.categoryViewsInOrder);

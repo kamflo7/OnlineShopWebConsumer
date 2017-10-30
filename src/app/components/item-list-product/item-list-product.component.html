@@ -3,7 +3,7 @@
         <img *ngIf="product.image" height="120" src="{{imgSrc}}">
     </div>
     <div class="col-md-7">
-        <h4>{{product.name}}</h4>
+        <h4><a style="text-decoration: none;" routerLink="{{url}}">{{product.name}}</a></h4>
         <div>
             <ul>
                 <li *ngFor="let handyFeature of handyFeatures">{{handyFeature.name}}: {{handyFeature.values}}</li>

@@ -30,7 +30,7 @@ const routes: Routes = [
             { path: 'change-password', component: ProfileChangePasswordComponent }
         ]
     },
-    { path: 'product/:productid', component: ProductComponent },
+    { path: 'product/:id', component: ProductComponent },
     { path: 'category/:category', component: CategoryComponent },
     { path: 'category/:category/:subcategory', component: CategoryComponent },
     { path: 'category/:category/:subcategory/:subcategory2', component: CategoryComponent },

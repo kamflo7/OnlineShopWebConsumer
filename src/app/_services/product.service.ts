@@ -28,13 +28,27 @@ export class ProductService {
     constructor(private http:HttpClient, private globals:Globals) {}
     printDebugLog:boolean = false;
 
+    getFullUrlForProductImage(imageName:string) {
+        return this.globals.resourceImgsUrl + imageName;
+    }
+
 // CATEGORIES VIEW (NAVIGATION)
     getCategoryViews():Promise<ResponseDetails<Array<CategoryView>>> {
         return new Promise(resolve => {
             this.http.get<ResponseDetails<Array<CategoryView>>>(this.globals.backendUrl+'navigations',
             {observe: 'response'}).subscribe(r => {
                 if(this.printDebugLog) console.log(r.body);
-                    resolve(r.body);
+                resolve(r.body);
+            });
+        });
+    }
+
+    getCategoryViewTreeForID(categoryViewID:number):Promise<ResponseDetails<CategoryView>> {
+        return new Promise(resolve => {
+            this.http.get<ResponseDetails<CategoryView>>(this.globals.backendUrl+'navigations/'+categoryViewID+'/tree',
+            {observe: 'response'}).subscribe(r => {
+                if(this.printDebugLog) console.log(r.body);
+                resolve(r.body);
             });
         });
     }

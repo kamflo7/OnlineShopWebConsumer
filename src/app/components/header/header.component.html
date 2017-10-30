@@ -29,7 +29,6 @@
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">{{c.name}}
                             <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-
                                 <ng-container *ngFor="let s of c.children; let j=index">
                                     <li *ngIf="!categories[i].children[j].url" class="divider"></li>
                                     <li>
@@ -42,17 +41,6 @@
                                         </ng-container>
                                     </li>
                                 </ng-container>
-
-                                <!-- <li *ngFor="let s of c.children">
-                                    <ng-container *ngIf="s.url">
-                                        <a *ngIf="s.lastLevel" routerLink="/category/{{s.url}}">&emsp;{{s.name}}</a>
-                                        <a *ngIf="!s.lastLevel" routerLink="/category/{{s.url}}">{{s.name}}</a>
-                                    </ng-container>
-                                    <ng-container *ngIf="!s.url">
-                                        <a href="#">{{s.name}} &#8628;</a>
-                                    </ng-container>
-                                </li> -->
-
                             </ul>
                         </li>
                     </ng-container>

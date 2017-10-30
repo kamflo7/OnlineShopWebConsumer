@@ -25,14 +25,17 @@ export class ItemListProductComponent implements OnInit {
   }
 
   @Input() product:Product;
+  @Input() categoryViewID:number;
   handyFeatures = [];
   imgSrc:string;
-
+  url:string;
 
   ngOnInit(): void {
     if(this.product.image != null) {
         this.imgSrc = this.globals.resourceImgsUrl + this.product.image.name;
     }
+
+    this.url = '/product/' + this.product.name.replace(/ /g, "-") + '-' + this.product.id + '_' + this.categoryViewID;
 
     for(let i=0; i<this.product.featureBags.length; i++) {
       let loopFeatureBag = this.product.featureBags[i];

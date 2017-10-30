@@ -32,6 +32,7 @@ export class CategoryComponent implements OnInit {
   filterableDefinitions = []; // {def, values, valuesNgModel}
 
   products:Product[] = [];
+  sort:string;
 
   ngOnInit(): void {
     document.title = "Kategoria";
@@ -86,10 +87,7 @@ export class CategoryComponent implements OnInit {
           }
         }
 
-        // this.readURLFiltersAndAssignToNGModel().then(r => {
-          this.getProducts();
-        // });
-        
+        this.getProducts();
       }
     });
   }
@@ -124,6 +122,10 @@ export class CategoryComponent implements OnInit {
             }
           }
         }
+
+        if(result.s != null) {
+          this.sort = (result.s == 'prc-asc' || result.s == 'prc-desc') ? result.s : null;
+        }
         resolve(true);
       });
     });
@@ -131,10 +133,11 @@ export class CategoryComponent implements OnInit {
 
   getProducts() { // called automatically after fully loading page
     this.readURLFiltersAndAssignToNGModel().then(r => {
-      this.productService.getProducts(this.categoryLogic.id, this.currentURLFilterParams).then(r => {
+      let sortstr = this.sort == 'prc-asc' || this.sort == 'prc-desc' ? this.sort : null;
+      this.productService.getProducts(this.categoryLogic.id, this.currentURLFilterParams, sortstr).then(r => {
         this.products = r.data;
-        console.log("Pobralem produkty:");
-        console.log(r.data);
+        // console.log("Pobralem produkty:");
+        // console.log(r.data);
       });
     });
   }
@@ -144,6 +147,17 @@ export class CategoryComponent implements OnInit {
     let params = this.getFilterParamsQueryFromNGModel();
 
     this.router.navigate([url], { queryParams: { f: params } }).then(r => {
+      this.getProducts();
+    });
+  }
+
+  doSort() {
+    let url = this.currentURL;
+    let params = this.getFilterParamsQueryFromNGModel();
+    let sortParams = (this.sort == 'prc-asc' || this.sort == 'prc-desc') ? this.sort : null;
+
+    let queryParams = sortParams ? { f: params, s: sortParams } : { f: params };
+    this.router.navigate([url], { queryParams: queryParams }).then(r => {
       this.getProducts();
     });
   }

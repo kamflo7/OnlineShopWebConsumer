@@ -120,10 +120,11 @@ export class ProductService {
     
 // PRODUCTS
     ///categories/{categoryID}/products + ?f={filters}
-    getProducts(categoryID:number, filters:String):Promise<ResponseDetails<Product[]>> {
+    getProducts(categoryID:number, filters:String, sort:String):Promise<ResponseDetails<Product[]>> {
         return new Promise(resolve => {
             this.http.get<ResponseDetails<Product[]>>(this.globals.backendUrl+'categories/'+categoryID+'/products/'
-                + (filters != null ? '?f='+filters : ''), {observe: 'response'}).subscribe(r => {
+                + (filters != null ? '?f='+filters : '')
+                +  (sort!=null ? (filters!=null ? '&' : '?') + 's='+sort : ''), {observe: 'response'}).subscribe(r => {
                     if(this.printDebugLog) console.log(r.body);
                     resolve(r.body);
                 });

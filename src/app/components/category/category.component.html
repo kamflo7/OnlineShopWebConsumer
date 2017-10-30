@@ -22,7 +22,21 @@
                 <button class="btn btn-danger" style="width: 200px" (click)="doClearFilters()">Clear filters</button>
             </div>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-9" style="padding-top: 10px">
+            <div class="row" style="border:0px solid red; width: 100%; height: 50px;">
+                <div class="col-md-6">
+                    <h4 style="margin-top: 5px">{{products?.length}} products found</h4>
+                </div>
+                <div class="col-md-6" style="text-align: right">
+                    <mat-form-field class="example-full-width">
+                        <mat-select placeholder="Sort" [(ngModel)]="sort" name="Sort" (change)="doSort()">
+                            <mat-option value="default">Default</mat-option>
+                            <mat-option value="prc-asc">From lowest price</mat-option>
+                            <mat-option value="prc-desc">From greatest price</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
             <item-list-product *ngFor="let product of products" [product]="product"></item-list-product>
         </div>
     </div>

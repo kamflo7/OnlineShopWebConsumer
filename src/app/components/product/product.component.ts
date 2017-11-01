@@ -43,7 +43,7 @@ export class ProductComponent implements OnInit {
   productInstallment:number;
 
   categoryLogic:CategoryLogic;
-  date:number = Date.now();// + 2 * 24*60*60*1000;
+  date:number = Date.now() + 2 * 24*60*60*1000;
   
   detailFeatureGroups = [];
 

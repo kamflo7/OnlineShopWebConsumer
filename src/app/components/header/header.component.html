@@ -36,9 +36,10 @@
             <div class="basket-group">
                 <div class="basket-image">
                         <img src="assets/shopping-cart.png" height="40" />
+                        <span class="badge">{{orderItemAmount}}</span>
                 </div>
                     <div class="basket-info">
-                        {{basketValue | number:'.2'}} PLN
+                        <a routerLink="/shopping-cart">{{basketValue | number:'.2'}} PLN</a>
                     </div>
             </div>
         </div>

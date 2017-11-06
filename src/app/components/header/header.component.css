@@ -28,7 +28,7 @@
 }
 
 .basket-group {
-    width: 150px;
+    min-width: 150px;
     /* background-color: lime; */
     margin-left: 15px;
     display: flex;
@@ -38,6 +38,8 @@
 .basket-info {
     font-size: 16px;
     margin-left: 15px;
+    color: #337ab7;
+    /* background-color: rgb(116, 130, 255); */
 }
 
 /* for <li> */

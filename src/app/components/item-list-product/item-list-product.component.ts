@@ -9,6 +9,7 @@ import { Product } from '../../_model/product';
 import { Globals } from '../../globals';
 import { FeatureDefinition } from '../../_model/feature-definition';
 import { FeatureBag } from '../../_model/feature-bag';
+import { OrderService } from '../../_services/order.service';
 
 @Component({
   selector: 'item-list-product',
@@ -20,7 +21,8 @@ export class ItemListProductComponent implements OnInit {
   constructor(private auth:AuthenticationService,
     private router:Router,
     private productService:ProductService,
-    private globals:Globals
+    private globals:Globals,
+    private orderService:OrderService
   ) {
   }
 
@@ -49,5 +51,9 @@ export class ItemListProductComponent implements OnInit {
         this.handyFeatures.push({ name: loopFeatureBag.featureDefinition.name, values: values });
       }
     }
+  }
+
+  addToCart_Click() {
+    this.orderService.addItemOrderToLocalStorage(this.product.id, 1, Number(this.product.price));
   }
 }

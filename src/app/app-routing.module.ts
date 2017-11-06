@@ -22,6 +22,7 @@ import { AdminNavigationEditComponent } from './components/admin-center/admin-na
 const routes: Routes = [
     // { path: 'cat/:category',    component: CategoryComponent },
     { path: '', component: HomeComponent },
+    { path: 'shopping-cart', component: HomeComponent }, // todo: change
     { path: 'login', component: LoginComponent },
     {
         path: 'profile', component: ProfileCenterComponent,

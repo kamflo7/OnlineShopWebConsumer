@@ -1,7 +1,43 @@
 .header {
     display: flex;
     align-items: center;
-    -webkit-box-align: center;
+    justify-content: space-between;
+
+}
+
+.user-basket-group {
+    display: flex;
+    height: 70px;
+    align-items: center;
+}
+
+.user-group {
+    width: 160px;
+    /* background-color: red; */
+    display: flex;
+    align-items: center;
+}
+
+.user-image {
+
+}
+
+.user-nav {
+    margin-left: 10px;
+    font-size: 16px;
+}
+
+.basket-group {
+    width: 150px;
+    /* background-color: lime; */
+    margin-left: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.basket-info {
+    font-size: 16px;
+    margin-left: 15px;
 }
 
 /* for <li> */

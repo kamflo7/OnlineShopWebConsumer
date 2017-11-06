@@ -6,6 +6,7 @@ import { CategoryLogic } from '../../_model/category-logic';
 import { ProductService } from '../../_services/product.service';
 import { CategoryView, HashNumberOfGroup } from '../../_model/category-view';
 import { NavigationConverter } from '../../_services/navigation-converter.service';
+import { OrderService } from '../../_services/order.service';
 
 @Component({
   selector: 'app-header',
@@ -17,18 +18,19 @@ export class HeaderComponent implements OnInit {
   constructor(private auth: AuthenticationService,
     private router: Router,
     private productService: ProductService,
-    private navigationConverter: NavigationConverter) {
+    private navigationConverter: NavigationConverter,
+    private orderService: OrderService) {
     // this.authenticated = auth.isUserAuthenticated();
     // if(this.authenticated)
     //   this.user = auth.getUser();
-
+      
   }
 
 
   authenticated: boolean;
   user: User;
   categories = [];
-
+  basketValue:number;
 
   ngOnInit() {
     this.productService.getCategoryViews().then(r => {
@@ -37,6 +39,8 @@ export class HeaderComponent implements OnInit {
         // console.log(this.categories);
       }
     });
+
+    this.basketValue = this.orderService.getBasketTotalValue();
   }
 
 }

@@ -1,0 +1,28 @@
+body {
+   height: 100%;
+}
+
+.bar {
+    text-align: center;
+    width: 100%;
+    height: 70px;
+    background-color: orange;
+}
+
+.my-container {
+    background-color: gray;
+    display: flex;
+    height: 100%;
+    flex-direction: row;
+}
+
+.sidebar {
+    background-color: rgb(193, 193, 255);
+    width: 250px;
+    height: 100%;
+}
+
+.content {
+    background-color: rgb(210, 255, 210);
+    width: 100%;
+}

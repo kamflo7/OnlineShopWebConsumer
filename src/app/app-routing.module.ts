@@ -37,7 +37,9 @@ const routes: Routes = [
     {
         path: 'admin', component: AdminCenterComponent,
         children: [
-            { path: '', component: AdminMainComponent},
+            // { path: '', component: AdminMainComponent},
+            { path: '', redirectTo: 'dashboard', pathMatch: 'full'},
+            { path: 'dashboard', component: AdminMainComponent},
             // { path: ':id', component: AdminMainComponent},
             { path: 'categories', component: AdminCategoriesComponent},
             { path: 'categories/edit/:id', component: AdminCategoryEditComponent},

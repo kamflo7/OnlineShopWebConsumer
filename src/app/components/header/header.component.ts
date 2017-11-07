@@ -8,6 +8,8 @@ import { CategoryView, HashNumberOfGroup } from '../../_model/category-view';
 import { NavigationConverter } from '../../_services/navigation-converter.service';
 import { OrderService } from '../../_services/order.service';
 import { ItemOrder } from '../../_dto/item-order';
+import { Observable } from 'rxjs/Observable';
+import { Observer } from 'rxjs/Observer';
 
 @Component({
   selector: 'app-header',
@@ -42,6 +44,10 @@ export class HeaderComponent implements OnInit {
       }
     });
 
+    this.orderService.change.subscribe(r => {
+      this.refreshShoppingCart();
+    });
+
     // this.orderService.addItemOrderToLocalStorage(5, 1);
     // this.orderService.addItemOrderToLocalStorage(5, 1, 349);
     // this.orderService.addItemOrderToLocalStorage(8, 1, 31);
@@ -51,7 +57,10 @@ export class HeaderComponent implements OnInit {
     //   console.log(items[i].productid + " : " + items[i].amount);
     // }
 
+    this.refreshShoppingCart();
+  }
 
+  refreshShoppingCart() {
     this.basketValue = this.orderService.getBasketTotalValue();
     this.orderItemAmount = this.orderService.getItemsOrderAmount();
   }

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Output, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Globals } from '../globals';
 import { ItemOrder } from '../_dto/item-order';
@@ -6,7 +6,11 @@ import { ItemOrder } from '../_dto/item-order';
 @Injectable()
 export class OrderService {
 
+    @Output()
+    change: EventEmitter<boolean> = new EventEmitter();
+
     constructor(private http: HttpClient, private globals: Globals) { }
+
 
     getBasketTotalValue(): number {
         let totalValue: string = localStorage.getItem("total_cost");
@@ -29,13 +33,13 @@ export class OrderService {
         return amount;
     }
 
-    addItemOrderToLocalStorage(productid: number, amount: number, price:number): void {
+    addItemOrderToLocalStorage(productid: number, amount: number, price: number): void {
         let str = localStorage.getItem("order");
 
         if (str != null) {
             let orders: ItemOrder[] = JSON.parse(str);
-            let found:boolean = false;
-            let totalCost:number = 0;
+            let found: boolean = false;
+            let totalCost: number = 0;
 
             for (let i = 0; i < orders.length; i++) {
                 if (orders[i].productid == productid) {
@@ -45,23 +49,27 @@ export class OrderService {
                 }
                 totalCost += orders[i].price * orders[i].amount;
             }
-            localStorage.setItem("total_cost", totalCost+"");
-
+            
             // if not found, create new
-            if(!found) {
-            orders.push(new ItemOrder(productid, amount, price));
-            localStorage.setItem("order", JSON.stringify(orders));
+            if (!found) {
+                totalCost += price * amount;
+                orders.push(new ItemOrder(productid, amount, price));
+                localStorage.setItem("order", JSON.stringify(orders));
             }
+
+            localStorage.setItem("total_cost", totalCost + "");
         } else {
             let array: ItemOrder[] = [];
             array.push(new ItemOrder(productid, amount, price));
             localStorage.setItem("order", JSON.stringify(array));
+            localStorage.setItem("total_cost", (price*amount)+"");
         }
+
+        this.change.emit(true);
     }
 
     getItemsOrderFromLocalStorage(): ItemOrder[] {
         let str = localStorage.getItem("order");
-        console.log("GetItems: " + str);
         if (str != null) {
             let orders: ItemOrder[] = JSON.parse(str);
             return orders;
@@ -75,7 +83,7 @@ export class OrderService {
 
         if (str != null) {
             let orders: ItemOrder[] = JSON.parse(str);
-            let totalCost:number = 0;
+            let totalCost: number = 0;
 
             for (let i = 0; i < orders.length; i++) {
                 if (orders[i].productid == productid) {
@@ -85,8 +93,9 @@ export class OrderService {
 
                 totalCost += orders[i].price * orders[i].amount;
             }
-            localStorage.setItem("total_cost", totalCost+"");
+            localStorage.setItem("total_cost", totalCost + "");
         }
+        this.change.emit(true);
     }
 
     removeItemOrderFromLocalStorage(productid: number): void {
@@ -102,5 +111,6 @@ export class OrderService {
 
             localStorage.setItem("order", JSON.stringify(newOrders));
         }
+        this.change.emit(true);
     }
 }

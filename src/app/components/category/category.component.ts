@@ -8,6 +8,7 @@ import { NavigationItem } from '../../_dto/navigation-item';
 import { FeatureDefinition } from '../../_model/feature-definition';
 import { Observable } from 'rxjs/Observable';
 import { Product } from '../../_model/product';
+import { OrderService } from '../../_services/order.service';
 
 @Component({
   selector: 'app-category',

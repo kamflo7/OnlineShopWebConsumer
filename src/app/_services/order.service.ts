@@ -49,7 +49,7 @@ export class OrderService {
                 }
                 totalCost += orders[i].price * orders[i].amount;
             }
-            
+
             // if not found, create new
             if (!found) {
                 totalCost += price * amount;
@@ -62,7 +62,7 @@ export class OrderService {
             let array: ItemOrder[] = [];
             array.push(new ItemOrder(productid, amount, price));
             localStorage.setItem("order", JSON.stringify(array));
-            localStorage.setItem("total_cost", (price*amount)+"");
+            localStorage.setItem("total_cost", (price * amount) + "");
         }
 
         this.change.emit(true);
@@ -111,6 +111,26 @@ export class OrderService {
 
             localStorage.setItem("order", JSON.stringify(newOrders));
         }
+        this.recalculateTotalPrice();
+        this.change.emit(true);
+    }
+
+    recalculateTotalPrice() {
+        let str = localStorage.getItem("order");
+        let totalPrice:number = 0;
+
+        if (str != null) {
+            let orders: ItemOrder[] = JSON.parse(str);
+            
+            for (let i = 0; i < orders.length; i++)
+                totalPrice += orders[i].price;
+        }
+
+        localStorage.setItem("total_cost", totalPrice+"");
+    }
+
+    removeAllItems() {
+        localStorage.clear();
         this.change.emit(true);
     }
 }

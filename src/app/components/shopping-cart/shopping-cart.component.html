@@ -1,0 +1,150 @@
+<app-header></app-header>
+
+<div class="container" *ngIf="products.length != 0">
+    <div class="row">
+        <table class="table orders">
+            <thead>
+                <tr>
+                    <td colspan="2" class="col-md-6">Your shopping cart</td>
+                    <td class="col-md-2">Estimated delivery time</td>
+                    <td class="col-md-2">Amount</td>
+                    <td class="col-md-2" colspan="2">Price</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let product of products; let i=index">
+                    <td class="col-md-2">
+                        <img height="75" src="{{globals.resourceImgsUrl+product.data.image.name}}">
+                    </td>
+                    <td class="col-md-4">
+                        <a routerLink="{{product.url}}">{{product.data.name}}</a>
+                    </td>
+                    <td class="col-md-2" style="color: green">{{dateDummy | date:'MMM, dd'}}</td>
+                    <td class="col-md-1" style="padding-right: 20px">
+                        <input class="form-control" type="number" value="{{product.itemOrder.amount}}" (change)="amountChange(products[i], $event.target.value)"
+                        />
+                    </td>
+                    <td class="col-md-2">
+                        <span>{{product.data.price * product.itemOrder.amount}} PLN</span>
+                    </td>
+                    <td class="col-md-1">
+                        <img (click)="removeSingleItem(products[i])" class="trash" height="30" src="assets/trash.png">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <div class="col-md-3 pull-left">
+            <a href="#" (click)="removeBasket()">
+                <img src="assets/trash.png" height="20">Clear basket</a>
+        </div>
+        <div class="col-md-6 pull-right" style="text-align: right">
+            <span style="font-size: 20px;">Basket value ({{products.length}} products): {{totalPrice}} PLN</span>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 30px">
+        <div class="col-md-4">
+            <h4 style="font-weight: bold">Choose the method of delivery</h4>
+            <h5>Home delivery</h5>
+            <div class="deliverBox">
+                <div style="display: flex; justify-content: space-between">
+                    <mat-radio-button [checked]="radioCourier" (change)="deliveryMethodChange('courier')" value="1">Courier</mat-radio-button>
+                    <div>
+                        <span style="color: green; font-weight:bold">({{dateDummy | date:'MMM, dd'}})</span>
+                        <span style="font-weight: bold">19.00 PLN</span>
+                    </div>
+                </div>
+                <div style="margin-left: 20px; margin-top: 10px">
+                    <span>Select delivery time</span>
+                    <mat-radio-group>
+                        <mat-radio-button [checked]="radioCourierDaily" (change)="deliveryCourierTimeChange('daily')" value="2">Delivery between 8:00 - 17:00</mat-radio-button>
+                        <mat-radio-button [checked]="radioCourierSaturday" (change)="deliveryCourierTimeChange('saturday')" value="3">Saturday delivery between 8:00 - 14:00</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+            </div>
+
+            <h5 style="margin-top: 30px">Pick up at the desired location</h5>
+            <div class="deliverBox">
+                <div style="display: flex; justify-content: space-between">
+                    <mat-radio-button [checked]="radioPersonal" (change)="deliveryMethodChange('personal')" value="4">Personal reception</mat-radio-button>
+                    <div>
+                        <span style="color: green; font-weight:bold">({{dateDummy | date:'MMM, dd'}})</span>
+                        <span style="font-weight: bold">0.00 PLN</span>
+                    </div>
+                </div>
+                <div style="margin-left: 20px; margin-top: 10px">
+                    <span>Convenient reception and return at one of our 25 points in Poland</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <h4 style="font-weight: bold">Choose the payment method</h4>
+            <mat-radio-group (change)="paymentMethodChange($event.value)">
+                <div class="paymentBox">
+                    <mat-radio-button value="Payment in advance">
+                        <span style="font-weight: normal">Payment in advance on account</span>
+                        <span style="font-weight: bold">(0.00 PLN)</span>
+                    </mat-radio-button>
+                    <div>&nbsp;</div>
+                </div>
+                <div class="paymentBox">
+                    <mat-radio-button value="Instant transfer">
+                        <span style="font-weight: normal">Instant transfer</span>
+                        <span style="font-weight: bold">(300.00 PLN)</span>
+                    </mat-radio-button>
+                    <div>&nbsp;</div>
+                </div>
+                <div class="paymentBox">
+                    <mat-radio-button value="Payment card">
+                        <span style="font-weight: normal">Payment card</span>
+                        <span style="font-weight: bold">(0.00 PLN)</span>
+                    </mat-radio-button>
+                    <div>&nbsp;</div>
+                </div>
+                <div class="paymentBox">
+                    <mat-radio-button value="Masterpass">
+                        <span style="font-weight: normal">Masterpass</span>
+                        <span style="font-weight: bold">(0.00 PLN)</span>
+                    </mat-radio-button>
+                    <div>&nbsp;</div>
+                </div>
+                <div class="paymentBox">
+                    <mat-radio-button value="Leasing">
+                        <span style="font-weight: normal">Leasing</span>
+                        <span style="font-weight: bold">(0.00 PLN)</span>
+                    </mat-radio-button>
+                    <div>&nbsp;</div>
+                </div>
+            </mat-radio-group>
+        </div>
+        <div class="col-md-4">
+            <h4>&nbsp;</h4>
+            <div class="summaryBox">
+                <h4 style="font-weight: bold">Summary:</h4>
+                <div class="summaryItemListGroup">
+                    <div>Value of products in shopping cart:</div>
+                    <div>{{totalPrice}} PLN</div>
+                </div>
+                <div class="summaryItemListGroup">
+                    <div>Delivery method: <b>{{deliveryMethodStr}}</b></div>
+                    <div>{{deliveryCost}} PLN</div>
+                </div>
+                <div class="summaryItemListGroup">
+                    <div>Payment: <b>{{paymentMethodStr}}</b></div>
+                    <div>{{paymentCost}} PLN</div>
+                </div>
+                <hr style="height: 2px; background-color: gray">
+                <div class="summaryItemListGroup">
+                    <div>Total cost</div>
+                    <div style="font-weight:bold">{{totalCost}} PLN</div>
+                </div>
+                <button style="width: 100%; margin-top: 15px" class="btn btn-lg btn-danger">Proceed</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" *ngIf="products.length == 0">
+    <p>Twój koszyk jest pusty</p>
+</div>

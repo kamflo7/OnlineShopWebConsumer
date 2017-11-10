@@ -59,11 +59,14 @@ export class ProductComponent implements OnInit {
       let idPart:string = r.id.substr(idx+1);
 
       let idTmp:string[] = idPart.split("_");
-      if(idTmp.length != 2)
-        return;
-
-      this.productID = Number(idTmp[0]);
-      this.categoryViewID = Number(idTmp[1]);
+      if(idTmp.length != 2) { // not found CategoryView id
+        this.productID = Number(idPart);
+        this.categoryViewID = null;
+        console.log("Wyjatek, id produktu: " + this.productID);
+      } else {
+        this.productID = Number(idTmp[0]);
+        this.categoryViewID = Number(idTmp[1]);
+      }
 
       this.getProduct().then(success => {
         if(success) {

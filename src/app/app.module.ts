@@ -38,6 +38,7 @@ import { AdminNavigationEditComponent } from './components/admin-center/admin-na
 import { NavigationConverter } from './_services/navigation-converter.service';
 import { ItemListProductComponent } from './components/item-list-product/item-list-product.component';
 import { OrderService } from './_services/order.service';
+import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { OrderService } from './_services/order.service';
     CategoryComponent,
     ProfileCenterComponent, ProfileMainComponent, ProfileChangePasswordComponent,
     ProductComponent,
+    ShoppingCartComponent,
 // Admin components
     AdminCenterComponent,
       AdminMainComponent,

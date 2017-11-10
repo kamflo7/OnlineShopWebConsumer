@@ -1,0 +1,62 @@
+/* orders thead */
+.orders>thead>tr>td:first-child {
+    font-size: 28px;
+}
+
+.orders>thead>tr>td:not(:first-child) {
+    vertical-align: bottom;
+}
+
+.orders>thead>tr>td {
+    font-weight: bold;
+}
+
+/* orders tbody */
+.orders>tbody>tr {
+    padding: 5px 0;
+}
+
+.orders>tbody>tr>td {
+    font-weight: bold;
+    vertical-align: middle;
+}
+
+/* trash icon */
+.trash {
+    margin-left: 10px;
+    opacity: 0.7;
+}
+
+.trash:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+/*  */
+.deliverBox {
+    border: 1px solid rgb(27, 27, 56);
+    border-radius: 5px 5px;
+    min-height: 100px;
+    padding: 10px;
+}
+
+.paymentBox {
+    border: 1px solid gray;
+    border-radius: 5px 5px;
+    display: flex; justify-content: space-between;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+.summaryBox {
+    border-radius: 5px 5px;
+    background-color: #eceff0;
+    padding: 10px;
+}
+
+.summaryItemListGroup {
+    display:flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    font-size: 16px;
+}

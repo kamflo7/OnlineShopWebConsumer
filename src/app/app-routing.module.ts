@@ -17,12 +17,13 @@ import { AdminProductsComponent } from './components/admin-center/admin-products
 import { AdminProductEditComponent } from './components/admin-center/admin-products/admin-product-edit/admin-product-edit.component';
 import { AdminNavigationsComponent } from './components/admin-center/admin-navigations/admin-navigations.component';
 import { AdminNavigationEditComponent } from './components/admin-center/admin-navigations/admin-navigation-edit/admin-navigation-edit.component';
+import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 
 
 const routes: Routes = [
     // { path: 'cat/:category',    component: CategoryComponent },
     { path: '', component: HomeComponent },
-    { path: 'shopping-cart', component: HomeComponent }, // todo: change
+    { path: 'shopping-cart', component: ShoppingCartComponent }, // todo: change
     { path: 'login', component: LoginComponent },
     {
         path: 'profile', component: ProfileCenterComponent,

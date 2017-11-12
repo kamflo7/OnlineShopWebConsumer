@@ -47,7 +47,7 @@
         <div class="col-md-4">
             <h4 style="font-weight: bold">Choose the method of delivery</h4>
             <h5>Home delivery</h5>
-            <div class="deliverBox">
+            <div [ngClass]="{'selected': radioCourier, 'deliverBox': true}">
                 <div style="display: flex; justify-content: space-between">
                     <mat-radio-button [checked]="radioCourier" (change)="deliveryMethodChange('courier')" value="1">Courier</mat-radio-button>
                     <div>
@@ -65,7 +65,7 @@
             </div>
 
             <h5 style="margin-top: 30px">Pick up at the desired location</h5>
-            <div class="deliverBox">
+            <div class="deliverBox" [class.selected]="radioPersonal">
                 <div style="display: flex; justify-content: space-between">
                     <mat-radio-button [checked]="radioPersonal" (change)="deliveryMethodChange('personal')" value="4">Personal reception</mat-radio-button>
                     <div>
@@ -81,35 +81,35 @@
         <div class="col-md-4">
             <h4 style="font-weight: bold">Choose the payment method</h4>
             <mat-radio-group (change)="paymentMethodChange($event.value)">
-                <div class="paymentBox">
+                <div class="paymentBox" [class.selected]="paymentMethodStr == 'Payment in advance'">
                     <mat-radio-button value="Payment in advance">
                         <span style="font-weight: normal">Payment in advance on account</span>
                         <span style="font-weight: bold">(0.00 PLN)</span>
                     </mat-radio-button>
                     <div>&nbsp;</div>
                 </div>
-                <div class="paymentBox">
+                <div class="paymentBox" [class.selected]="paymentMethodStr == 'Instant transfer'">
                     <mat-radio-button value="Instant transfer">
                         <span style="font-weight: normal">Instant transfer</span>
                         <span style="font-weight: bold">(300.00 PLN)</span>
                     </mat-radio-button>
                     <div>&nbsp;</div>
                 </div>
-                <div class="paymentBox">
+                <div class="paymentBox" [class.selected]="paymentMethodStr == 'Payment card'">
                     <mat-radio-button value="Payment card">
                         <span style="font-weight: normal">Payment card</span>
                         <span style="font-weight: bold">(0.00 PLN)</span>
                     </mat-radio-button>
                     <div>&nbsp;</div>
                 </div>
-                <div class="paymentBox">
+                <div class="paymentBox" [class.selected]="paymentMethodStr == 'Masterpass'">
                     <mat-radio-button value="Masterpass">
                         <span style="font-weight: normal">Masterpass</span>
                         <span style="font-weight: bold">(0.00 PLN)</span>
                     </mat-radio-button>
                     <div>&nbsp;</div>
                 </div>
-                <div class="paymentBox">
+                <div class="paymentBox" [class.selected]="paymentMethodStr == 'Leasing'">
                     <mat-radio-button value="Leasing">
                         <span style="font-weight: normal">Leasing</span>
                         <span style="font-weight: bold">(0.00 PLN)</span>
@@ -139,7 +139,7 @@
                     <div>Total cost</div>
                     <div style="font-weight:bold">{{totalCost}} PLN</div>
                 </div>
-                <button style="width: 100%; margin-top: 15px" class="btn btn-lg btn-danger">Proceed</button>
+                <button (click)="proceed_Click()" style="width: 100%; margin-top: 15px" class="btn btn-lg btn-danger">Proceed</button>
             </div>
         </div>
     </div>

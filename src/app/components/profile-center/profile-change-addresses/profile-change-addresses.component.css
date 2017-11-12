@@ -1,0 +1,15 @@
+.box {
+    width: 100%;
+    border: 1px solid #e7e7e7;
+    border-radius: 5px 5px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+h4 {
+    margin: 0;
+}
+
+tr>td {
+    vertical-align: middle;
+}

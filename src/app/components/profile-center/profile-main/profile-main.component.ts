@@ -3,9 +3,8 @@ import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-profile-main',
-    template: `
-        To jest profile->Main
-    `
+    templateUrl: 'profile-main.component.html',
+    styleUrls: ['profile-main.component.css']
   })
 export class ProfileMainComponent implements OnInit {
 	ngOnInit(): void {

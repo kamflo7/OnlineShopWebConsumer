@@ -3,9 +3,8 @@ import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-profile-change-passwd',
-    template: `
-        To jest profile->Change password
-    `
+    templateUrl: 'profile-change-passwd.component.html',
+    styles: ['profile-change-passwd.component.css']
   })
 export class ProfileChangePasswordComponent implements OnInit {
 	ngOnInit(): void {

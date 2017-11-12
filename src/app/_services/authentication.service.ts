@@ -29,7 +29,8 @@ export class AuthenticationService {
 
     getUser():User {
         let user:User = new User();
-        user.email = localStorage.getItem('sub'); 
+        user.email = localStorage.getItem('sub');
+        user.id = localStorage.getItem('jti');
         return user;
     }
 
@@ -76,9 +77,10 @@ export class AuthenticationService {
     setupReceivedToken(token:string) {
         var jwt:JwtHelper = new JwtHelper();
         var decodedToken = jwt.decodeToken(token);
-        console.log(decodedToken);
+        // console.log(decodedToken);
 
         localStorage.setItem("sub", decodedToken.sub);
+        localStorage.setItem("jti", decodedToken.jti);
         localStorage.setItem("exp", decodedToken.exp);
         localStorage.setItem("iss", decodedToken.iss);
         localStorage.setItem("token", token);

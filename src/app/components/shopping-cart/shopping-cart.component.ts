@@ -99,6 +99,7 @@ export class ShoppingCartComponent implements OnInit {
   deliveryMethodChange(method:string) {
     if(method == 'courier') {
       this.radioPersonal = false;
+      this.radioCourier = true;
       this.deliveryMethodStr = "Courier";
       this.deliveryCost = 19.00;
       this.radioCourierDaily = true;
@@ -106,6 +107,7 @@ export class ShoppingCartComponent implements OnInit {
     } else {
       this.deliveryMethodStr = "Personal";
       this.radioCourier = false;
+      this.radioPersonal = true;
       this.radioCourierDaily = false;
       this.radioCourierSaturday = false;
       this.deliveryCost = 0.00;
@@ -141,5 +143,17 @@ export class ShoppingCartComponent implements OnInit {
 
   updateTotalCost() {
     this.totalCost = this.paymentCost + this.deliveryCost + this.totalPrice;
+  }
+
+  proceed_Click() {
+    if(this.radioCourier != true && this.radioPersonal != true) {
+      alert("Choose a delivery method");
+      return;
+    }
+
+    if(this.paymentMethodStr == "") {
+      alert("Choose a payment method");
+      return;
+    }
   }
 }

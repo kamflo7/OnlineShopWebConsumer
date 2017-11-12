@@ -39,6 +39,19 @@ import { NavigationConverter } from './_services/navigation-converter.service';
 import { ItemListProductComponent } from './components/item-list-product/item-list-product.component';
 import { OrderService } from './_services/order.service';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
+import { ProfileChangeInformationsComponent } from './components/profile-center/profile-change-informations/profile-change-informations.component';
+import { ProfileChangeEmailComponent } from './components/profile-center/profile-change-email/profile-change-email.component';
+import { ProfileChangeAddressesComponent } from './components/profile-center/profile-change-addresses/profile-change-addresses.component';
+import { ProfileOrdersComponent } from './components/profile-center/profile-orders/profile-orders.component';
+import { ProfileReportProductComponent } from './components/profile-center/profile-report-product/profile-report-product.component';
+import { ProfileActiveSubmissionsComponent } from './components/profile-center/profile-active-submissions/profile-active-submissions.component';
+import { ProfileClosedSubmissionsComponent } from './components/profile-center/profile-closed-submissions/profile-closed-submissions.component';
+import { ProfileAskQuestionComponent } from './components/profile-center/profile-ask-question/profile-ask-question.component';
+import { ProfileActiveQuestionsComponent } from './components/profile-center/profile-active-questions/profile-active-questions.component';
+import { ProfileClosedQuestionsComponent } from './components/profile-center/profile-closed-questions/profile-closed-questions.component';
+import { ProfileOffersComponent } from './components/profile-center/profile-offers/profile-offers.component';
+import { DialogCreateEditAddressComponent } from './components/_dialogs/dialog-create-edit-address/dialog-create-edit-address.component';
+import { UserService } from './_services/user.service';
 
 @NgModule({
   declarations: [
@@ -47,7 +60,9 @@ import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.
     HomeComponent,
     LoginComponent,
     CategoryComponent,
-    ProfileCenterComponent, ProfileMainComponent, ProfileChangePasswordComponent,
+    ProfileCenterComponent, ProfileMainComponent, ProfileChangePasswordComponent, ProfileActiveQuestionsComponent, ProfileActiveSubmissionsComponent,
+      ProfileAskQuestionComponent, ProfileChangeAddressesComponent, ProfileChangeEmailComponent, ProfileChangeInformationsComponent, ProfileClosedQuestionsComponent,
+      ProfileClosedSubmissionsComponent, ProfileOrdersComponent, ProfileReportProductComponent,
     ProductComponent,
     ShoppingCartComponent,
 // Admin components
@@ -58,9 +73,9 @@ import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.
       AdminNavigationsComponent, AdminNavigationEditComponent,
     FormAdminProductEdit, FormAdminCategoryLogicComponent,
 // dialogs
-    DialogCreateCategoryComponent, DialogCreateFeatureGroupComponent, DialogCreateEditFeatureDefinition,
+    DialogCreateCategoryComponent, DialogCreateFeatureGroupComponent, DialogCreateEditFeatureDefinition, DialogCreateEditAddressComponent,
 // other things
-    DynamicInputTextComponent, ItemListProductComponent
+    DynamicInputTextComponent, ItemListProductComponent, ProfileChangeInformationsComponent, ProfileChangeEmailComponent, ProfileChangeAddressesComponent, ProfileOrdersComponent, ProfileReportProductComponent, ProfileActiveSubmissionsComponent, ProfileClosedSubmissionsComponent, ProfileAskQuestionComponent, ProfileActiveQuestionsComponent, ProfileClosedQuestionsComponent, ProfileOffersComponent
   ],
   imports: [
     BrowserModule,
@@ -72,7 +87,8 @@ import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.
     MatDialogModule, MatInputModule, MatSnackBarModule, MatSelectModule, MatRadioModule, MatCheckboxModule, MatButtonModule
   ],
   entryComponents: [
-    DialogCreateCategoryComponent, DialogCreateFeatureGroupComponent, DialogCreateEditFeatureDefinition
+    DialogCreateCategoryComponent, DialogCreateFeatureGroupComponent, DialogCreateEditFeatureDefinition,
+    DialogCreateEditAddressComponent
   ],
   exports: [
 
@@ -83,6 +99,7 @@ import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.
     ProductService,
     NavigationConverter,
     OrderService,
+    UserService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

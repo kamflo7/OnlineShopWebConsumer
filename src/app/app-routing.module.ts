@@ -18,18 +18,41 @@ import { AdminProductEditComponent } from './components/admin-center/admin-produ
 import { AdminNavigationsComponent } from './components/admin-center/admin-navigations/admin-navigations.component';
 import { AdminNavigationEditComponent } from './components/admin-center/admin-navigations/admin-navigation-edit/admin-navigation-edit.component';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
+import { ProfileChangeInformationsComponent } from './components/profile-center/profile-change-informations/profile-change-informations.component';
+import { ProfileChangeEmailComponent } from './components/profile-center/profile-change-email/profile-change-email.component';
+import { ProfileChangeAddressesComponent } from './components/profile-center/profile-change-addresses/profile-change-addresses.component';
+import { ProfileOrdersComponent } from './components/profile-center/profile-orders/profile-orders.component';
+import { ProfileOffersComponent } from './components/profile-center/profile-offers/profile-offers.component';
+import { ProfileReportProductComponent } from './components/profile-center/profile-report-product/profile-report-product.component';
+import { ProfileActiveSubmissionsComponent } from './components/profile-center/profile-active-submissions/profile-active-submissions.component';
+import { ProfileClosedSubmissionsComponent } from './components/profile-center/profile-closed-submissions/profile-closed-submissions.component';
+import { ProfileAskQuestionComponent } from './components/profile-center/profile-ask-question/profile-ask-question.component';
+import { ProfileActiveQuestionsComponent } from './components/profile-center/profile-active-questions/profile-active-questions.component';
+import { ProfileClosedQuestionsComponent } from './components/profile-center/profile-closed-questions/profile-closed-questions.component';
 
 
 const routes: Routes = [
     // { path: 'cat/:category',    component: CategoryComponent },
     { path: '', component: HomeComponent },
-    { path: 'shopping-cart', component: ShoppingCartComponent }, // todo: change
+    { path: 'shopping-cart', component: ShoppingCartComponent }, 
+    // { path: 'shopping-cart/confirm', component: ShoppingCartConfirmationComponent },
     { path: 'login', component: LoginComponent },
     {
         path: 'profile', component: ProfileCenterComponent,
         children: [
             { path: '', component: ProfileMainComponent },
-            { path: 'change-password', component: ProfileChangePasswordComponent }
+            { path: 'change-password', component: ProfileChangePasswordComponent },
+            { path: 'change-basic-informations', component: ProfileChangeInformationsComponent },
+            { path: 'change-email', component: ProfileChangeEmailComponent },
+            { path: 'change-addresses', component: ProfileChangeAddressesComponent },
+            { path: 'orders', component: ProfileOrdersComponent },
+            { path: 'offers', component: ProfileOffersComponent },
+            { path: 'report-product', component: ProfileReportProductComponent },
+            { path: 'active-submissions', component: ProfileActiveSubmissionsComponent },
+            { path: 'closed-submissions', component: ProfileClosedSubmissionsComponent },
+            { path: 'ask-a-question', component: ProfileAskQuestionComponent },
+            { path: 'active-questions', component: ProfileActiveQuestionsComponent },
+            { path: 'closed-questions', component: ProfileClosedQuestionsComponent },
         ]
     },
     { path: 'product/:id', component: ProductComponent },

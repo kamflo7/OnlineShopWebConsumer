@@ -1,0 +1,64 @@
+<div>
+    <h4 md-dialog-title>{{title}}</h4>
+    <hr>
+    <md-dialog-content>
+        <!-- <form> -->
+        <div class="form-group">
+            <div>
+                <mat-radio-group (change)="addressType_Change($event)">
+                    <mat-radio-button [checked]="addressTypeSelected=='personal'" value="personal">Personal address</mat-radio-button>
+                    <mat-radio-button [checked]="addressTypeSelected=='company'" value="company">Company address</mat-radio-button>
+                </mat-radio-group>
+
+                <mat-form-field class="full-width" style="margin-top: 15px">
+                    <input matInput placeholder="Address name" [(ngModel)]="addressName" name="addressName">
+                </mat-form-field>
+                <mat-form-field class="full-width">
+                    <input matInput placeholder="Street" [(ngModel)]="street" name="street">
+                </mat-form-field>
+                <mat-form-field class="full-width">
+                    <input matInput placeholder="Zip code" [(ngModel)]="zipCode" name="zipCode">
+                </mat-form-field>
+                <mat-form-field class="full-width">
+                    <input matInput placeholder="City" [(ngModel)]="city" name="city">
+                </mat-form-field>
+                <mat-form-field class="full-width">
+                    <input matInput placeholder="Phone number" [(ngModel)]="phoneNumber" name="phoneNumber">
+                </mat-form-field>
+                <mat-form-field class="full-width">
+                    <input matInput placeholder="House number" [(ngModel)]="houseNumber" name="houseNumber">
+                </mat-form-field>
+
+
+                <div *ngIf="addressTypeSelected=='personal'">
+                    <mat-form-field class="full-width">
+                        <input matInput placeholder="First name" [(ngModel)]="firstName" name="firstName">
+                    </mat-form-field>
+                    <mat-form-field class="full-width">
+                        <input matInput placeholder="Last name" [(ngModel)]="lastName" name="lastName">
+                    </mat-form-field>
+                </div>
+                <div *ngIf="addressTypeSelected=='company'">
+                    <mat-form-field class="full-width">
+                        <input matInput placeholder="Name" [(ngModel)]="name" name="name">
+                    </mat-form-field>
+                    <mat-form-field class="full-width">
+                        <input matInput placeholder="Name 2" [(ngModel)]="name2" name="name2">
+                    </mat-form-field>
+                    <mat-form-field class="full-width">
+                        <input matInput placeholder="Name 3" [(ngModel)]="name3" name="name3">
+                    </mat-form-field>
+                    <mat-form-field class="full-width">
+                        <input matInput placeholder="Nip" [(ngModel)]="nip" name="nip">
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+        <!-- </form> -->
+    </md-dialog-content>
+    <hr>
+    <md-dialog-actions>
+        <button md-raised-button (click)="onCloseConfirm()">Confirm</button>
+        <button md-raised-button (click)="onCloseCancel()">Cancel</button>
+    </md-dialog-actions>
+</div>

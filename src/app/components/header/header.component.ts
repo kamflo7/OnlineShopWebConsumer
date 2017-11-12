@@ -23,18 +23,15 @@ export class HeaderComponent implements OnInit {
     private productService: ProductService,
     private navigationConverter: NavigationConverter,
     private orderService: OrderService) {
-    // this.authenticated = auth.isUserAuthenticated();
-    // if(this.authenticated)
-    //   this.user = auth.getUser();
-      
+
   }
 
 
   authenticated: boolean;
   user: User;
   categories = [];
-  basketValue:number;
-  orderItemAmount:number;
+  basketValue: number;
+  orderItemAmount: number;
 
   ngOnInit() {
     this.productService.getCategoryViews().then(r => {
@@ -48,14 +45,11 @@ export class HeaderComponent implements OnInit {
       this.refreshShoppingCart();
     });
 
-    // this.orderService.addItemOrderToLocalStorage(5, 1);
-    // this.orderService.addItemOrderToLocalStorage(5, 1, 349);
-    // this.orderService.addItemOrderToLocalStorage(8, 1, 31);
+    this.authenticated = this.auth.isUserAuthenticated();
+    if (this.authenticated)
+      this.user = this.auth.getUser();
 
-    // let items:ItemOrder[] = this.orderService.getItemsOrderFromLocalStorage();
-    // for(let i=0; i<items.length; i++) {
-    //   console.log(items[i].productid + " : " + items[i].amount);
-    // }
+
 
     this.refreshShoppingCart();
   }

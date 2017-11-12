@@ -1,0 +1,37 @@
+<app-header></app-header>
+<div class="container" style="border: 1px dashed gray;">
+    <div class="row">
+        <div class="col-md-3">
+            <h4 style="font-weight: bold">My account</h4>
+            <div class="list-group">
+                <a class="list-group-item" [class.active]="childUrl=='change-password'" routerLink="/profile/change-password" href="#">&rarr; Change password</a>
+                <a class="list-group-item" [class.active]="childUrl=='change-basic-informations'" routerLink="/profile/change-basic-informations" href="#">&rarr; Change basic informations</a>
+                <a class="list-group-item" [class.active]="childUrl=='change-email'" routerLink="/profile/change-email" href="#">&rarr; Change e-mail address</a>
+                <a class="list-group-item" [class.active]="childUrl=='change-addresses'" routerLink="/profile/change-addresses" href="#">&rarr; Addresses</a>
+            </div>
+
+            <h4 style="font-weight: bold; margin-top: 20px">Orders</h4>
+            <div class="list-group">
+                <a class="list-group-item" [class.active]="childUrl=='orders'" routerLink="/profile/orders" href="#">&rarr; Orders and invoices</a>
+                <a class="list-group-item" [class.active]="childUrl=='offers'" routerLink="/profile/offers" href="#">&rarr; Offers</a>
+            </div>
+
+            <h4 style="font-weight: bold; margin-top: 20px">Services, complaints, returns</h4>
+            <div class="list-group">
+                <a class="list-group-item" [class.active]="childUrl=='report-product'" routerLink="/profile/report-product" href="#">&rarr; Report product</a>
+                <a class="list-group-item" [class.active]="childUrl=='active-submissions'" routerLink="/profile/active-submissions" href="#">&rarr; Submissions in progress</a>
+                <a class="list-group-item" [class.active]="childUrl=='closed-submissions'" routerLink="/profile/closed-submissions" href="#">&rarr; Closed submissions</a>
+            </div>
+
+            <h4 style="font-weight: bold; margin-top: 20px">Questions</h4>
+            <div class="list-group">
+                <a class="list-group-item" [class.active]="childUrl=='ask-a-question'" routerLink="/profile/ask-a-question" href="#">&rarr; Ask a question</a>
+                <a class="list-group-item" [class.active]="childUrl=='active-questions'" routerLink="/profile/active-questions" href="#">&rarr; Questions in progress</a>
+                <a class="list-group-item" [class.active]="childUrl=='closed-questions'" routerLink="/profile/closed-questions" href="#">&rarr; Closed questions</a>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

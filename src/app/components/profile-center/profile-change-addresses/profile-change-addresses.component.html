@@ -1,0 +1,65 @@
+<h4 class="bold">Address book</h4>
+<button class="btn btn-primary btn-lg" (click)="addNewAddress_Click()">Add new address</button>
+<div class="box">
+  <h4>List of addresses</h4>
+  <table *ngIf="addresses.length > 0" class="table table-striped">
+    <caption>Personal</caption>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Street</th>
+        <th>Zip code</th>
+        <th>City</th>
+        <th>Phone number</th>
+        <th>House number</th>
+        <th>First name</th>
+        <th>Last name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let address of addresses">
+        <tr *ngIf="address.type == 'personal'">
+          <td>{{address.addressName}}</td>
+          <td>{{address.street}}</td>
+          <td>{{address.zipCode}}</td>
+          <td>{{address.city}}</td>
+          <td>{{address.phoneNumber}}</td>
+          <td>{{address.houseNumber}}</td>
+          <td>{{address.firstName}}</td>
+          <td>{{address.lastName}}</td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+
+  <table *ngIf="addresses.length > 0" class="table table-striped">
+      <caption>Company</caption>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Street</th>
+          <th>Zip code</th>
+          <th>City</th>
+          <th>Phone number</th>
+          <th>House number</th>
+          <th>Name</th>
+          <th>NIP</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let address of addresses">
+          <tr *ngIf="address.type == 'company'">
+            <td>{{address.addressName}}</td>
+            <td>{{address.street}}</td>
+            <td>{{address.zipCode}}</td>
+            <td>{{address.city}}</td>
+            <td>{{address.phoneNumber}}</td>
+            <td>{{address.houseNumber}}</td>
+            <td [innerHTML]="address.names"></td>
+            <td>{{address.nip}}</td>
+          </tr>
+        </ng-container>
+  
+      </tbody>
+    </table>
+</div>

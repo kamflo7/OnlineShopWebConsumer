@@ -36,7 +36,7 @@ export class ProfileChangeAddressesComponent implements OnInit {
             this.addresses[i]['names'] += this.addresses[i]['name3'] != null ? '<br>'+this.addresses[i]['name3'] : '';
           }
         }
-        console.log(this.addresses);
+        // console.log(this.addresses);
       }
     });
   }

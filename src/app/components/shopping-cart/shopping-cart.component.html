@@ -25,7 +25,7 @@
                         />
                     </td>
                     <td class="col-md-2">
-                        <span>{{product.data.price * product.itemOrder.amount}} PLN</span>
+                        <span>{{product.data.price * product.itemOrder.amount  | number:'.2':'fr'}} PLN</span>
                     </td>
                     <td class="col-md-1">
                         <img (click)="removeSingleItem(products[i])" class="trash" height="30" src="assets/trash.png">
@@ -40,7 +40,7 @@
                 <img src="assets/trash.png" height="20">Clear basket</a>
         </div>
         <div class="col-md-6 pull-right" style="text-align: right">
-            <span style="font-size: 20px;">Basket value ({{products.length}} products): {{totalPrice}} PLN</span>
+            <span style="font-size: 20px;">Basket value ({{products.length}} products): {{totalPrice | number:'.2':'fr'}} PLN</span>
         </div>
     </div>
     <div class="row" style="margin-top: 30px">
@@ -123,21 +123,21 @@
             <div class="summaryBox">
                 <h4 style="font-weight: bold">Summary:</h4>
                 <div class="summaryItemListGroup">
-                    <div>Value of products in shopping cart:</div>
-                    <div>{{totalPrice}} PLN</div>
+                    <div>Value of products in cart:</div>
+                    <div>{{totalPrice | number:'.2':'fr'}} PLN</div>
                 </div>
                 <div class="summaryItemListGroup">
                     <div>Delivery method: <b>{{deliveryMethodStr}}</b></div>
-                    <div>{{deliveryCost}} PLN</div>
+                    <div>{{deliveryCost | number:'.2':'fr'}} PLN</div>
                 </div>
                 <div class="summaryItemListGroup">
                     <div>Payment: <b>{{paymentMethodStr}}</b></div>
-                    <div>{{paymentCost}} PLN</div>
+                    <div>{{paymentCost | number:'.2':'fr'}} PLN</div>
                 </div>
                 <hr style="height: 2px; background-color: gray">
                 <div class="summaryItemListGroup">
                     <div>Total cost</div>
-                    <div style="font-weight:bold">{{totalCost}} PLN</div>
+                    <div style="font-weight:bold">{{totalCost | number:'.2':'fr'}} PLN</div>
                 </div>
                 <button (click)="proceed_Click()" style="width: 100%; margin-top: 15px" class="btn btn-lg btn-danger">Proceed</button>
             </div>

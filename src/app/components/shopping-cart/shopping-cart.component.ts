@@ -38,6 +38,8 @@ export class ShoppingCartComponent implements OnInit {
   radioPersonal;
   radioCourierDaily;
   radioCourierSaturday;
+  selectedDeliveryMethod;
+  selectedPaymentMethod;
 
   deliveryMethodStr = "";
   deliveryCost:number = 0;
@@ -104,6 +106,7 @@ export class ShoppingCartComponent implements OnInit {
       this.deliveryCost = 19.00;
       this.radioCourierDaily = true;
       this.radioCourierSaturday = false;
+      this.selectedDeliveryMethod = 'courier_daily';
     } else {
       this.deliveryMethodStr = "Personal";
       this.radioCourier = false;
@@ -111,6 +114,7 @@ export class ShoppingCartComponent implements OnInit {
       this.radioCourierDaily = false;
       this.radioCourierSaturday = false;
       this.deliveryCost = 0.00;
+      this.selectedDeliveryMethod = 'personal';
     }
     this.updateTotalCost();
   }
@@ -124,14 +128,17 @@ export class ShoppingCartComponent implements OnInit {
     if(time == 'daily') {
       this.radioCourierDaily = true;
       this.radioCourierSaturday = false;
+      this.selectedDeliveryMethod = 'courier_daily';
     } else {
       this.radioCourierDaily = false;
       this.radioCourierSaturday = true;
+      this.selectedDeliveryMethod = 'courier_saturday';
     }
   }
 
   paymentMethodChange(value) {
     this.paymentMethodStr = value;
+    this.selectedPaymentMethod = value;
 
     if(value == 'Instant transfer') {
       this.paymentCost = 300.00;
@@ -155,5 +162,9 @@ export class ShoppingCartComponent implements OnInit {
       alert("Choose a payment method");
       return;
     }
+
+    this.orderService.setDeliveryMethod(this.selectedDeliveryMethod);
+    this.orderService.setPaymentMethod(this.selectedPaymentMethod);
+    this.router.navigate(["/shopping-cart/confirm"]);
   }
 }

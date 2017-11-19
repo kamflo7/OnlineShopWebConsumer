@@ -133,4 +133,22 @@ export class OrderService {
         localStorage.clear();
         this.change.emit(true);
     }
+
+
+    setDeliveryMethod(method) {
+        localStorage.setItem("delivery_method", method);
+    }
+
+    getDeliveryMethod() {
+        let r = localStorage.getItem("delivery_method");
+        return r;
+    }
+
+    setPaymentMethod(method) {
+        localStorage.setItem("payment_method", method);
+    }
+
+    getPaymentMethod() {
+        return localStorage.getItem("payment_method");
+    }
 }

@@ -1,0 +1,80 @@
+.steps-container {
+    /* border: 1px dashed red; */
+    margin: 40px 0 100px 0;
+
+}
+
+.line {
+    height: 5px;
+    background-color: #4d91bb;
+}
+
+.step {
+    width: 25%;
+    float: left;
+    position: relative;
+    height: 10px;
+}
+
+.num {
+    position: absolute;
+    left: 50%;
+    margin-left: -20px;
+    margin-top: -22px;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    font-size: 16px;
+    color: white;
+    background-color: #4d91bb;
+    border-radius: 100%;
+    line-height: 40px;
+    font-weight: 700;
+    z-index: 10;
+}
+
+.text {
+    margin-top: 30px;
+    text-align: center;
+    font-weight: 700;
+    color: #4d91bb;
+}
+
+.nested-line {
+    position: absolute;
+    left: -50%;
+    right: 50%;
+    /* background-color: red; */
+    z-index: 9;
+    height: 5px;
+    top: 0;
+    margin-top: -5px;
+}
+
+.active {
+    background-color: #1b4a65;
+}
+
+.activeText {
+    color: #1b4a65;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.box {
+    border: 1px solid #cccccc;
+    border-radius: 5px 5px;
+    padding: 10px;
+}
+
+.margin-20 {
+    margin-top: 20px;
+}
+
+.margin-40 {
+    margin-top: 20px;
+}
+
+h4 { margin: 0; }

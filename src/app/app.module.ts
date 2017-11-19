@@ -52,6 +52,7 @@ import { ProfileClosedQuestionsComponent } from './components/profile-center/pro
 import { ProfileOffersComponent } from './components/profile-center/profile-offers/profile-offers.component';
 import { DialogCreateEditAddressComponent } from './components/_dialogs/dialog-create-edit-address/dialog-create-edit-address.component';
 import { UserService } from './_services/user.service';
+import { ShoppingCartConfirmationComponent } from './components/shopping-cart-confirmation/shopping-cart-confirmation.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,7 @@ import { UserService } from './_services/user.service';
       ProfileAskQuestionComponent, ProfileChangeAddressesComponent, ProfileChangeEmailComponent, ProfileChangeInformationsComponent, ProfileClosedQuestionsComponent,
       ProfileClosedSubmissionsComponent, ProfileOrdersComponent, ProfileReportProductComponent,
     ProductComponent,
-    ShoppingCartComponent,
+    ShoppingCartComponent, ShoppingCartConfirmationComponent,
 // Admin components
     AdminCenterComponent,
       AdminMainComponent,
@@ -75,7 +76,7 @@ import { UserService } from './_services/user.service';
 // dialogs
     DialogCreateCategoryComponent, DialogCreateFeatureGroupComponent, DialogCreateEditFeatureDefinition, DialogCreateEditAddressComponent,
 // other things
-    DynamicInputTextComponent, ItemListProductComponent, ProfileChangeInformationsComponent, ProfileChangeEmailComponent, ProfileChangeAddressesComponent, ProfileOrdersComponent, ProfileReportProductComponent, ProfileActiveSubmissionsComponent, ProfileClosedSubmissionsComponent, ProfileAskQuestionComponent, ProfileActiveQuestionsComponent, ProfileClosedQuestionsComponent, ProfileOffersComponent
+    DynamicInputTextComponent, ItemListProductComponent, ProfileChangeInformationsComponent, ProfileChangeEmailComponent, ProfileChangeAddressesComponent, ProfileOrdersComponent, ProfileReportProductComponent, ProfileActiveSubmissionsComponent, ProfileClosedSubmissionsComponent, ProfileAskQuestionComponent, ProfileActiveQuestionsComponent, ProfileClosedQuestionsComponent, ProfileOffersComponent,
   ],
   imports: [
     BrowserModule,

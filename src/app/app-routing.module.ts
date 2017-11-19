@@ -29,13 +29,14 @@ import { ProfileClosedSubmissionsComponent } from './components/profile-center/p
 import { ProfileAskQuestionComponent } from './components/profile-center/profile-ask-question/profile-ask-question.component';
 import { ProfileActiveQuestionsComponent } from './components/profile-center/profile-active-questions/profile-active-questions.component';
 import { ProfileClosedQuestionsComponent } from './components/profile-center/profile-closed-questions/profile-closed-questions.component';
+import { ShoppingCartConfirmationComponent } from './components/shopping-cart-confirmation/shopping-cart-confirmation.component';
 
 
 const routes: Routes = [
     // { path: 'cat/:category',    component: CategoryComponent },
     { path: '', component: HomeComponent },
     { path: 'shopping-cart', component: ShoppingCartComponent }, 
-    // { path: 'shopping-cart/confirm', component: ShoppingCartConfirmationComponent },
+    { path: 'shopping-cart/confirm', component: ShoppingCartConfirmationComponent },
     { path: 'login', component: LoginComponent },
     {
         path: 'profile', component: ProfileCenterComponent,

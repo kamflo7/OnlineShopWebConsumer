@@ -29,6 +29,7 @@ export class OrderService {
         return new Promise(resolve => {
             this.http.get<ResponseDetails<any>>(this.globals.backendUrl+'orders', {observe: 'response'}).subscribe(r => {
                 resolve(r.body);
+                console.log(r.body);
             });
         });
     }

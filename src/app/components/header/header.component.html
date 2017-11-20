@@ -26,9 +26,9 @@
                     <img src="assets/profile.png" height="35" />
                 </div>
                 <div class="user-nav">
-                    <a *ngIf="authenticated; else elseBlock" routerLink="/profile">Twoje konto</a>
+                    <a *ngIf="authenticated; else elseBlock" routerLink="/profile">Your account</a>
                     <ng-template #elseBlock>
-                        <a routerLink="/login">Zaloguj się<br>lub załóż konto</a>
+                        <a routerLink="/login">Log in</a>
                     </ng-template>
                 </div>
 

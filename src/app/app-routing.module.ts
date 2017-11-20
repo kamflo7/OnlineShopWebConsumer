@@ -30,6 +30,7 @@ import { ProfileAskQuestionComponent } from './components/profile-center/profile
 import { ProfileActiveQuestionsComponent } from './components/profile-center/profile-active-questions/profile-active-questions.component';
 import { ProfileClosedQuestionsComponent } from './components/profile-center/profile-closed-questions/profile-closed-questions.component';
 import { ShoppingCartConfirmationComponent } from './components/shopping-cart-confirmation/shopping-cart-confirmation.component';
+import { ProfileOrderDetailsComponent } from './components/profile-center/profile-order-details/profile-order-details.component';
 
 
 const routes: Routes = [
@@ -47,6 +48,7 @@ const routes: Routes = [
             { path: 'change-email', component: ProfileChangeEmailComponent },
             { path: 'change-addresses', component: ProfileChangeAddressesComponent },
             { path: 'orders', component: ProfileOrdersComponent },
+            { path: 'orders/:id', component: ProfileOrderDetailsComponent },
             { path: 'offers', component: ProfileOffersComponent },
             { path: 'report-product', component: ProfileReportProductComponent },
             { path: 'active-submissions', component: ProfileActiveSubmissionsComponent },

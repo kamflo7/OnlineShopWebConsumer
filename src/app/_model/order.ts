@@ -3,7 +3,7 @@ import { User } from './user';
 
 export class Order {
     id:number;
-    date:string;
+    date:number;
     user:User;
     orderProducts:Array<OrderProduct>;
     userAddress:any;

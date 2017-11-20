@@ -1,3 +1,21 @@
-<p>
-  profile-orders works!
-</p>
+<h3>Orders</h3>
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <td>Order ID</td>
+      <td>Date</td>
+      <td>Status</td>
+      <td>Value</td>
+      <td>Ask a question</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let order of orders; let i=index">
+      <td><a style="color: white; background-color: #337ab7; padding: 3px 8px; border-radius: 3px 3px" routerLink="/profile/orders/{{order.id}}">{{order.id}}</a></td>
+      <td>{{order.date | date:'MMM d, y, h:mm:ss'}}</td>
+      <td>New, not approved<br>(0/4)</td>
+      <td>{{sumValue[i] | number:'.2':'fr'}} PLN</td>
+      <td><a href="#">Ask</a></td>
+    </tr>
+  </tbody>
+</table>

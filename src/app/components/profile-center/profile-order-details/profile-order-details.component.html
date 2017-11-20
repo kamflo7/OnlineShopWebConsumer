@@ -1,0 +1,52 @@
+<ng-container *ngIf="order != null">
+  <h3>Order number {{order.id}}</h3>
+
+  <div class="row margin-20">
+    <div class="col-md-6">
+      <div class="box">
+        <div>Order status:
+          <b>New, not approved (1/4)</b>
+        </div>
+        <div>The date of order:
+          <b>{{order.date | date:'MMM d, y, h:mm:ss'}}</b>
+        </div>
+        <div>Delivery date:
+          <b>{{order.date+4*24*60*60*1000 | date:'MMM d, y'}}</b>
+        </div>
+        <div>Bill type:
+          <b>invoice</b>
+        </div>
+        <div>Waybill:
+          <b>not assigned yet</b>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table table-bordered table-striped margin-40">
+        <thead>
+          <tr>
+            <td>Product name</td>
+            <td>Amount</td>
+            <td>Price</td>
+            <td>Value</td>
+            <td>Status</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let orderProduct of order.orderProducts; let i=index">
+            <td><a routerLink="/product/{{productFormatedNameForURL[i]}}-{{orderProduct.product.id}}">{{orderProduct.product.name}}</a></td>
+            <td>{{orderProduct.amount}}</td>
+            <td>{{orderProduct.price | number:'.2':'fr'}} PLN</td>
+            <td>{{orderProduct.price * orderProduct.amount | number:'.2':'fr'}} PLN</td>
+            <td>New (1/4)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</ng-container>

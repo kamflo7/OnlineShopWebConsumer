@@ -1,18 +1,48 @@
-<div class="bar">
-    <img src="assets/logo.png" height="50" />
-    <h3 style="display: inline">Admin Center</h3>
+<div class="sidebar">
+    <div class="title">overview</div>
+    <ul>
+        <li>
+            <a routerLink="/admin/dashboard">
+                <div class="imgContainer"><img src="assets/admin_icons/dashboard.png" height="18"></div>
+                Dashboard
+            </a>
+        </li>
+    </ul>
+
+    <div class="title">components</div>
+    <ul>
+        <li>
+            <a routerLink="/admin/categories">
+                <div class="imgContainer"><img src="assets/admin_icons/categories.png" height="18"></div>
+                Categories
+            </a>
+        </li>
+        <li>
+            <a routerLink="/admin/products">
+                <div class="imgContainer"><img src="assets/admin_icons/products.png" height="18"></div>
+                Products
+            </a>
+        </li>
+        <li>
+            <a routerLink="/admin/orders">
+                <div class="imgContainer"><img src="assets/admin_icons/orders.png" height="18"></div>
+                Orders
+            </a>
+        </li>
+        <li>
+            <a routerLink="/admin/users">
+                <div class="imgContainer"><img src="assets/admin_icons/users.png" height="18"></div>
+                Users
+            </a>
+        </li>
+    </ul>
 </div>
-<div class="my-container">
-    <div class="sidebar">
-        <ul>
-            <li><a routerLink="/admin/dashboard">Dashboard</a></li>
-            <li><a routerLink="/admin/categories">Categories</a></li>
-            <li><a routerLink="/admin/products">Products</a></li>
-            <li><a routerLink="/admin/orders">Orders</a></li>
-            <li><a routerLink="/admin/users">Users</a></li>
-        </ul>
+<div class="content">
+    <div class="bar">
+        <img src="assets/logo.png" height="45" />
+        <span style="color: #a9a9a9; font-size: 16px; font-family: Impact, Charcoal, sans-serif; text-shadow: 2px 2px rgb(28, 28, 28);">Admin Center</span>
     </div>
-    <div class="content">
-            <router-outlet></router-outlet>
+    <div class="contentOutlet">
+        <router-outlet></router-outlet>
     </div>
 </div>

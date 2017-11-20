@@ -53,6 +53,7 @@ import { ProfileOffersComponent } from './components/profile-center/profile-offe
 import { DialogCreateEditAddressComponent } from './components/_dialogs/dialog-create-edit-address/dialog-create-edit-address.component';
 import { UserService } from './_services/user.service';
 import { ShoppingCartConfirmationComponent } from './components/shopping-cart-confirmation/shopping-cart-confirmation.component';
+import { ProfileOrderDetailsComponent } from './components/profile-center/profile-order-details/profile-order-details.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,7 @@ import { ShoppingCartConfirmationComponent } from './components/shopping-cart-co
     CategoryComponent,
     ProfileCenterComponent, ProfileMainComponent, ProfileChangePasswordComponent, ProfileActiveQuestionsComponent, ProfileActiveSubmissionsComponent,
       ProfileAskQuestionComponent, ProfileChangeAddressesComponent, ProfileChangeEmailComponent, ProfileChangeInformationsComponent, ProfileClosedQuestionsComponent,
-      ProfileClosedSubmissionsComponent, ProfileOrdersComponent, ProfileReportProductComponent,
+      ProfileClosedSubmissionsComponent, ProfileOrdersComponent, ProfileOrderDetailsComponent, ProfileReportProductComponent,
     ProductComponent,
     ShoppingCartComponent, ShoppingCartConfirmationComponent,
 // Admin components

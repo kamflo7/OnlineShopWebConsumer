@@ -13,6 +13,8 @@ import { Observer } from 'rxjs/Observer';
 import { Globals } from '../../globals';
 import { Product } from '../../_model/product';
 import { UserService } from '../../_services/user.service';
+import { OrderProductDTO } from '../../_dto/order-product-dto';
+import { Order } from '../../_model/order';
 
 @Component({
     selector: 'app-shopping-cart-confirmation',
@@ -31,6 +33,9 @@ import { UserService } from '../../_services/user.service';
     
     }
 
+    stepIsOrdering:boolean = true;
+    orderMade:Order;
+
     deliveryMethod = "";
     paymentForm = "";
 
@@ -44,7 +49,24 @@ import { UserService } from '../../_services/user.service';
     paymentCost;
     deliveryCost;
 
+    // testViewAfterOrder() {
+    //   this.stepIsOrdering = false;
+    //   this.orderService.getOrder(3).then(r => {
+    //     if(r.status == 'success') {
+    //       this.orderMade = r.data;
+    //       console.log("Successfully loaded order");
+    //       console.log(r.data);
+    //     }
+    //   });
+    // }
+
     ngOnInit() {
+      // let a = true;
+      // if(a) {
+      //   this.testViewAfterOrder();
+      //   return;
+      // }
+
       // lack of logic, mocking
       let delivery = this.orderService.getDeliveryMethod();
       if(delivery == 'courier_daily' || delivery == 'courier_saturday') this.deliveryMethod = 'Courier';
@@ -117,6 +139,25 @@ import { UserService } from '../../_services/user.service';
     }
 
     order() {
+      let orderProductsDTO:Array<OrderProductDTO> = [];
       
+      for(let i=0; i<this.products.length; i++) {
+        let orderDTO = <OrderProductDTO>{};
+        orderDTO.productID = this.products[i].itemOrder.productid;
+        orderDTO.amount = this.products[i].itemOrder.amount;
+        orderProductsDTO.push(orderDTO);
+      }
+
+
+      this.orderService.makeOrder(this.loggedUser.id, this.address['id'], this.deliveryMethod, this.paymentForm,
+      orderProductsDTO).then(r => {
+        if(r.status == 'success') {
+            this.stepIsOrdering = false;
+            this.orderMade = r.data;
+        } else {
+          alert("There was a problem with ordering your order");
+        }
+      });
+
     }
 }

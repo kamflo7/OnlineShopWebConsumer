@@ -2,6 +2,9 @@ import { Injectable, Output, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Globals } from '../globals';
 import { ItemOrder } from '../_dto/item-order';
+import { OrderProductDTO } from '../_dto/order-product-dto';
+import { ResponseDetails } from '../_model/response-details';
+import { Order } from '../_model/order';
 
 @Injectable()
 export class OrderService {
@@ -11,6 +14,33 @@ export class OrderService {
 
     constructor(private http: HttpClient, private globals: Globals) { }
 
+    makeOrder(userID:number, addressID:number, deliveryMethod:string, paymentMethod:string,
+        orderProductDTO:Array<OrderProductDTO>):Promise<ResponseDetails<Order>> {
+        return new Promise(resolve => {
+            this.http.put<ResponseDetails<Order>>(this.globals.backendUrl+'orders?'
+                +'addressID='+addressID+'&deliveryMethod='+deliveryMethod
+                +'&paymentMethod='+paymentMethod, orderProductDTO, {observe: 'response'}).subscribe(r => {
+                    resolve(r.body);
+                });
+        });
+    }
+
+    getOrders():Promise<ResponseDetails<Array<Order>>> {
+        return new Promise(resolve => {
+            this.http.get<ResponseDetails<any>>(this.globals.backendUrl+'orders', {observe: 'response'}).subscribe(r => {
+                resolve(r.body);
+            });
+        });
+    }
+
+    getOrder(orderID:number):Promise<ResponseDetails<Order>> {
+        return new Promise(resolve => {
+            this.http.get<ResponseDetails<Order>>(this.globals.backendUrl+'orders/'+orderID,
+            {observe: 'response'}).subscribe(r => {
+                resolve(r.body);
+            });
+        });
+    }
 
     getBasketTotalValue(): number {
         let totalValue: string = localStorage.getItem("total_cost");
@@ -151,4 +181,6 @@ export class OrderService {
     getPaymentMethod() {
         return localStorage.getItem("payment_method");
     }
+
+
 }

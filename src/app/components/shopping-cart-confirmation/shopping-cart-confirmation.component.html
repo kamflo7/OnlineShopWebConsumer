@@ -23,128 +23,138 @@
         <div class="nested-line active"></div>
     </div>
     <div class="step">
-        <div class="num">4</div>
-        <div class="text">ordered</div>
-        <div class="nested-line"></div>
+        <div class="num" [class.active]="!stepIsOrdering">4</div>
+        <div class="text" [class.activeText]="!stepIsOrdering">ordered</div>
+        <div class="nested-line" [class.active]="!stepIsOrdering"></div>
+        <div class="last-nested-line active" *ngIf="!stepIsOrdering"></div>
     </div>
 </div>
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-2 pull-left">
-            <button class="btn btn-lg full-width">Go back</button>
-        </div>
-        <div class="col-md-3 pull-right">
-            <button class="btn btn-danger btn-lg full-width" (click)="order()">Order and pay</button>
-        </div>
-    </div>
-    <div class="row margin-20 ">
-        <div class="col-md-3">
-            <div class="box">
-                <h4>Execution of the order</h4>
-                <div style="margin-top: 10px">Delivery:</div>
-                <div>
-                    <b>{{deliveryMethod}}</b>
-                </div>
-                <div style="margin-top: 10px">Form of payment:</div>
-                <div>
-                    <b>{{paymentForm}}</b>
-                </div>
-                <div>
-                    <button class="btn pull-right">Change</button>
-                </div>
-                <div style="clear:both;"></div>
+<ng-container *ngIf="stepIsOrdering">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2 pull-left">
+                <button class="btn btn-lg full-width">Go back</button>
+            </div>
+            <div class="col-md-3 pull-right">
+                <button class="btn btn-danger btn-lg full-width" (click)="order()">Order and pay</button>
             </div>
         </div>
-        <div class="col-md-6">
-            <div class="box">
-                <div class="row">
-                    <div class="col-md-6">
-                        <h4>Billing information</h4>
-                        <div *ngIf="address.type == 'personal'">
-                            <div>{{address.firstName}} {{address.lastName}}</div>
-                            <div>{{address.street}} {{address.houseNumber}}</div>
-                            <div>{{address.zipCode}} {{address.city}}</div>
-                            <div>{{address.phoneNumber}}</div>
+        <div class="row margin-20 ">
+            <div class="col-md-3">
+                <div class="box">
+                    <h4>Execution of the order</h4>
+                    <div style="margin-top: 10px">Delivery:</div>
+                    <div>
+                        <b>{{deliveryMethod}}</b>
+                    </div>
+                    <div style="margin-top: 10px">Form of payment:</div>
+                    <div>
+                        <b>{{paymentForm}}</b>
+                    </div>
+                    <div>
+                        <button class="btn pull-right">Change</button>
+                    </div>
+                    <div style="clear:both;"></div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="box">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>Billing information</h4>
+                            <div *ngIf="address.type == 'personal'">
+                                <div>{{address.firstName}} {{address.lastName}}</div>
+                                <div>{{address.street}} {{address.houseNumber}}</div>
+                                <div>{{address.zipCode}} {{address.city}}</div>
+                                <div>{{address.phoneNumber}}</div>
+                            </div>
+                            <div *ngIf="address.type == 'company'">
+                                <div>{{address.names}}</div>
+                                <div>{{address.nip}}</div>
+                                <div>{{address.street}} {{address.houseNumber}}</div>
+                                <div>{{address.zipCode}} {{address.city}}</div>
+                                <div>{{address.phoneNumber}}</div>
+                            </div>
                         </div>
-                        <div *ngIf="address.type == 'company'">
-                            <div>{{address.names}}</div>
-                            <div>{{address.nip}}</div>
-                            <div>{{address.street}} {{address.houseNumber}}</div>
-                            <div>{{address.zipCode}} {{address.city}}</div>
-                            <div>{{address.phoneNumber}}</div>
+                        <div class="col-md-6">
+                            <h4>Delivery address</h4>
+                            <div *ngIf="address.type == 'personal'">
+                                <div>{{address.firstName}} {{address.lastName}}</div>
+                                <div>{{address.street}} {{address.houseNumber}}</div>
+                                <div>{{address.zipCode}} {{address.city}}</div>
+                                <div>{{address.phoneNumber}}</div>
+                            </div>
+                            <div *ngIf="address.type == 'company'">
+                                <div>{{address.street}} {{address.houseNumber}}</div>
+                                <div>{{address.zipCode}} {{address.city}}</div>
+                                <div>{{address.phoneNumber}}</div>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <h4>Delivery address</h4>
-                        <div *ngIf="address.type == 'personal'">
-                            <div>{{address.firstName}} {{address.lastName}}</div>
-                            <div>{{address.street}} {{address.houseNumber}}</div>
-                            <div>{{address.zipCode}} {{address.city}}</div>
-                            <div>{{address.phoneNumber}}</div>
-                        </div>
-                        <div *ngIf="address.type == 'company'">
-                            <div>{{address.street}} {{address.houseNumber}}</div>
-                            <div>{{address.zipCode}} {{address.city}}</div>
-                            <div>{{address.phoneNumber}}</div>
-                        </div>
+                    <div style="margin-top: 20px">
+                        <button class="btn pull-right">Change</button>
                     </div>
+                    <div style="clear:both;"></div>
                 </div>
-                <div style="margin-top: 20px">
-                    <button class="btn pull-right">Change</button>
-                </div>
-                <div style="clear:both;"></div>
+            </div>
+            <div class="col-md-3">
+                <!-- <div class="box"> -->
+                <h4>Message to the seller:</h4>
+                <textarea style="margin-top: 10px; width: 100%" class="form-control"></textarea>
+                <!-- </div> -->
             </div>
         </div>
-        <div class="col-md-3">
-            <!-- <div class="box"> -->
-            <h4>Message to the seller:</h4>
-            <textarea style="margin-top: 10px; width: 100%" class="form-control"></textarea>
-            <!-- </div> -->
+        <div class="row margin-40">
+            <h4>Products</h4>
+            <table class="table orders">
+                <thead>
+                    <tr>
+                        <td class="col-md-6">&nbsp;</td>
+                        <td class="col-md-2">Amount</td>
+                        <td class="col-md-2">Price</td>
+                        <td class="col-md-2">Sum</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let product of products; let i=index">
+                        <td class="col-md-6">
+                            <a routerLink="{{product.url}}">{{product.data.name}}</a>
+                        </td>
+                        <td class="col-md-2">
+                            <span>{{product.itemOrder.amount}}</span>
+                        </td>
+                        <td class="col-md-2">
+                            <span>{{product.data.price | number:'.2':'fr'}} PLN</span>
+                        </td>
+                        <td class="col-md-2">
+                            <span style="font-weight:bold">{{product.data.price * product.itemOrder.amount | number:'.2':'fr'}} PLN</span>
+                        </td>
+                    </tr>
+                    <tr *ngIf="deliveryMethod == 'Courier'">
+                        <td class="col-md-6">Execution of the contract: courier service</td>
+                        <td class="col-md-2">1</td>
+                        <td class="col-md-2">{{paymentCost | number:'.2':'fr'}} PLN</td>
+                        <td class="col-md-2" style="font-weight:bold">{{paymentCost | number:'.2':'fr'}} PLN</td>
+                    </tr>
+                </tbody>
+            </table>
+            <span class="pull-right" style="font-size: 20px; ">Total amount payable: {{totalCost | number:'.2':'fr'}} PLN</span>
+        </div>
+        <div class="row margin-20">
+            <div class="col-md-2 pull-left">
+                <button class="btn btn-lg full-width">Go back</button>
+            </div>
+            <div class="col-md-3 pull-right">
+                <button class="btn btn-danger btn-lg full-width" (click)="order()">Order and pay</button>
+            </div>
         </div>
     </div>
-    <div class="row margin-40">
-        <h4>Products</h4>
-        <table class="table orders">
-            <thead>
-                <tr>
-                    <td class="col-md-6">&nbsp;</td>
-                    <td class="col-md-2">Amount</td>
-                    <td class="col-md-2">Price</td>
-                    <td class="col-md-2">Sum</td>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let product of products; let i=index">
-                    <td class="col-md-6">
-                        <a routerLink="{{product.url}}">{{product.data.name}}</a>
-                    </td>
-                    <td class="col-md-2">
-                        <span>{{product.itemOrder.amount}}</span>
-                    </td>
-                    <td class="col-md-2">
-                        <span>{{product.data.price | number:'.2':'fr'}} PLN</span>
-                    </td>
-                    <td class="col-md-2">
-                        <span style="font-weight:bold">{{product.data.price * product.itemOrder.amount | number:'.2':'fr'}} PLN</span>
-                    </td>
-                </tr>
-                <tr *ngIf="deliveryMethod == 'Courier'">
-                    <td class="col-md-6">Execution of the contract: courier service</td>
-                    <td class="col-md-2">1</td>
-                    <td class="col-md-2">{{paymentCost | number:'.2':'fr'}} PLN</td>
-                    <td class="col-md-2" style="font-weight:bold">{{paymentCost | number:'.2':'fr'}} PLN</td>
-                </tr>
-            </tbody>
-        </table>
-        <span class="pull-right" style="font-size: 20px; ">Total amount payable: {{totalCost | number:'.2':'fr'}} PLN</span>
+</ng-container>
+
+<ng-container *ngIf="!stepIsOrdering && orderMade != null">
+    <div class="container">
+        <h3>Thank you for your order.</h3>
+        <p style="font-size:20px">We have started realization of your order number: {{orderMade.id}}<br>You can check status of your orders at your <a routerLink="/profile/orders">orders page</a>.</p>
     </div>
-    <div class="row margin-20">
-        <div class="col-md-2 pull-left">
-            <button class="btn btn-lg full-width">Go back</button>
-        </div>
-        <div class="col-md-3 pull-right">
-            <button class="btn btn-danger btn-lg full-width" (click)="order()">Order and pay</button>
-        </div>
-    </div>
-</div>
+</ng-container>

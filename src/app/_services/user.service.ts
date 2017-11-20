@@ -28,7 +28,7 @@ export class UserService {
             this.http.get<ResponseDetails<Array<any>>>(this.globals.backendUrl+'users/'+userid+'/addresses',
             {observe: 'response'}).subscribe(r => {
                 resolve(r.body);
-                // console.log('[UserService::getAddresses] ' + JSON.stringify(r.body)); 
+                 console.log('[UserService::getAddresses] ' + JSON.stringify(r.body)); 
             });
         });
         // return null;

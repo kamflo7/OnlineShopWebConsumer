@@ -17,6 +17,10 @@ export class AuthenticationService {
 
     constructor(private http:HttpClient, private globals:Globals) {}
 
+    getToken() {
+        return localStorage.getItem("token");
+    }
+
     isUserAuthenticated():boolean {
         var jwt:JwtHelper = new JwtHelper();
 		var token = localStorage.getItem("token");

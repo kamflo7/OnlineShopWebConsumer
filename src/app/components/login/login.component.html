@@ -4,65 +4,65 @@
 
             <!-- COL LOGIN  -->
             <div class="col-md-6 bg">
-                <h2>Zaloguj się</h2>
+                <h2>Sign in</h2>
                 <form (ngSubmit)="doLogin()">
                     <div class="line-margin">
-                        <label for="email">adres e-mail:</label>
+                        <label for="email">e-mail:</label>
                         <input type="email" id="email" name="email" class="form-control" [(ngModel)]="login.email" required minlength="4" #name="ngModel" />
                         <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
-                            <div *ngIf="name.errors.required">E-mail jest wymagany.</div>
-                            <div *ngIf="name.errors.minlength">Niepoprawny e-mail.</div>
+                            <div *ngIf="name.errors.required">E-mail is required.</div>
+                            <div *ngIf="name.errors.minlength">Incorrect e-mail.</div>
                         </div>
                     </div>
                     <div class="line-margin">
-                        <label for="password">hasło:</label>
+                        <label for="password">password:</label>
                         <input type="password" id="password" name="password" class="form-control" [(ngModel)]="login.password" required #password="ngModel" />
                         <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
-                            <div *ngIf="password.errors.required">Hasło jest wymagane.</div>
+                            <div *ngIf="password.errors.required">Password is required.</div>
                         </div>
                     </div>
-                    <button type="submit" class="line-margin btn btn-success btn-block btn-lg">Zaloguj się</button>
+                    <button type="submit" class="line-margin btn btn-success btn-block btn-lg">Sign in</button>
                 </form>
             </div>
 
             <!-- COL REGISTER  -->
             <div class="col-md-6 bg">
-                <h2>Utwórz konto</h2>
+                <h2>Sign up</h2>
                 <form (ngSubmit)="doRegister()">
                     <div class="line-margin">
-                        <label for="emailR">adres e-mail:</label>
+                        <label for="emailR">e-mail:</label>
                         <input type="email" id="emailR" name="emailR" class="form-control" [(ngModel)]="register.email" required minlength="4" email #emailR="ngModel"/>
                         <div *ngIf="emailR.invalid && (emailR.dirty || emailR.touched)" class="alert alert-danger">
-                            <div *ngIf="emailR.errors.required">E-mail jest wymagany.</div>
-                            <div *ngIf="(emailR.errors.minlength || emailR.errors.email) && !emailR.errors.required">Niepoprawny e-mail.</div>
+                            <div *ngIf="emailR.errors.required">E-mail is required.</div>
+                            <div *ngIf="(emailR.errors.minlength || emailR.errors.email) && !emailR.errors.required">Incorrect e-mail.</div>
                         </div>
                     </div>
                     <div class="line-margin">
-                        <label for="emailAgainR">powtórz e-mail:</label>
+                        <label for="emailAgainR">repeat e-mail:</label>
                         <input type="email" id="emailAgainR" name="emailAgainR" class="form-control" [(ngModel)]="register.email2" required minlength="4" #emailAgainR="ngModel" />
                         <div *ngIf="emailAgainR.invalid && (emailAgainR.dirty || emailAgainR.touched)" class="alert alert-danger">
-                            <div *ngIf="emailAgainR.errors.required">E-mail jest wymagany.</div>
-                            <div *ngIf="emailAgainR.errors.minlength">Niepoprawny e-mail.</div>
+                            <div *ngIf="emailAgainR.errors.required">E-mail is required.</div>
+                            <div *ngIf="emailAgainR.errors.minlength">Incorrect e-mail.</div>
                         </div>
-                        <div *ngIf="!emailAgainR.invalid && emailAgainR.value != emailR.value" class="alert alert-danger">Podany e-mail się różni.</div>
+                        <div *ngIf="!emailAgainR.invalid && emailAgainR.value != emailR.value" class="alert alert-danger">Given e-mails are different.</div>
                     </div>
                     <div class="line-margin">
-                        <label for="passwordR">hasło:</label>
+                        <label for="passwordR">password:</label>
                         <input type="password" id="passwordR" name="passwordR" class="form-control" [(ngModel)]="register.password" required minlength="5" #passwordR="ngModel" />
                         <div *ngIf="passwordR.invalid && (passwordR.dirty || passwordR.touched)" class="alert alert-danger">
-                            <div *ngIf="passwordR.errors.required">Hasło jest wymagane.</div>
-                            <div *ngIf="passwordR.errors.minlength">Hasło musi posiadać conajmniej 5 znaków.</div>
+                            <div *ngIf="passwordR.errors.required">Password is required.</div>
+                            <div *ngIf="passwordR.errors.minlength">Password must be at least 5 characters.</div>
                         </div>
                     </div>
                     <div class="line-margin">
-                        <label for="passwordAgainR">powtórz hasło:</label>
+                        <label for="passwordAgainR">repeat password</label>
                         <input type="password" id="passwordAgainR" name="passwordAgainR" class="form-control" [(ngModel)]="register.password2" required #passwordAgainR="ngModel" />
                         <div *ngIf="passwordAgainR.invalid && (passwordAgainR.dirty || passwordAgainR.touched)" class="alert alert-danger">
-                                <div *ngIf="passwordAgainR.errors.required">Wymagane jest powtórzenie hasła.</div>
+                                <div *ngIf="passwordAgainR.errors.required">You have to repeat password.</div>
                         </div>
-                        <div *ngIf="passwordAgainR.value != passwordR.value && (passwordAgainR.dirty || passwordAgainR.touched)" class="alert alert-danger">Powtórzone hasło jest różne.</div>
+                        <div *ngIf="passwordAgainR.value != passwordR.value && (passwordAgainR.dirty || passwordAgainR.touched)" class="alert alert-danger">Given passwords are different.</div>
                     </div>
-                    <button type="submit" class="line-margin btn btn-primary btn-block btn-lg">Utwórz konto</button>
+                    <button type="submit" class="line-margin btn btn-primary btn-block btn-lg">Sign up</button>
                 </form>
             </div>
         </div>

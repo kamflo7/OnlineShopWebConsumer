@@ -7,13 +7,21 @@
             <ng-container *ngIf="categoryLogic">
                 <ng-container *ngFor="let fd of filterableDefinitions; let i=index">
                     <mat-form-field class="example-full-width">
-                        <mat-select placeholder="{{fd.def.name}}" [multiple]="fd.def.multipleValues" [(ngModel)]="filterableDefinitions[i].valuesNgModel" name="{{fd.def.name}}">
+                        <mat-select placeholder="{{fd.def.name}}" [multiple]="fd.def.multipleValues" [(ngModel)]="filterableDefinitions[i].valuesNgModel"
+                            name="{{fd.def.name}}">
                             <mat-option *ngFor="let featureValue of fd.values" [value]="featureValue.id">
                                 {{featureValue.value}}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
                 </ng-container>
+                <!-- price filter: -->
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Min price" type="number" [(ngModel)]="selectedLowestPrice" name="pricemin">
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Max price" type="number" [(ngModel)]="selectedHighestPrice" name="pricemax">
+                </mat-form-field>
             </ng-container>
             <div>
                 <button class="btn btn-primary" style="width: 200px" (click)="doFilter()">Filter</button>

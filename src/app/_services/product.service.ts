@@ -91,6 +91,14 @@ export class ProductService {
                 });
         });
     }
+
+    getPriceRange(categoryID:number):Promise<ResponseDetails<any>> {
+        return new Promise(resolve => {
+            this.http.get<ResponseDetails<any>>(this.globals.backendUrl+'/categories/'+categoryID+'/products/price-range', {observe: 'response'}).subscribe(r => {
+                resolve(r.body);
+            });
+        });
+    }
 // FEATURE GROUPS
     createFeatureGroup(categoryid:number, name:string):Promise<ResponseDetails<CategoryLogic>> {
         return new Promise(resolve => {

@@ -24,7 +24,7 @@ export class CategoryComponent implements OnInit {
   }
 
   currentURL: string;
-  currentURLFilterParams:string;
+  currentURLFilterParams: string;
   categoryViewID: number;
 
   navigationItems: NavigationItem[];
@@ -32,8 +32,14 @@ export class CategoryComponent implements OnInit {
   categoryLogic: CategoryLogic;
   filterableDefinitions = []; // {def, values, valuesNgModel}
 
-  products:Product[] = [];
-  sort:string;
+  products: Product[] = [];
+  sort: string;
+
+  lowestPrice: number;
+  highestPrice: number;
+
+  selectedLowestPrice: number;
+  selectedHighestPrice: number;
 
   ngOnInit(): void {
     document.title = "Kategoria";
@@ -88,7 +94,21 @@ export class CategoryComponent implements OnInit {
           }
         }
 
+        this.getPriceRange();
         this.getProducts();
+      }
+    });
+  }
+
+  getPriceRange() {
+    this.productService.getPriceRange(this.categoryLogic.id).then(r => {
+      if (r.status == 'success') {
+        this.lowestPrice = Number(r.data['item1']);
+        this.highestPrice = Number(r.data['item2']);
+
+        this.selectedLowestPrice = this.selectedLowestPrice > 0 ? this.selectedLowestPrice : this.lowestPrice;
+        this.selectedHighestPrice = this.selectedHighestPrice > 0 ? this.selectedHighestPrice : this.highestPrice;
+        // console.log('[getPriceRange:] lowest: ' + this.lowestPrice + '; highest: ' + this.highestPrice);
       }
     });
   }
@@ -98,33 +118,44 @@ export class CategoryComponent implements OnInit {
       this.route.queryParams.subscribe(result => {
         if (result.f != null) {
           this.currentURLFilterParams = result.f;
-          let urlFilters: string[] = result.f.split(",");
+          let urlFilters: string[] = result.f.split(","); // %d-%d,%d-%d.%d.%d,prc-100.0_5000.0
           for (let i = 0; i < urlFilters.length; i++) { // iterate over URL filter segments
             let loopFilter = urlFilters[i];
 
             let eachFilter: string[] = loopFilter.split("-");
-            let filterDefID = Number(eachFilter[0]);
 
-            for (let j = 0; j < this.filterableDefinitions.length; j++) { // iterate over FilterableDefinitions
-              if (filterDefID == this.filterableDefinitions[j].def.id) {
-                let filterValues: string[] = eachFilter[1].split(".");
-                this.filterableDefinitions[j].valuesNgModel = [];
-                
-                for (let k = 0; k < filterValues.length; k++) {  // iterate over URL filter segment assigned values
-                  let valueID = Number(filterValues[k]);
-                  
-                  for (let h = 0; h < this.filterableDefinitions[j].values.length; h++) { // iterate over current FilterableDefinition's values
-                    if (valueID == this.filterableDefinitions[j].values[h].id) {
-                      this.filterableDefinitions[j].valuesNgModel.push(valueID);
+            if (eachFilter[0] == 'prc') {
+              let range:Array<string> = eachFilter[1].split("_");
+              if(range.length == 2) {
+                this.selectedLowestPrice = Number(range[0]);
+                this.selectedHighestPrice = Number(range[1]);
+                // console.log('[readURLFiltersAndAssignToNGModel:] lowest: ' + this.selectedLowestPrice + '; highest: ' + this.selectedHighestPrice);
+              }
+            } else {
+              let filterDefID = Number(eachFilter[0]);
+
+              for (let j = 0; j < this.filterableDefinitions.length; j++) { // iterate over FilterableDefinitions
+                if (filterDefID == this.filterableDefinitions[j].def.id) {
+                  let filterValues: string[] = eachFilter[1].split(".");
+                  this.filterableDefinitions[j].valuesNgModel = [];
+
+                  for (let k = 0; k < filterValues.length; k++) {  // iterate over URL filter segment assigned values
+                    let valueID = Number(filterValues[k]);
+
+                    for (let h = 0; h < this.filterableDefinitions[j].values.length; h++) { // iterate over current FilterableDefinition's values
+                      if (valueID == this.filterableDefinitions[j].values[h].id) {
+                        this.filterableDefinitions[j].valuesNgModel.push(valueID);
+                      }
                     }
                   }
                 }
               }
             }
+            // end for
           }
         }
 
-        if(result.s != null) {
+        if (result.s != null) {
           this.sort = (result.s == 'prc-asc' || result.s == 'prc-desc') ? result.s : null;
         }
         resolve(true);
@@ -146,6 +177,7 @@ export class CategoryComponent implements OnInit {
   doFilter() {
     let url = this.currentURL;
     let params = this.getFilterParamsQueryFromNGModel();
+    console.log('params: ' + params);
 
     this.router.navigate([url], { queryParams: { f: params } }).then(r => {
       this.getProducts();
@@ -166,7 +198,7 @@ export class CategoryComponent implements OnInit {
   doClearFilters() {
     let url = this.currentURL;
     this.router.navigate([url]).then(r => {
-      for(let i=0; i<this.filterableDefinitions.length; i++) {
+      for (let i = 0; i < this.filterableDefinitions.length; i++) {
         this.filterableDefinitions[i].valuesNgModel = [];
       }
 
@@ -182,7 +214,7 @@ export class CategoryComponent implements OnInit {
       let loopDef = this.filterableDefinitions[i];
 
       if (typeof loopDef.valuesNgModel === 'object') { // if selected filter values are ARRAY
-        if(loopDef.valuesNgModel.length == 0) continue;
+        if (loopDef.valuesNgModel.length == 0) continue;
         params += loopDef.def.id + "-";
         for (let j = 0, max = loopDef.valuesNgModel.length; j < max; j++) {
           params += loopDef.valuesNgModel[j] + (j != max - 1 ? '.' : '');

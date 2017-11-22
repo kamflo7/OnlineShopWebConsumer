@@ -4,6 +4,7 @@ import { NavigationItem } from '../../../_dto/navigation-item';
 import { ProductService } from '../../../_services/product.service';
 import { CategoryView } from '../../../_model/category-view';
 import { CategoryLogic } from '../../../_model/category-logic';
+import { NavigationConverter } from '../../../_services/navigation-converter.service';
 
 @Component({
   selector: 'dialog-create-edit-navigation',
@@ -25,13 +26,18 @@ export class DialogCreateEditNavigationComponent {
   selectedParentNavigation = -1;
   selectedCategoryLogic = -1;
 
-  navigations:Array<CategoryView> = [];
+  // navigations:Array<CategoryView> = [];
+  navigations:Array<NavigationItem> = [];
   categoryLogics:Array<CategoryLogic> = [];
 
   ngOnInit() {
     if(this.data.navigationItem != null) { // mode editing
       this.dialogTitle = "Edit navigation";
       this.modeEditing = true;
+
+      this.navigationName = this.data.navigationItem.name;
+      this.selectedCategoryLogic = this.data.navigationItem.categoryLogic != null ? this.data.navigationItem.categoryLogic.id : -1;
+      this.selectedParentNavigation = this.data.navigationItem.parentid > 0 ? this.data.navigationItem.parentid : -1;
     } else {
       this.modeEditing = false;
       this.dialogTitle = "Create a navigation";
@@ -60,19 +66,21 @@ export class DialogCreateEditNavigationComponent {
   requestNavigationData() {
     this.productService.getCategoryViews().then(r => {
       if(r.status == 'success') {
-        this.navigations = r.data;
+        let nv:NavigationConverter = new NavigationConverter();
+        this.navigations = nv.convertToChildrenStructure(r.data);
       }
     });
   }
 
   onCloseConfirm() {
     if(!this.modeEditing) {
-      // console.log("{Trying to send:] name: " + this.navigationName + '; parent: ' + this.selectedParentNavigation + '; categoryLogic: ' + this.selectedCategoryLogic);
       this.productService.createCategoryView(this.navigationName, this.selectedParentNavigation, this.selectedCategoryLogic).then(r => {
         this.dialogRef.close({success: true});
       });
     } else {
-
+      this.productService.updateCategoryView(this.data.navigationItem.id, this.navigationName, this.selectedParentNavigation, this.selectedCategoryLogic).then(r => {
+        this.dialogRef.close({success: true});
+      });
     }
   }
 

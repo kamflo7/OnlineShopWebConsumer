@@ -187,6 +187,7 @@ export class NavigationConverter {
     }
 
     convertCategoryViewToLocalDTO(categoryView: CategoryView, level:number): NavigationItem {
+        
         let result = new NavigationItem();
         result.id = categoryView.id;
         result.name = categoryView.name;

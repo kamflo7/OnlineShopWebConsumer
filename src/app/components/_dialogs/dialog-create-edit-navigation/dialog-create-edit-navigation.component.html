@@ -1,3 +1,48 @@
+<!-- <div>
+    <h4 md-dialog-title>{{dialogTitle}}</h4>
+    <hr>
+    <md-dialog-content>
+        <form>
+            <div class="form-group">
+                <label for="categoryName">Item name:</label>
+                <input type="text" id="navigationName" class="form-control" [(ngModel)]="navigationName" name="navigationName" ngModel required
+                    minlength="3" #navigation="ngModel" />
+                <div class="alert alert-danger" *ngIf="navigation.touched && !navigation.valid">
+                    <div *ngIf="navigation.errors.required">Navigation name is required.</div>
+                    <div *ngIf="navigation.errors.minlength">Navigation name should be minimum {{navigation.errors.minlength.requiredLength}} characters.</div>
+                </div>
+                <mat-form-field *ngIf="navigations.length > 0" class="full-width">
+                    <mat-select placeholder="Navigation parent" [(ngModel)]="selectedParentNavigation" name="category" (change)="navigationParent_Change()">
+                        <mat-option value="-1">
+                            [Null]
+                        </mat-option>
+                        <ng-container *ngFor="let nav of navigations">
+                            <mat-option [value]="nav.id">
+                                {{nav.name}}
+                            </mat-option>
+                        </ng-container>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field *ngIf="categoryLogics.length > 0" class="full-width">
+                    <mat-select placeholder="CategoryLogic" [(ngModel)]="selectedCategoryLogic" name="categoryLogic" (change)="categoryLogic_Change()">
+                        <mat-option value="-1">
+                            [Null]
+                        </mat-option>
+                        <mat-option *ngFor="let category of categoryLogics" [value]="category.id">
+                            {{category.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </form>
+    </md-dialog-content>
+    <hr>
+    <md-dialog-actions>
+        <button md-raised-button (click)="onCloseConfirm()">Confirm</button>
+        <button md-raised-button (click)="onCloseCancel()">Cancel</button>
+    </md-dialog-actions>
+</div> -->
+
 <div>
     <h4 md-dialog-title>{{dialogTitle}}</h4>
     <hr>
@@ -16,9 +61,19 @@
                         <mat-option value="-1">
                             [Null]
                         </mat-option>
-                        <mat-option *ngFor="let nav of navigations" [value]="nav.id">
-                            {{nav.name}}
-                        </mat-option>
+                        <ng-container *ngFor="let nav of navigations">
+                            <mat-option [value]="nav.id">
+                                {{nav.name}}
+                            </mat-option>
+                            <mat-option *ngFor="let subNav of nav.children" [value]="subNav.id">
+                                &rarr; {{subNav.name}}
+                            </mat-option>
+                        </ng-container>
+                        <!-- <ng-container *ngFor="let nav of navigations">
+                                <mat-option [value]="nav.id">
+                                    {{nav.name}}
+                                </mat-option>
+                            </ng-container> -->
                     </mat-select>
                 </mat-form-field>
                 <mat-form-field *ngIf="categoryLogics.length > 0" class="full-width">

@@ -71,6 +71,19 @@ export class ProductService {
         });
     }
 
+    updateCategoryView(navigationID:number, name:string, parentID:number, categoryLogicID:number):Promise<ResponseDetails<CategoryView>> {
+        let params = '';
+        if(parentID != -1) params += '&parentID='+parentID;
+        if(categoryLogicID != -1) params += '&categoryLogicID='+categoryLogicID;
+
+        return new Promise(resolve => {
+            this.http.post<ResponseDetails<CategoryView>>(this.globals.backendUrl+'navigations/'+navigationID+'/?name='+name+params, null,
+            {observe: 'response'}).subscribe(r => {
+                resolve(r.body);
+            });
+        });
+    }
+
 // CATEGORIES
     getCategories():Promise<ResponseDetails<Array<CategoryLogic>>> {
         return new Promise(resolve => {

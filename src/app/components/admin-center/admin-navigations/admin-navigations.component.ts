@@ -11,6 +11,7 @@ import { NavigationConverter } from '../../../_services/navigation-converter.ser
 import { NavigationItem } from '../../../_dto/navigation-item';
 import { DialogCreateEditNavigationComponent } from '../../_dialogs/dialog-create-edit-navigation/dialog-create-edit-navigation.component';
 import { CreateEditNavigationDTO } from '../../_dialogs/dialog-create-edit-navigation/dialog-create-edit-navigation.component';
+import { LoginComponent } from '../../login/login.component';
 
 @Component({
     selector: 'app-admin-navigations',
@@ -24,7 +25,7 @@ export class AdminNavigationsComponent implements OnInit {
         private productService: ProductService,
         public dialog: MatDialog
     ) {
-        //   DialogCreateEditNavigationComponent
+
     }
 
     categories: Array<NavigationItem> = [];
@@ -65,24 +66,50 @@ export class AdminNavigationsComponent implements OnInit {
         });
     }
 
-    openDialog(): void {
-        // let dialogRef = this.dialog.open(DialogCreateCategoryComponent, {
-        //     width: '300px',
-        //     data: <CreateEditNavigationDTO>{
-        //         navigationItem
-        //     }
-        //   });
+    editNavigation(id) {
+        console.log("edit navigation leci " + id);
 
-        //   dialogRef.afterClosed().subscribe(result => {
-        //     if(result.success) {
-        //         this.productService.createCategory(result.data).then(r => {
-        //             if(r.status == 'success') {
-        //                 this.loadCategories();
-        //             } else {
-        //                 alert("There was a problem with creating the category")
-        //             }
-        //         });
-        //     }
-        //   });
+        let nav:NavigationItem;
+
+        for(let i=0; i<this.categories.length; i++) {
+            if(this.categories[i].id == id) {
+                nav = this.categories[i];
+                break;
+            } else {
+                for(let j=0; j<this.categories[i].children.length; j++) {
+                    if(this.categories[i].children[j].id == id) {
+                        nav = this.categories[i].children[j];
+                        break;
+                    } else {
+                        for(let k=0; k<this.categories[i].children[j].children.length; k++) {
+                            if(this.categories[i].children[j].children[k].id == id) {
+                                nav = this.categories[i].children[j].children[k];
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        if(nav == null) {
+            alert("Fatal error, cannot edit");
+            return;
+        }
+
+        console.log(nav);
+
+        let dialogRef = this.dialog.open(DialogCreateEditNavigationComponent, {
+            width: '400px',
+            data: <CreateEditNavigationDTO>{
+                navigationItem: nav
+            }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            if(result.success) {
+                this.loadCategories();
+            }
+        });
     }
 }

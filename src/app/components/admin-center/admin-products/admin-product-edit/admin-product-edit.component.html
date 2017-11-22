@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container"> -->
   <div class="row">
     <div class="col-xs-6">
       <h3>{{staticTitle}}</h3>
@@ -8,47 +8,53 @@
     </div>
   </div>
 
-  <div class="row bgcontainer">
+  <div class="row admin-bg" style="padding-top: 20px">
     <form class="example-form" *ngIf="productDTO">
-      <!-- BASIC FIELDS -->
-      <mat-form-field class="example-full-width">
-        <input matInput placeholder="Name" [(ngModel)]="productDTO.name" name="name">
-      </mat-form-field>
-      <mat-form-field class="example-full-width">
-        <input matInput placeholder="Price" type="number" [(ngModel)]="productDTO.price" name="price">
-      </mat-form-field>
-      <mat-form-field class="example-full-width">
-        <input matInput placeholder="Amount" type="number" [(ngModel)]="productDTO.amount" name="amount">
-      </mat-form-field>
-      <mat-form-field class="example-full-width">
-        <textarea matInput placeholder="Description" type="text" style="min-height: 50px" [(ngModel)]="productDTO.description" name="description"></textarea>
-      </mat-form-field>
-      <!-- CATEGORY PICKER IF CREATE MODE -->
-      <mat-form-field *ngIf="mode == 1 && categories" class="example-full-width">
-        <mat-select placeholder="CategoryLogic" [(ngModel)]="category" name="category" (change)="categoryLogic_Change()">
-          <mat-option *ngFor="let cat of categories" [value]="cat.id">
-            {{cat.name}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <!-- FEATURES  -->
-      <ng-container *ngIf="categoryLogic && features">
-        <ng-container *ngFor="let def of features; let i=index">
-          <mat-form-field class="example-full-width">
-            <mat-select placeholder="{{def.featureDefName}}" [multiple]="def.multipleValues" [(ngModel)]="features[i].checked" name="{{def.featureDefName}}">
-              <mat-option *ngFor="let featureValue of def.values" [value]="featureValue.id">
-                {{featureValue.name}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </ng-container>
-      </ng-container>
-      <label for="filePicker">Choose or drag a file:</label>
-      <input type="file" id="filePicker" (change)="handleFileSelect($event)">
-      <div style="width: 330px">
-          <img src="{{base64textString}}" alt="Image" class="img-thumbnail" *ngIf="base64textString">
+      <div class="col-md-6">
+        <!-- BASIC FIELDS -->
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Name" [(ngModel)]="productDTO.name" name="name">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Price" type="number" [(ngModel)]="productDTO.price" name="price">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Amount" type="number" [(ngModel)]="productDTO.amount" name="amount">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <textarea matInput placeholder="Description" type="text" style="min-height: 50px" [(ngModel)]="productDTO.description" name="description"></textarea>
+        </mat-form-field>
+        <!-- CATEGORY PICKER IF CREATE MODE -->
+        <mat-form-field *ngIf="mode == 1 && categories" class="example-full-width">
+          <mat-select placeholder="CategoryLogic" [(ngModel)]="category" name="category" (change)="categoryLogic_Change()">
+            <mat-option *ngFor="let cat of categories" [value]="cat.id">
+              {{cat.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <label for="filePicker">Choose or drag a file:</label>
+        <input type="file" id="filePicker" (change)="handleFileSelect($event)">
+        <div style="width: 330px">
+            <img src="{{base64textString}}" alt="Image" class="img-thumbnail" *ngIf="base64textString">
+        </div>
+        
+        <div style="margin-top: 10px;"><button mat-raised-button color="primary" (click)="submit_Click()">{{staticTitle}}</button></div>
       </div>
-      
-      <div style="margin-top: 10px;"><button mat-raised-button color="primary" (click)="submit_Click()">{{staticTitle}}</button></div>
+      <div class="col-md-6">
+        <ng-container *ngIf="categoryLogic && features">
+          <ng-container *ngFor="let def of features; let i=index">
+            <mat-form-field class="example-full-width">
+              <mat-select placeholder="{{def.featureDefName}}" [multiple]="def.multipleValues" [(ngModel)]="features[i].checked" name="{{def.featureDefName}}">
+                <mat-option *ngFor="let featureValue of def.values" [value]="featureValue.id">
+                  {{featureValue.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </ng-container>
+        </ng-container>
+      </div>
+      <!-- FEATURES  -->
+
+
     </form>
-  </div>
+  <!-- </div> -->

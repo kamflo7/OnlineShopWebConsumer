@@ -54,6 +54,7 @@ import { DialogCreateEditAddressComponent } from './components/_dialogs/dialog-c
 import { UserService } from './_services/user.service';
 import { ShoppingCartConfirmationComponent } from './components/shopping-cart-confirmation/shopping-cart-confirmation.component';
 import { ProfileOrderDetailsComponent } from './components/profile-center/profile-order-details/profile-order-details.component';
+import { DialogCreateEditNavigationComponent } from './components/_dialogs/dialog-create-edit-navigation/dialog-create-edit-navigation.component';
 
 @NgModule({
   declarations: [
@@ -75,7 +76,7 @@ import { ProfileOrderDetailsComponent } from './components/profile-center/profil
       AdminNavigationsComponent, AdminNavigationEditComponent,
     FormAdminProductEdit, FormAdminCategoryLogicComponent,
 // dialogs
-    DialogCreateCategoryComponent, DialogCreateFeatureGroupComponent, DialogCreateEditFeatureDefinition, DialogCreateEditAddressComponent,
+    DialogCreateCategoryComponent, DialogCreateFeatureGroupComponent, DialogCreateEditFeatureDefinition, DialogCreateEditAddressComponent, DialogCreateEditNavigationComponent,
 // other things
     DynamicInputTextComponent, ItemListProductComponent, ProfileChangeInformationsComponent, ProfileChangeEmailComponent, ProfileChangeAddressesComponent, ProfileOrdersComponent, ProfileReportProductComponent, ProfileActiveSubmissionsComponent, ProfileClosedSubmissionsComponent, ProfileAskQuestionComponent, ProfileActiveQuestionsComponent, ProfileClosedQuestionsComponent, ProfileOffersComponent,
   ],
@@ -90,7 +91,7 @@ import { ProfileOrderDetailsComponent } from './components/profile-center/profil
   ],
   entryComponents: [
     DialogCreateCategoryComponent, DialogCreateFeatureGroupComponent, DialogCreateEditFeatureDefinition,
-    DialogCreateEditAddressComponent
+    DialogCreateEditAddressComponent, DialogCreateEditNavigationComponent
   ],
   exports: [
 

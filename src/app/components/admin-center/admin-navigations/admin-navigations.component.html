@@ -1,35 +1,101 @@
-<div class="container">
-    <div class="row">
-        <div class="col-xs-6">
-            <h3>Navigations (to do)</h3>
+<div class="row">
+    <div class="col-xs-8">
+        <h3>Site navigation</h3>
+        <p>Here you can create site navigation hierarchy and assign appropriate logical categories to them.</p>
+    </div>
+</div>
+<hr style="margin-top: 5px">
+
+<div class="row margin-20">
+    <div class="col-md-6 flex-start">
+        <button class="btn btn-primary btn-md" (click)="createNavigation()">Create</button>
+        <button class="btn btn-primary btn-md" data-toggle="collapse" data-target=".collapsable" (click)="toggleCollapsation()">{{btnCollapseText}}</button>
+    </div>
+</div>
+
+<div class="row margin-20">
+    <div class="col-md-6">
+        <div class="list-group">
+            <ng-container *ngFor="let category of categories">
+                <!-- level 1 no children -->
+                <a *ngIf="category.children.length == 0" class="list-group-item list-group-item-success" routerLink="/admin/navigations/edit/{{category.id}}">
+                    {{category.name}}
+                </a>
+                <!-- level 1 WITH children -->
+                <a *ngIf="category.children.length > 0" class="list-group-item list-group-item-success" routerLink="/admin/navigations/edit/{{category.id}}">
+                    {{category.name}}
+                    <div class="list-group collapsable in">
+                        <ng-container *ngFor="let sub of category.children">
+                            <a *ngIf="sub.children.length == 0" class="list-group-item list-group-item-info" routerLink="/admin/navigations/edit/{{sub.id}}">
+                                {{sub.name}}
+                            </a>
+                            <a *ngIf="sub.children.length > 0" class="list-group-item list-group-item-info" routerLink="/admin/navigations/edit/{{sub.id}}">
+                                {{sub.name}}
+                                <div class="list-group collapsable in">
+                                    <a *ngFor="let sub2 of sub.children" class="list-group-item list-group-item-warning" routerLink="/admin/navigations/edit/{{sub2.id}}">
+                                        {{sub2.name}}
+                                    </a>
+                                </div>
+                            </a>
+                        </ng-container>
+                    </div>
+                </a>
+            </ng-container>
         </div>
     </div>
-    <!-- <div class="container">
-        <div class="row bgcontainer">
-            <div class="col-md-6">
-                <table class="table">
-                    <thead class="thead-inverse">
-                        <tr>
-                            <th>ID</th>
-                            <th colspan="2">Name</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let c of categories">
-                            <td>{{c.id}}</td>
-                            <td>{{c.name}}</td>
-                            <td><a [routerLink]="'edit/' + c.id">Edit</a></td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td colspan="2">
-                                <button class="btn btn-secondary btn-sm" mat-raised-button (click)="openDialog()">Create a category</button>
-                            </td>
-                        </tr>
-                    </tbody>
+</div>
 
-                </table>
-            </div>
-        </div> -->
-
+<!-- <div class="row margin-20">
+    <div class="col-md-6">
+        <div class="list-group">
+            <ng-container *ngFor="let category of categories">
+                <a *ngIf="category.children.length == 0" class="list-group-item list-group-item-success">
+                    <div class="flex-between">
+                        <div class="category-name">{{category.name}}</div>
+                        <div>
+                            <a routerLink="/admin/navigations/edit/{{category.id}}">Edit</a>
+                        </div>
+                    </div>
+                </a>
+                <a *ngIf="category.children.length > 0" class="list-group-item list-group-item-success">
+                    <div class="flex-between">
+                        <div class="category-name">{{category.name}}</div>
+                        <div>
+                            <a routerLink="/admin/navigations/edit/{{category.id}}">Edit</a>
+                        </div>
+                    </div>
+                    <div class="list-group collapsable in">
+                        <ng-container *ngFor="let sub of category.children">
+                            <a *ngIf="sub.children.length == 0" class="list-group-item list-group-item-info">
+                                <div class="flex-between">
+                                    <div class="category-name">{{sub.name}}</div>
+                                    <div>
+                                        <a routerLink="/admin/navigations/edit/{{sub.id}}">Edit</a>
+                                    </div>
+                                </div>
+                            </a>
+                            <a *ngIf="sub.children.length > 0" class="list-group-item list-group-item-info">
+                                <div class="flex-between">
+                                    <div class="category-name">{{sub.name}}</div>
+                                    <div>
+                                        <a routerLink="/admin/navigations/edit/{{sub.id}}">Edit</a>
+                                    </div>
+                                </div>
+                                <div class="list-group collapsable in">
+                                    <a *ngFor="let sub2 of sub.children" class="list-group-item list-group-item-warning">
+                                        <div class="flex-between">
+                                            <div class="category-name">{{sub2.name}}</div>
+                                            <div>
+                                                <a routerLink="/admin/navigations/edit/{{sub2.id}}">Edit</a>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </a>
+                        </ng-container>
+                    </div>
+                </a>
+            </ng-container>
+        </div>
     </div>
+</div> -->

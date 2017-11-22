@@ -1,3 +1,33 @@
-.row {
+h3 {
+    margin: 0;
+}
+
+.margin-20 {
     margin-top: 20px;
+}
+
+.list-group-item {
+    padding: 5px 10px !important;
+}
+
+.flex-between {
+    display: flex;
+    justify-content: space-between;
+}
+
+.flex-start {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.flex-start button:not(:first-child) {
+    margin-left: 5px;
+}
+
+.category-name {
+    font-weight: bold;
+}
+
+.list-group {
+    cursor: pointer;
 }

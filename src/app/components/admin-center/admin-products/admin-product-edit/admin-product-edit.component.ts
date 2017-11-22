@@ -84,7 +84,7 @@ export class AdminProductEditComponent implements OnInit {
         });
       } else {                      // else creating mode [two similar operations (same data) in one component]
         this.mode = 1;
-        this.staticTitle = "Create product";
+        this.staticTitle = "Create a product";
         this.productDTO = <ProductDTO>{};
         this.productDTO.features = <HashNumberOfListNumbers>{};
         this.loadCategories();

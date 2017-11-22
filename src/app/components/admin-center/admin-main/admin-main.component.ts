@@ -11,7 +11,8 @@ import { FeatureBag } from '../../../_model/feature-bag';
 
 @Component({
     selector: 'app-admin-main',
-    templateUrl: 'admin-main.component.html'
+    templateUrl: 'admin-main.component.html',
+    styleUrls: ['admin-main.component.css']
   })
 export class AdminMainComponent implements OnInit {
     constructor(private auth:AuthenticationService,

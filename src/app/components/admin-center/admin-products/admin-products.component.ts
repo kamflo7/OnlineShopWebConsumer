@@ -6,53 +6,57 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material'
 import { Observable } from 'rxjs/Observable';
 import { CategoryLogic } from '../../../_model/category-logic';
 import { DialogCreateCategoryComponent } from '../../_dialogs/dialog-create-category/dialog-create-category.component';
+import { HttpResponse } from '@angular/common/http';
+import { Product } from '../../../_model/product';
+import { ResponseDetails } from '../../../_model/response-details';
 
 @Component({
     selector: 'app-admin-products',
     templateUrl: 'admin-products.component.html',
     styleUrls: ['admin-products.component.css']
-  })
+})
 export class AdminProductsComponent implements OnInit {
-    constructor(private auth:AuthenticationService,
-        private router:Router,
+    constructor(private auth: AuthenticationService,
+        private router: Router,
         private route: ActivatedRoute,
-        private productService:ProductService,
+        private productService: ProductService,
         public dialog: MatDialog
-      ) {
-          
-      }
+    ) {
 
-    // categories:CategoryLogic[];
-
-	ngOnInit(): void {
-            // this.loadCategories();
     }
 
-    loadCategories():void {
-        // this.productService.getCategories().then(r => {
-        //     if(r.status == 'success') {
-        //         this.categories = r.data;
-        //     }
-        // });
+    searchValue: string;
+    timerID = null;
+    products:Array<Product> = [];
+
+    ngOnInit(): void {
+
     }
 
-    // openDialog():void {
-    //     // this.router.navigate(["create"], {relativeTo: this.route});
-    //     let dialogRef = this.dialog.open(DialogCreateCategoryComponent, {
-    //         width: '300px',
-    //         // data: {  }
-    //       });
-      
-    //     dialogRef.afterClosed().subscribe(result => {
-    //     if(result.success) {
-    //         this.productService.createCategory(result.data).then(r => {
-    //             if(r.status == 'success') {
-    //                 this.loadCategories();
-    //             } else {
-    //                 alert("There was a problem with creating the category")
-    //             }
-    //         });
-    //     }
-    //     });
-    // }
+
+    createProduct() {
+        this.router.navigate(['admin/products/edit/createNew']);
+    }
+
+    change() {
+        if (this.timerID == null) {
+            this.createTimerForRequest();
+        } else {
+            clearTimeout(this.timerID);
+            this.createTimerForRequest();
+        }
+    }
+
+    createTimerForRequest() {
+        this.timerID = setTimeout(() => {
+            this.productService.findProductsByName(this.searchValue).subscribe(r => {
+                console.log('got');
+                if(r.body.status == 'success') {
+                    this.products = r.body.data;
+                    console.log(this.products);
+                }
+            });
+            this.timerID = null;
+        }, 750);
+    }
 }

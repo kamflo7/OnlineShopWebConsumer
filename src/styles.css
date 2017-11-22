@@ -39,5 +39,13 @@ body {
 }
 
 .admin-bg {
-    background-color: #e2e2e2;
+    background-color: #ececec;
+}
+
+.margin-20 {
+    margin-top: 20px;
+}
+
+.margin-40 {
+    margin-top: 40px;
 }

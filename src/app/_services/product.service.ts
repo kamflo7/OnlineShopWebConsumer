@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpRequest, HttpEvent, HttpEventType, HttpHeaderResponse } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpHeaders, HttpRequest, HttpEvent, HttpEventType, HttpHeaderResponse } from '@angular/common/http';
 import { RequestOptions, Response, Headers } from '@angular/http';
 import { Observable } from "rxjs/Observable";
 import 'rxjs/Rx';
@@ -32,6 +32,11 @@ export class ProductService {
         return this.globals.resourceImgsUrl + imageName;
     }
 
+    findProductsByName(name:string):Observable<HttpResponse<ResponseDetails<Array<Product>>>> { ///products/search/{name}
+        return this.http.get<ResponseDetails<Array<Product>>>(this.globals.backendUrl+'products/search/'+name,
+        {observe: 'response'});
+    }
+
 // CATEGORIES VIEW (NAVIGATION)
     getCategoryViews():Promise<ResponseDetails<Array<CategoryView>>> {
         return new Promise(resolve => {
@@ -48,6 +53,19 @@ export class ProductService {
             this.http.get<ResponseDetails<CategoryView>>(this.globals.backendUrl+'navigations/'+categoryViewID+'/tree',
             {observe: 'response'}).subscribe(r => {
                 if(this.printDebugLog) console.log(r.body);
+                resolve(r.body);
+            });
+        });
+    }
+
+    createCategoryView(name:string, parentID:number, categoryLogicID:number):Promise<ResponseDetails<CategoryView>> {
+        let params = '';
+        if(parentID != -1) params += '&parentID='+parentID;
+        if(categoryLogicID != -1) params += '&categoryLogicID='+categoryLogicID;
+
+        return new Promise(resolve => {
+            this.http.put<ResponseDetails<CategoryView>>(this.globals.backendUrl+'navigations/?name='+name+params, null,
+            {observe: 'response'}).subscribe(r => {
                 resolve(r.body);
             });
         });

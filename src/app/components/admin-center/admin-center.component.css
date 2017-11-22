@@ -3,18 +3,18 @@ body {
 
 }
 
+.my-container {
+    /* display: flex; */
+    height: 100%;
+    /* flex-direction: row; */
+}
+
 .bar {
     text-align: center;
     height: 50px;
     /* background-color: #ffffff; */
     background-color: #272634;
     border-bottom: 1px solid #e1e1e1;
-}
-
-.my-container {
-    /* display: flex; */
-    height: 100%;
-    /* flex-direction: row; */
 }
 
 .sidebar {

@@ -23,6 +23,10 @@ export class AdminCategoryEditComponent implements OnInit {
 
   id: number;
   category: CategoryLogic;
+  featureDefinitionsForGroupsPointers:FeatureDefinition[][] = [[]];
+
+  collapseText = "Hide";
+  collapsed:boolean = true;
 
   editingName: boolean;
 
@@ -33,10 +37,46 @@ export class AdminCategoryEditComponent implements OnInit {
     });
   }
 
+  toggleCollapsation() {
+    this.collapsed = !this.collapsed;
+    this.collapseText = this.collapsed ? "Hide" : "Collapse";
+  }
+
+  getSomeValuesForDef(def:FeatureDefinition) {
+    let result = '';
+    if(def.featureValueDefinitions.length > 0) {
+      result += '(';
+
+      let max = 3;
+      for(let i=0; i<def.featureValueDefinitions.length; i++) {
+        if(i < max) {
+          result += def.featureValueDefinitions[i].value + ', ';
+        }
+      }
+      result += '..)';
+    }
+    return result;
+  }
+
   loadCategory(id: number): void {
     this.productService.getCategory(id).then(r => {
       if (r.status == 'success') {
         this.category = r.data;
+        this.featureDefinitionsForGroupsPointers = [];
+
+        for(let i=0; i<this.category.featureGroups.length; i++) {
+          let featureDefs:FeatureDefinition[] = [];
+          for(let j=0; j<this.category.featureDefinitions.length; j++) {
+            if(this.category.featureDefinitions[j].featureGroup.id == this.category.featureGroups[i].id) {
+              featureDefs.push(this.category.featureDefinitions[j]);
+            }
+          }
+          this.featureDefinitionsForGroupsPointers.push(featureDefs);
+          // console.log("Dodalem wiersz z defami");
+          // console.log(featureDefs);
+        }
+        // console.log(this.category);
+        // console.log(this.featureDefinitionsForGroupsPointers);
       } else {
         alert("There was a problem with loading the CategoryLogic")
       }
@@ -76,7 +116,8 @@ export class AdminCategoryEditComponent implements OnInit {
       if(result.success) {
         this.productService.updateFeatureDefinition(this.id, result.groupid, featureDef.id, result.data).then(r => {
           if(r.status == 'success') {
-            this.category = r.data;
+            // this.category = r.data;
+            this.loadCategory(this.id);
             this.snackBar.open('You have successfully edited FeatureDefinition.', null, {duration: 5000});
           } else {
             alert("There was a problem with editing the FeatureDefinition");
@@ -100,10 +141,11 @@ export class AdminCategoryEditComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if(result.success) { // this.dialogRef.close({success: true, data: data, groupid: this.groupid});
-        console.log(JSON.stringify(result.data) + " | " + result.groupid);
+        // console.log(JSON.stringify(result.data) + " | " + result.groupid);
         this.productService.createFeatureDefinition(this.id, result.groupid, result.data).then(r => {
           if(r.status = 'success') {
-            this.category = r.data;
+            // this.category = r.data;
+            this.loadCategory(this.id);
             this.snackBar.open('You have successfully created the FeatureDefinition.', null, {duration: 5000});
           } else {
             alert("There was a problem with creating the FeatureDefinition");

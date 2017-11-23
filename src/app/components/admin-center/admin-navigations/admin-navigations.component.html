@@ -51,7 +51,7 @@
             <ng-container *ngFor="let category of categories">
                 <a *ngIf="category.children.length == 0" class="list-group-item list-group-item-success">
                     <div class="flex-between">
-                        <div class="category-name"><span style="font-weight:normal">[{{category.id}}]</span> {{category.name}}</div>
+                        <div class="category-name"><span style="font-weight:normal">[{{category.id}}]</span> {{category.name}} <span *ngIf="category.categoryLogic != null" style="font-weight:normal; font-size:12px">({{category.categoryLogic.name}})</span></div>
                         <div>
                             <a (click)="editNavigation(category.id)" class="edit"><img alt="Edit" src="assets/admin_icons/edit.png" height="10"></a>
                             <a (click)="removeNavigation(category.id)" class="remove"><img alt="Remove" src="assets/admin_icons/remove.png" height="14"></a>
@@ -60,7 +60,7 @@
                 </a>
                 <a *ngIf="category.children.length > 0" class="list-group-item list-group-item-success">
                     <div class="flex-between">
-                        <div class="category-name"><span style="font-weight:normal">[{{category.id}}]</span> {{category.name}}</div>
+                        <div class="category-name"><span style="font-weight:normal">[{{category.id}}]</span> {{category.name}} <span *ngIf="category.categoryLogic != null" style="font-weight:normal; font-size:12px">({{category.categoryLogic.name}})</span></div>
                         <div>
                             <a (click)="editNavigation(category.id)" class="edit"><img alt="Edit" src="assets/admin_icons/edit.png" height="14"></a>
                             <a (click)="removeNavigation(category.id)" class="remove"><img alt="Remove" src="assets/admin_icons/remove.png" height="14"></a>
@@ -70,7 +70,7 @@
                         <ng-container *ngFor="let sub of category.children">
                             <a *ngIf="sub.children.length == 0" class="list-group-item list-group-item-info">
                                 <div class="flex-between">
-                                    <div class="category-name"><span style="font-weight:normal">[{{sub.id}}]</span> {{sub.name}}</div>
+                                    <div class="category-name"><span style="font-weight:normal">[{{sub.id}}]</span> {{sub.name}} <span *ngIf="sub.categoryLogic != null" style="font-weight:normal; font-size:12px">({{sub.categoryLogic.name}})</span></div>
                                     <div>
                                         <a (click)="editNavigation(sub.id)" class="edit"><img alt="Edit" src="assets/admin_icons/edit.png" height="14"></a>
                                         <a (click)="removeNavigation(sub.id)" class="remove"><img alt="Remove" src="assets/admin_icons/remove.png" height="14"></a>
@@ -79,7 +79,7 @@
                             </a>
                             <a *ngIf="sub.children.length > 0" class="list-group-item list-group-item-info">
                                 <div class="flex-between">
-                                    <div class="category-name"><span style="font-weight:normal">[{{sub.id}}]</span> {{sub.name}}</div>
+                                    <div class="category-name"><span style="font-weight:normal">[{{sub.id}}]</span> {{sub.name}} <span *ngIf="sub.categoryLogic != null" style="font-weight:normal; font-size:12px">({{sub.categoryLogic.name}})</span></div>
                                     <div>
                                         <a (click)="editNavigation(sub.id)" class="edit"><img alt="Edit" src="assets/admin_icons/edit.png" height="14"></a>
                                         <a (click)="removeNavigation(sub.id)" class="remove"><img alt="Remove" src="assets/admin_icons/remove.png" height="14"></a>
@@ -88,7 +88,7 @@
                                 <div class="list-group collapsable in">
                                     <a *ngFor="let sub2 of sub.children" class="list-group-item list-group-item-warning">
                                         <div class="flex-between">
-                                            <div class="category-name"><span style="font-weight:normal">[{{sub2.id}}]</span> {{sub2.name}}</div>
+                                            <div class="category-name"><span style="font-weight:normal">[{{sub2.id}}]</span> {{sub2.name}} <span *ngIf="sub2.categoryLogic != null" style="font-weight:normal; font-size:12px">({{sub2.categoryLogic.name}})</span></div>
                                             <div>
                                                 <a (click)="editNavigation(sub2.id)" class="edit"><img alt="Edit" src="assets/admin_icons/edit.png" height="14"></a>
                                                 <a (click)="removeNavigation(sub2.id)" class="remove"><img alt="Remove" src="assets/admin_icons/remove.png" height="14"></a>

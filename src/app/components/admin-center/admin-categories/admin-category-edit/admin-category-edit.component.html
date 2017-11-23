@@ -1,42 +1,41 @@
-<!-- <div class="container"> -->
-  <div class="row">
-    <div class="col-xs-6">
-        <h3>Edit category</h3>
+<div class="row">
+  <div class="col-xs-6">
+    <h3>Edit category</h3>
+  </div>
+  <div class="col-xs-6">
+    <button class="btn btn-secondary btn-sm pull-right" style="position:relative;margin-top:20px" (click)="goBack_Click()">Go back</button>
+  </div>
+</div>
+
+<div class="row admin-bg" *ngIf="category">
+  <div class="col-md-4">
+    <h4>Basic informations:</h4>
+    <span>ID: {{category.id}}</span>
+    <br>
+    <span>Name: </span>
+    <dynamic-input-text [value]="category.name" (changeVal)="categoryNameChange_Click($event)"></dynamic-input-text>
+  </div>
+  <div class="col-md-6">
+    <h4>FeatureGroups and its FeatureDefinitions:</h4>
+    <div class="flex-start">
+        <button class="btn btn-primary btn-sm" (click)="addFeatureGroup_Click()">Create FeatureGroup</button>
+        <button class="btn btn-primary btn-sm" (click)="addFeatureDefinition_Click()">Create FeatureDefinition</button>
+        <button class="btn btn-primary btn-sm" data-toggle="collapse" data-target=".collapsable" (click)="toggleCollapsation()">{{collapseText}}</button>
     </div>
-    <div class="col-xs-6">
-      <button class="btn btn-secondary btn-sm pull-right" style="position:relative;margin-top:20px" (click)="goBack_Click()">Go back</button>
+    <div class="list-group margin-20">
+      <div class="list-group-item list-group-item-info" *ngFor="let group of category.featureGroups; let i=index">
+        <dynamic-input-text styleBold="true" [value]="category.featureGroups[i].name" (changeVal)="featureGroupNameChange_Click(category.featureGroups[i].id, $event)"></dynamic-input-text>
+
+        <div class="list-group collapsable in" *ngIf="featureDefinitionsForGroupsPointers[i].length > 0">
+          <div class="list-group-item list-group-item-success" *ngFor="let def of featureDefinitionsForGroupsPointers[i]">
+              <span class="span-hoverable" (click)="listFeatureDefinition_Click(category.featureDefinitions[i])" style="font-weight:bold">{{def.name}}</span>
+
+              <ng-container *ngIf="def.featureValueDefinitions.length > 0">
+                <span style="font-size: 10px">{{getSomeValuesForDef(def)}}</span>
+              </ng-container>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-
-  <div class="row admin-bg" *ngIf="category">
-    <div class="col-md-4">
-      <h4>Basic informations:</h4>
-      <span>ID: {{category.id}}</span><br>
-      <span>Name: </span>
-      <dynamic-input-text [value]="category.name" (changeVal)="categoryNameChange_Click($event)"></dynamic-input-text>
-    </div>
-    <div class="col-md-4">
-      <h4>Feature Groups:</h4>
-      <ul>
-        <li *ngFor="let g of category.featureGroups; let i=index">
-          <dynamic-input-text [value]="category.featureGroups[i].name" (changeVal)="featureGroupNameChange_Click(category.featureGroups[i].id, $event)"></dynamic-input-text>
-        </li>
-        <li>
-          <button class="btn btn-default btn-xs" (click)="addFeatureGroup_Click()">New FeatureGroup</button>
-        </li>
-      </ul>
-    </div>
-    <div class="col-md-4">
-      <h4>Feature Definitions:</h4>
-      <ul>
-        <li class="editable-span" *ngFor="let f of category.featureDefinitions; let i=index" (click)="listFeatureDefinition_Click(category.featureDefinitions[i])">{{f.name}}</li>
-        <li>
-          <button class="btn btn-default btn-xs" (click)="addFeatureDefinition_Click()">New FeatureDefinition</button>
-        </li>
-      </ul>
-    </div>
-  </div>
-
-
-<!-- </div> -->
-<hr>
+</div>

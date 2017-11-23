@@ -6,5 +6,4 @@ export class CategoryLogic {
     name:string;
     featureDefinitions:FeatureDefinition[] = [];
     featureGroups:FeatureGroup[] = [];
-
 }

@@ -1,4 +1,4 @@
-<span *ngIf="!isEditing" (click)="isEditing = !isEditing" class="editable-span">{{value}}</span>
+<span *ngIf="!isEditing" (click)="isEditing = !isEditing" class="editable-span" [class.span-bold]="styleBold">{{value}}</span>
 
 <!-- <div class="row" *ngIf="isEditing">
   <div class="col-md-8 no-gutter">

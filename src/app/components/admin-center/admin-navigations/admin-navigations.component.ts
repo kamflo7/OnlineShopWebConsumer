@@ -44,6 +44,7 @@ export class AdminNavigationsComponent implements OnInit {
             if (r.status == 'success') {
                 let nv: NavigationConverter = new NavigationConverter();
                 this.categories = nv.convertToChildrenStructure(r.data);
+                // console.log(this.categories);
             }
         });
     }

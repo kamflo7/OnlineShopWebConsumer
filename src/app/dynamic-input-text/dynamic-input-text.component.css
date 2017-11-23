@@ -11,3 +11,7 @@
     padding-right:0;
     padding-left:0;
 }
+
+.span-bold {
+    font-weight: bold;
+}

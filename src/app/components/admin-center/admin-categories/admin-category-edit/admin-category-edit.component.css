@@ -11,3 +11,32 @@
     padding-right:0;
     padding-left:0;
 }
+
+.list-group-item {
+    padding: 2px 7px;
+}
+
+.list-group-item-info:hover {
+    background-color: #c4e3f3;
+}
+
+.list-group-item-success:hover {
+    background-color: #d0e9c6;
+}
+
+.span-hoverable {
+    cursor: pointer;
+}
+
+.span-hoverable:hover {
+    text-decoration: underline;
+}
+
+.flex-start {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.flex-start button:not(:first-child) {
+    margin-left: 5px;
+}

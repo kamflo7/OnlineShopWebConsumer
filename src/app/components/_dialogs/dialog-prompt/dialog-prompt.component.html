@@ -1,0 +1,12 @@
+<div>
+    <h4 md-dialog-title>{{title}}</h4>
+    <hr>
+    <md-dialog-content>
+        <p>{{content}}</p>
+    </md-dialog-content>
+    <hr>
+    <md-dialog-actions>
+        <button md-raised-button (click)="onCloseConfirm()">Confirm</button>
+        <button md-raised-button (click)="onCloseCancel()">Cancel</button>
+    </md-dialog-actions>
+</div>

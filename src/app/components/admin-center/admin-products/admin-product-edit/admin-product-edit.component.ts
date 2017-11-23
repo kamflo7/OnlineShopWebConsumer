@@ -9,7 +9,7 @@ import { FeatureBag } from '../../../../_model/feature-bag';
 import { CategoryLogic } from '../../../../_model/category-logic';
 import { Observable } from 'rxjs/Observable';
 import { Globals } from '../../../../globals';
-
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-admin-product-edit',
@@ -23,7 +23,8 @@ export class AdminProductEditComponent implements OnInit {
     private route: ActivatedRoute,
     private productService: ProductService,
     public dialog: MatDialog,
-    private globals:Globals
+    private globals: Globals,
+    public snackBar: MatSnackBar
   ) {
 
   }
@@ -40,19 +41,19 @@ export class AdminProductEditComponent implements OnInit {
   category;
 
 
-  base64textString:string="";
-  base64ToSend:string;
+  base64textString: string = "";
+  base64ToSend: string;
 
-  imageChanged:boolean;
-  
-  handleFileSelect(evt){
-      var files = evt.target.files;
-      var file = files[0];
-    
+  imageChanged: boolean;
+
+  handleFileSelect(evt) {
+    var files = evt.target.files;
+    var file = files[0];
+
     if (files && file) {
-        var reader = new FileReader();
-        reader.onload =this._handleReaderLoaded.bind(this);
-        reader.readAsBinaryString(file);
+      var reader = new FileReader();
+      reader.onload = this._handleReaderLoaded.bind(this);
+      reader.readAsBinaryString(file);
     }
   }
 
@@ -60,10 +61,10 @@ export class AdminProductEditComponent implements OnInit {
     var binaryString = readerEvt.target.result;
     // this.base64textString= btoa(binaryString);
     this.base64ToSend = btoa(binaryString);
-    this.base64textString= "data:image/jpeg;base64," + this.base64ToSend;
+    this.base64textString = "data:image/jpeg;base64," + this.base64ToSend;
     this.imageChanged = true;
     // console.log(btoa(binaryString));
-   }
+  }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -75,8 +76,8 @@ export class AdminProductEditComponent implements OnInit {
         this.productService.getProduct(this.productid).then(r => {
           if (r.status == 'success') {
             let product: Product = r.data;
-            if(r.data.image != null) {
-              this.base64textString = this.globals.resourceImgsUrl+r.data.image.name;
+            if (r.data.image != null) {
+              this.base64textString = this.globals.resourceImgsUrl + r.data.image.name;
             }
             this.productDTO = this.convertProductToProductDTO(product);
             this.loadCategory(product.categoryLogic.id, r.data);
@@ -109,7 +110,7 @@ export class AdminProductEditComponent implements OnInit {
         this.categories = r.data;
         console.log(this.categories);
       } else {
-        alert("There was a problem with fetch categories");
+        this.snackBar.open('There was a problem with getting categories', null, {duration: 4000});
       }
     });
   }
@@ -128,26 +129,34 @@ export class AdminProductEditComponent implements OnInit {
           featureValues.push(loopFeature.checked[j]);
         }
       } else {
-        if(typeof loopFeature.checked === "object") {
+        if (typeof loopFeature.checked === "object") {
           featureValues.push(loopFeature.checked[0]);
-        }  else {
+        } else {
           featureValues.push(loopFeature.checked);
         }
       }
       this.productDTO.features[loopFeature.featureDefID] = featureValues;
     }
 
-    if(this.imageChanged) {
+    if (this.imageChanged) {
       this.productDTO.image = this.base64ToSend;
     }
 
     if (this.mode == Mode.CREATE) {
       this.productService.createProduct(this.category, this.productDTO).then(r => {
-
+        if (r.status == 'success') {
+          this.snackBar.open('You have successfully created the Product.', null, {duration: 4000});
+        } else {
+          this.snackBar.open('There was a problem with creating the Product.', null, {duration: 4000});
+        }
       })
     } else {
       this.productService.editProduct(this.productid, this.productDTO).then(r => {
-
+        if (r.status == 'success') {
+          this.snackBar.open('You have successfully edited the Product.', null, {duration: 4000});
+        } else {
+          this.snackBar.open('There was a problem with editing the Product.', null, {duration: 4000});
+        }
       });
     }
   }

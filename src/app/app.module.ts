@@ -55,6 +55,7 @@ import { UserService } from './_services/user.service';
 import { ShoppingCartConfirmationComponent } from './components/shopping-cart-confirmation/shopping-cart-confirmation.component';
 import { ProfileOrderDetailsComponent } from './components/profile-center/profile-order-details/profile-order-details.component';
 import { DialogCreateEditNavigationComponent } from './components/_dialogs/dialog-create-edit-navigation/dialog-create-edit-navigation.component';
+import { DialogPrompt } from './components/_dialogs/dialog-prompt/dialog-prompt.component';
 
 @NgModule({
   declarations: [
@@ -76,7 +77,7 @@ import { DialogCreateEditNavigationComponent } from './components/_dialogs/dialo
       AdminNavigationsComponent, AdminNavigationEditComponent,
     FormAdminProductEdit, FormAdminCategoryLogicComponent,
 // dialogs
-    DialogCreateCategoryComponent, DialogCreateFeatureGroupComponent, DialogCreateEditFeatureDefinition, DialogCreateEditAddressComponent, DialogCreateEditNavigationComponent,
+    DialogCreateCategoryComponent, DialogCreateFeatureGroupComponent, DialogCreateEditFeatureDefinition, DialogCreateEditAddressComponent, DialogCreateEditNavigationComponent, DialogPrompt,
 // other things
     DynamicInputTextComponent, ItemListProductComponent, ProfileChangeInformationsComponent, ProfileChangeEmailComponent, ProfileChangeAddressesComponent, ProfileOrdersComponent, ProfileReportProductComponent, ProfileActiveSubmissionsComponent, ProfileClosedSubmissionsComponent, ProfileAskQuestionComponent, ProfileActiveQuestionsComponent, ProfileClosedQuestionsComponent, ProfileOffersComponent,
   ],
@@ -91,7 +92,7 @@ import { DialogCreateEditNavigationComponent } from './components/_dialogs/dialo
   ],
   entryComponents: [
     DialogCreateCategoryComponent, DialogCreateFeatureGroupComponent, DialogCreateEditFeatureDefinition,
-    DialogCreateEditAddressComponent, DialogCreateEditNavigationComponent
+    DialogCreateEditAddressComponent, DialogCreateEditNavigationComponent, DialogPrompt
   ],
   exports: [
 

@@ -84,6 +84,15 @@ export class ProductService {
         });
     }
 
+    deleteCategoryView(navigationID:number):Promise<ResponseDetails<any>> {
+        return new Promise(resolve => {
+            this.http.delete<ResponseDetails<any>>(this.globals.backendUrl+'navigations/'+navigationID,
+            {observe: 'response'}).subscribe(r => {
+                resolve(r.body);
+            });
+        });
+    }
+
 // CATEGORIES
     getCategories():Promise<ResponseDetails<Array<CategoryLogic>>> {
         return new Promise(resolve => {

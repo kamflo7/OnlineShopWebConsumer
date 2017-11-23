@@ -12,6 +12,8 @@ import { NavigationItem } from '../../../_dto/navigation-item';
 import { DialogCreateEditNavigationComponent } from '../../_dialogs/dialog-create-edit-navigation/dialog-create-edit-navigation.component';
 import { CreateEditNavigationDTO } from '../../_dialogs/dialog-create-edit-navigation/dialog-create-edit-navigation.component';
 import { LoginComponent } from '../../login/login.component';
+import { DialogPrompt, DialogPromptData } from '../../_dialogs/dialog-prompt/dialog-prompt.component';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
     selector: 'app-admin-navigations',
@@ -23,7 +25,8 @@ export class AdminNavigationsComponent implements OnInit {
         private router: Router,
         private route: ActivatedRoute,
         private productService: ProductService,
-        public dialog: MatDialog
+        public dialog: MatDialog,
+        public snackBar: MatSnackBar
     ) {
 
     }
@@ -60,29 +63,28 @@ export class AdminNavigationsComponent implements OnInit {
         });
 
         dialogRef.afterClosed().subscribe(result => {
-            if(result.success) {
+            if (result.success) {
+                this.snackBar.open('You have successfully created the NavigationItem', null, {duration: 3000});
                 this.loadCategories();
             }
         });
     }
 
-    editNavigation(id) {
-        console.log("edit navigation leci " + id);
+    findNavigationItemById(id) {
+        let nav: NavigationItem;
 
-        let nav:NavigationItem;
-
-        for(let i=0; i<this.categories.length; i++) {
-            if(this.categories[i].id == id) {
+        for (let i = 0; i < this.categories.length; i++) {
+            if (this.categories[i].id == id) {
                 nav = this.categories[i];
                 break;
             } else {
-                for(let j=0; j<this.categories[i].children.length; j++) {
-                    if(this.categories[i].children[j].id == id) {
+                for (let j = 0; j < this.categories[i].children.length; j++) {
+                    if (this.categories[i].children[j].id == id) {
                         nav = this.categories[i].children[j];
                         break;
                     } else {
-                        for(let k=0; k<this.categories[i].children[j].children.length; k++) {
-                            if(this.categories[i].children[j].children[k].id == id) {
+                        for (let k = 0; k < this.categories[i].children[j].children.length; k++) {
+                            if (this.categories[i].children[j].children[k].id == id) {
                                 nav = this.categories[i].children[j].children[k];
                                 break;
                             }
@@ -91,13 +93,16 @@ export class AdminNavigationsComponent implements OnInit {
                 }
             }
         }
+        return nav;
+    }
 
-        if(nav == null) {
+    editNavigation(id) {
+        let nav = this.findNavigationItemById(id);
+
+        if (nav == null) {
             alert("Fatal error, cannot edit");
             return;
         }
-
-        console.log(nav);
 
         let dialogRef = this.dialog.open(DialogCreateEditNavigationComponent, {
             width: '400px',
@@ -107,8 +112,39 @@ export class AdminNavigationsComponent implements OnInit {
         });
 
         dialogRef.afterClosed().subscribe(result => {
-            if(result.success) {
+            if (result.success) {
+                this.snackBar.open('You have successfully edited "' + nav.name + '".', null, {duration: 3000});
                 this.loadCategories();
+            }
+        });
+    }
+
+    removeNavigation(id) {
+        let nav = this.findNavigationItemById(id);
+
+        if (nav == null) {
+            alert("Fatal error, cannot edit");
+            return;
+        }
+
+        let dialogRef = this.dialog.open(DialogPrompt, {
+            width: '400px',
+            data: <DialogPromptData>{
+                title: 'Remove NavigationItem',
+                content: 'Are you sure you want to pernamently delete: ' + ' [' + nav.id + '] ' + nav.name
+            }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            if (result.success) {
+                this.productService.deleteCategoryView(nav.id).then(r => {
+                    if(r.status == 'success') {
+                        this.snackBar.open('You have successfully deleted "' + nav.name + '".', null, {duration: 3000});
+                        this.loadCategories();
+                    } else {
+                        alert('There was a problem with performing delete operation.');
+                    }
+                });
             }
         });
     }

@@ -53,7 +53,8 @@
                     <div class="flex-between">
                         <div class="category-name"><span style="font-weight:normal">[{{category.id}}]</span> {{category.name}}</div>
                         <div>
-                            <a (click)="editNavigation(category.id)">Edit</a>
+                            <a (click)="editNavigation(category.id)" class="edit"><img alt="Edit" src="assets/admin_icons/edit.png" height="10"></a>
+                            <a (click)="removeNavigation(category.id)" class="remove"><img alt="Remove" src="assets/admin_icons/remove.png" height="14"></a>
                         </div>
                     </div>
                 </a>
@@ -61,7 +62,8 @@
                     <div class="flex-between">
                         <div class="category-name"><span style="font-weight:normal">[{{category.id}}]</span> {{category.name}}</div>
                         <div>
-                            <a (click)="editNavigation(category.id)">Edit</a>
+                            <a (click)="editNavigation(category.id)" class="edit"><img alt="Edit" src="assets/admin_icons/edit.png" height="14"></a>
+                            <a (click)="removeNavigation(category.id)" class="remove"><img alt="Remove" src="assets/admin_icons/remove.png" height="14"></a>
                         </div>
                     </div>
                     <div class="list-group collapsable in">
@@ -70,7 +72,8 @@
                                 <div class="flex-between">
                                     <div class="category-name"><span style="font-weight:normal">[{{sub.id}}]</span> {{sub.name}}</div>
                                     <div>
-                                        <a (click)="editNavigation(sub.id)">Edit</a>
+                                        <a (click)="editNavigation(sub.id)" class="edit"><img alt="Edit" src="assets/admin_icons/edit.png" height="14"></a>
+                                        <a (click)="removeNavigation(sub.id)" class="remove"><img alt="Remove" src="assets/admin_icons/remove.png" height="14"></a>
                                     </div>
                                 </div>
                             </a>
@@ -78,7 +81,8 @@
                                 <div class="flex-between">
                                     <div class="category-name"><span style="font-weight:normal">[{{sub.id}}]</span> {{sub.name}}</div>
                                     <div>
-                                        <a (click)="editNavigation(sub.id)">Edit</a>
+                                        <a (click)="editNavigation(sub.id)" class="edit"><img alt="Edit" src="assets/admin_icons/edit.png" height="14"></a>
+                                        <a (click)="removeNavigation(sub.id)" class="remove"><img alt="Remove" src="assets/admin_icons/remove.png" height="14"></a>
                                     </div>
                                 </div>
                                 <div class="list-group collapsable in">
@@ -86,7 +90,8 @@
                                         <div class="flex-between">
                                             <div class="category-name"><span style="font-weight:normal">[{{sub2.id}}]</span> {{sub2.name}}</div>
                                             <div>
-                                                <a (click)="editNavigation(sub2.id)">Edit</a>
+                                                <a (click)="editNavigation(sub2.id)" class="edit"><img alt="Edit" src="assets/admin_icons/edit.png" height="14"></a>
+                                                <a (click)="removeNavigation(sub2.id)" class="remove"><img alt="Remove" src="assets/admin_icons/remove.png" height="14"></a>
                                             </div>
                                         </div>
                                     </a>
@@ -99,3 +104,6 @@
         </div>
     </div>
 </div>
+
+<img src="/assets/admin_icons/edit_hover.png" style="display:none">
+<img src="/assets/admin_icons/remove_hover.png" style="display:none">

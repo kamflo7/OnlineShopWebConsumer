@@ -31,3 +31,11 @@ h3 {
 .list-group {
     cursor: pointer;
 }
+
+.edit:hover > img {
+    content: url('/assets/admin_icons/edit_hover.png');
+}
+
+.remove:hover > img {
+    content: url('/assets/admin_icons/remove_hover.png');
+}

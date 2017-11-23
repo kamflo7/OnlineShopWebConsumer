@@ -6,6 +6,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material'
 import { Observable } from 'rxjs/Observable';
 import { CategoryLogic } from '../../../_model/category-logic';
 import { DialogCreateCategoryComponent } from '../../_dialogs/dialog-create-category/dialog-create-category.component';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
     selector: 'app-admin-categories',
@@ -17,7 +18,8 @@ export class AdminCategoriesComponent implements OnInit {
         private router:Router,
         private route: ActivatedRoute,
         private productService:ProductService,
-        public dialog: MatDialog
+        public dialog: MatDialog,
+        public snackBar: MatSnackBar
       ) {
           
       }
@@ -50,6 +52,7 @@ export class AdminCategoriesComponent implements OnInit {
             if(result.success) {
                 this.productService.createCategory(result.data).then(r => {
                     if(r.status == 'success') {
+                        this.snackBar.open('You have successfully created the Category', null, {duration: 3000});
                         this.loadCategories();
                     } else {
                         alert("There was a problem with creating the category")

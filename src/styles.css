@@ -42,6 +42,10 @@ body {
     background-color: #faf7ff;
 }
 
+.margin-10 {
+    margin-top: 10px;
+}
+
 .margin-20 {
     margin-top: 20px;
 }

@@ -1,18 +1,14 @@
-<div class="row">
-    <div class="col-xs-6">
-        <h3>Products</h3>
-    </div>
-    <div class="col-xs-6 pull-right">
-        <button class="btn btn-primary btn-md pull-right" (click)="createProduct()">Create a product</button>
-    </div>
-</div>
 
+<h3>Products</h3>
 <div class="row margin-20 admin-bg">
     <div class="col-md-6">
-        <mat-form-field class="full-width" style="margin-top: 15px;">
-            <input (ngModelChange)="change()" matInput placeholder="Search for product/categories" type="input" [(ngModel)]="searchValue" name="search">
+        <button class="btn btn-primary btn-sm margin-10" (click)="createProduct()">Create a product</button>
+
+        <mat-form-field class="full-width margin-10">
+            <input (ngModelChange)="change()" matInput placeholder="Search for product/categories" type="input" [(ngModel)]="searchValue"
+                name="search">
         </mat-form-field>
-        
+
         <table class="table table-striped" *ngIf="products.length > 0">
             <thead>
                 <tr>
@@ -29,7 +25,9 @@
                     <td>{{product.name}}</td>
                     <td>{{product.price | number:'.2':'fr'}} PLN</td>
                     <td>{{product.amount}}</td>
-                    <td><a routerLink="/admin/products/edit/{{product.id}}">Edit</a></td>
+                    <td>
+                        <a routerLink="/admin/products/edit/{{product.id}}">Edit</a>
+                    </td>
                 </tr>
             </tbody>
         </table>

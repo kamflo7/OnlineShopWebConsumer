@@ -37,6 +37,14 @@ export class ProductService {
         {observe: 'response'});
     }
 
+    adminTestRequest():Promise<ResponseDetails<any>> {
+        return new Promise(resolve => {
+            this.http.get<ResponseDetails<any>>(this.globals.backendUrl+'am-i-admin', {observe: 'response'}).subscribe(r => {
+                resolve(r.body);
+            });
+        });
+    }
+
 // CATEGORIES VIEW (NAVIGATION)
     getCategoryViews():Promise<ResponseDetails<Array<CategoryView>>> {
         return new Promise(resolve => {

@@ -31,6 +31,10 @@ export class AuthenticationService {
         return !jwt.isTokenExpired(token);
     }
 
+    isUserAuthenticatedAdmin():boolean {
+        return this.isUserAuthenticated() && localStorage.getItem("admin") == 'true';
+    }
+
     getUser():User {
         let user:User = new User();
         user.email = localStorage.getItem('sub');
@@ -50,8 +54,8 @@ export class AuthenticationService {
                 if(status === 'success') {
                     var token:string = r.headers.get('Token');
 
-                    console.log('Register status: ' + status);
-                    console.log('Token: ' + token);
+                    // console.log('Register status: ' + status);
+                    // console.log('Token: ' + token);
                     
                     this.setupReceivedToken(token);
                 }
@@ -81,12 +85,14 @@ export class AuthenticationService {
     setupReceivedToken(token:string) {
         var jwt:JwtHelper = new JwtHelper();
         var decodedToken = jwt.decodeToken(token);
+        // console.log("decoded token");
         // console.log(decodedToken);
 
         localStorage.setItem("sub", decodedToken.sub);
         localStorage.setItem("jti", decodedToken.jti);
         localStorage.setItem("exp", decodedToken.exp);
         localStorage.setItem("iss", decodedToken.iss);
+        localStorage.setItem("admin", decodedToken.admin);
         localStorage.setItem("token", token);
     }
 

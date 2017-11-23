@@ -34,4 +34,10 @@ export class HomeComponent implements OnInit {
     this.router.navigateByUrl('/');
     window.location.reload();
   }
+
+  adminTest() {
+    this.productService.adminTestRequest().then(r => {
+      console.log(r);
+    });
+  }
 }

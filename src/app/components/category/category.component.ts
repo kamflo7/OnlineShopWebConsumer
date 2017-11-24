@@ -177,7 +177,7 @@ export class CategoryComponent implements OnInit {
   doFilter() {
     let url = this.currentURL;
     let params = this.getFilterParamsQueryFromNGModel();
-    console.log('params: ' + params);
+    // console.log('[btn::doFilter() params: ' + params);
 
     this.router.navigate([url], { queryParams: { f: params } }).then(r => {
       this.getProducts();
@@ -228,7 +228,10 @@ export class CategoryComponent implements OnInit {
       params += ',';
     }
 
-    return params.substr(0, params.length - 1); // trim the last comma
+
+    params += 'prc-' + this.selectedLowestPrice + '_' + this.selectedHighestPrice;
+    // return params.substr(0, params.length - 1); // trim the last comma
+    return params;
   }
 
 }

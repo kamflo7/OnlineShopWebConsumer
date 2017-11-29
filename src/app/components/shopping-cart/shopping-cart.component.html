@@ -14,7 +14,7 @@
             <tbody>
                 <tr *ngFor="let product of products; let i=index">
                     <td class="col-md-2">
-                        <img height="75" src="{{globals.resourceImgsUrl+product.data.image.name}}">
+                        <img height="75" src="{{globals.resourceImgsUrl+product.data.image.id}}">
                     </td>
                     <td class="col-md-4">
                         <a routerLink="{{product.url}}">{{product.data.name}}</a>

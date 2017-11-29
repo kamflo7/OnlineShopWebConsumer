@@ -34,7 +34,7 @@
             <div style="clear:both;"></div>
             <div style="float: right;">installment from {{productInstallment | number : '1.2-2'}} PLN</div>
             <div style="clear:both;"></div>
-            <button class="btn btn-danger btn-lg" style="width: 100%; margin-top: 10px">Add to cart</button>
+            <button class="btn btn-danger btn-lg" style="width: 100%; margin-top: 10px" (click)="orderProduct()">Add to cart</button>
             <div style="margin-top: 10px; font-weight: bold">
                 Dou you want this product on {{date | date:'dd-MM-yyyy'}}? Order now!
             </div>

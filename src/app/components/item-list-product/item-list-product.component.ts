@@ -34,7 +34,7 @@ export class ItemListProductComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.product.image != null) {
-        this.imgSrc = this.globals.resourceImgsUrl + this.product.image.name;
+        this.imgSrc = this.globals.resourceImgsUrl + this.product.image.id;
     }
 
     this.url = '/product/' + this.product.name.replace(/ /g, "-") + '-' + this.product.id + '_' + this.categoryViewID;

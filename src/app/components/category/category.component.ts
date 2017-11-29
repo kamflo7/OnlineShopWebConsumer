@@ -9,6 +9,8 @@ import { FeatureDefinition } from '../../_model/feature-definition';
 import { Observable } from 'rxjs/Observable';
 import { Product } from '../../_model/product';
 import { OrderService } from '../../_services/order.service';
+import { FeatureBag } from '../../_model/feature-bag';
+import { FeatureValue } from '../../_model/feature-value';
 
 @Component({
   selector: 'app-category',
@@ -83,7 +85,7 @@ export class CategoryComponent implements OnInit {
     this.productService.getCategory(this.currentNavigationItem.categoryLogic.id).then(r2 => {
       if (r2.status == 'success') {
         this.categoryLogic = r2.data;
-
+        this.filterableDefinitions = [];
         for (let i = 0; i < this.categoryLogic.featureDefinitions.length; i++) {
           if (this.categoryLogic.featureDefinitions[i].filterable) {
             this.filterableDefinitions.push({
@@ -168,8 +170,6 @@ export class CategoryComponent implements OnInit {
       let sortstr = this.sort == 'prc-asc' || this.sort == 'prc-desc' ? this.sort : null;
       this.productService.getProducts(this.categoryLogic.id, this.currentURLFilterParams, sortstr).then(r => {
         this.products = r.data;
-        // console.log("Pobralem produkty:");
-        // console.log(r.data);
       });
     });
   }

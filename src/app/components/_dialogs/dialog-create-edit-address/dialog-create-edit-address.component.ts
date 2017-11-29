@@ -26,17 +26,17 @@ export class DialogCreateEditAddressComponent {
   userID;
 
   //data basic
-  addressTypeSelected = 'personal'; // personal or company
-  addressName = "Main";
-  street = "Nice";
-  zipCode = "30-080";
-  city = "SomeCity";
-  phoneNumber = "500800700";
-  houseNumber = "37";
+  addressTypeSelected = ''; // personal or company
+  addressName = "";
+  street = "";
+  zipCode = "";
+  city = "";
+  phoneNumber = "";
+  houseNumber = "";
 
   //data personal
-  firstName = "John";
-  lastName = "Doe";
+  firstName = "";
+  lastName = "";
 
   //data company
   name;

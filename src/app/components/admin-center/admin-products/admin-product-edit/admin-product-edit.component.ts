@@ -77,7 +77,7 @@ export class AdminProductEditComponent implements OnInit {
           if (r.status == 'success') {
             let product: Product = r.data;
             if (r.data.image != null) {
-              this.base64textString = this.globals.resourceImgsUrl + r.data.image.name;
+              this.base64textString = this.globals.resourceImgsUrl + r.data.image.id;
             }
             this.productDTO = this.convertProductToProductDTO(product);
             this.loadCategory(product.categoryLogic.id, r.data);
